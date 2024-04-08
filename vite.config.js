@@ -9,17 +9,20 @@ export default defineConfig({
     plugins: [vue(), libInjectCss(), dts({ include: ['components'] })],
     build: {
         lib: {
-            entry: resolve(__dirname, 'components/main.ts'),
+            entry: resolve(__dirname, 'components/index.ts'),
+            name: 'components-by-picklepilot',
             formats: ['es'],
+            fileName: (format) => `components-by-picklepilot.${format}.js`,
         },
+        emptyOutDir: false,
     },
     rollupOptions: {
         external: ['vue'],
         output: {
+            exports: 'named',
             globals: {
                 vue: 'Vue',
             },
         },
     },
-    dedupe: ['vue'],
 })

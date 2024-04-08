@@ -1,5 +1,15 @@
-import '../src/output.css'
+import { App } from 'vue'
 
-export { default as ModalComponent } from './modal/ModalComponent.vue'
-export { default as ModalComponent2 } from './color-picker/ColorPicker.vue'
-export { default as SortableComponent } from './sortable/SortableComponent.vue'
+import ColorPicker from './color-picker/ColorPicker.vue'
+import ModalComponent from './modal/ModalComponent.vue'
+import SortableComponent from './sortable/SortableComponent.vue'
+
+function install(app: App) {
+    app.component('ColorPicker', ColorPicker)
+    app.component('ModalComponent', ModalComponent)
+    app.component('SortableComponent', SortableComponent)
+}
+
+import './main.css'
+
+export default { install }

@@ -4,14 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "files": [
+    "components",
     "dist"
   ],
-  "main": "dist/components-by-picklepilot.js",
-  "types": "dist/main.d.ts",
+  "module": "./dist/components-by-picklepilot.es.js",
   "exports": {
     ".": {
-      "import": "./dist/components-by-picklepilot.js"
-    }
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/components-by-picklepilot.es.js"
+    },
+    "./dist/style.css": "./dist/index.css"
   },
   "scripts": {
     "dev": "vite",
@@ -29,13 +31,7 @@
     "vue-demi": "^0.14.7"
   },
   "peerDependencies": {
-    "@vue/composition-api": "^1.0.0-rc.1",
-    "vue": "^2.0.0 || >=3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
+    "vue": "^2.7.0 || >=3.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.5",
