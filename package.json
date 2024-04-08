@@ -6,8 +6,8 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/components-by-picklepilot.js",
-  "types": "./dist/main.d.ts",
+  "main": "dist/components-by-picklepilot.js",
+  "types": "dist/main.d.ts",
   "exports": {
     ".": {
       "import": "./dist/components-by-picklepilot.js"
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc --p ./tsconfig-build.json && vite build",
+    "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "docs:dev": "vitepress dev components",
     "docs:build": "vitepress build components",
@@ -51,7 +51,8 @@
     "vite-plugin-lib-inject-css": "^2.0.1",
     "vitepress": "^1.0.2",
     "vitest": "^1.4.0",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vue-tsc": "^2.0.11"
   },
   "postcss": {
     "plugins": {
