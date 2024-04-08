@@ -19,7 +19,7 @@ Modal is a dialog box/popup window that is displayed on the top layer of the cur
 
 ```vue
 <script setup lang="ts">
-import { ModalComponent } from '@picklepilot/components-by-picklepilot/components/modal/ModalComponent.vue'
+import ModalComponent from '@picklepilot/components-by-picklepilot/components/modal/ModalComponent.vue'
 import { ref } from 'vue'
 
 const showModal = ref<boolean>(false)

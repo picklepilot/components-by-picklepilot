@@ -33,6 +33,7 @@
 import Sortable, { type Options } from 'sortablejs'
 // import { ref, onMounted, watch, nextTick } from 'vue'
 import { ref, onMounted, watch, nextTick, isVue2 } from 'vue-demi'
+import type { Ref } from 'vue-demi'
 // import '../../../dist/style.css'
 
 interface Props {
@@ -131,7 +132,7 @@ onMounted(() => {
 })
 
 function syncArrayElements<T>(
-    list: Ref<T[]>,
+    list: any,
     domElements: HTMLElement[],
     from: number[],
     to: number[],
