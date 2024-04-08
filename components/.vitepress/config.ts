@@ -21,6 +21,7 @@ export default defineConfig({
                 items: [
                     { text: 'Modal', link: '/modal/' },
                     { text: 'Sortable', link: '/sortable/' },
+                    { text: 'Color Picker', link: '/color-picker/' },
                 ],
             },
         ],
