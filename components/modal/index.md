@@ -37,5 +37,6 @@ const showModal = ref<boolean>(false)
 <button @click="showModal = true" class="px-2.5 py-1.5 rounded-md bg-indigo-600 text-white hover:bg-indigo-500 font-sm font-medium">Show Modal</button>
 
 <ModalComponent :show-modal="showModal" @close="showModal = false">
-    <div>Here is some modal content</div>
+    <template #title>Modal Title</template>
+    <div class="mt-5">Here is some modal content</div>
 </ModalComponent>
