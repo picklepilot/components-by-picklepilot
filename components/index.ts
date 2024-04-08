@@ -10,6 +10,4 @@ function install(app: App) {
     app.component('SortableComponent', SortableComponent)
 }
 
-import './main.css'
-
 export default { install }
