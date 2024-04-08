@@ -1,12 +1,13 @@
 ---
-category: '@Library'
+category: '@Components'
 ---
 
 <script setup lang="ts">
-import ModalComponent from './ModalComponent.vue'
-</script>
+import ModalComponent from './ModalComponent.vue' 
+import { ref } from 'vue' 
 
-<ModalComponent />
+const showModal = ref(false)
+</script>
 
 # Modal
 
@@ -30,3 +31,11 @@ const showModal = ref<boolean>(false)
   </div>
 </template>
 ```
+
+## Example
+
+<button @click="showModal = true" class="px-2.5 py-1.5 rounded-md bg-indigo-600 text-white hover:bg-indigo-500 font-sm font-medium">Show Modal</button>
+
+<ModalComponent :show-modal="showModal" @close="showModal = false">
+    <div>Here is some modal content</div>
+</ModalComponent>
