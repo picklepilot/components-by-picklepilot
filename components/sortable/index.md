@@ -1,5 +1,5 @@
 ---
-category: '@Library'
+category: '@Components'
 ---
 
 <script setup lang="ts">
@@ -8,9 +8,9 @@ import SortableComponentDemo from './SortableComponentDemo.vue'
 
 <SortableComponentDemo />
 
-# Modal
+# Sortable
 
-Modal is a dialog box/popup window that is displayed on the top layer of the current page. Very useful for complete screen takeover (when the user's focus should be completely on the content of the modal).
+This is simply just another Vue wrapper for the Sortablejs plugin (https://github.com/SortableJS/Sortable). It accepts all the basic non-addon options, except one. This version of the wrapper enables support for multi-drag.
 
 ## Usage
 
@@ -30,3 +30,8 @@ const showModal = ref<boolean>(false)
   </div>
 </template>
 ```
+
+
+## Demo (without Multi-drag)
+
+The following demo is a single drag implementation.

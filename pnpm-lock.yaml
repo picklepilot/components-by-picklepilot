@@ -8,15 +8,18 @@ dependencies:
   '@types/sortablejs':
     specifier: ^1.15.8
     version: 1.15.8
+  '@vue/composition-api':
+    specifier: ^1.0.0-rc.1
+    version: 1.7.2(vue@3.4.21)
   clsx:
     specifier: ^2.1.0
     version: 2.1.0
   sortablejs:
     specifier: ^1.15.2
     version: 1.15.2
-  vue:
-    specifier: ^3.4.21
-    version: 3.4.21
+  vue-demi:
+    specifier: ^0.14.7
+    version: 0.14.7(vue@3.4.21)
 
 devDependencies:
   '@vitejs/plugin-vue':
@@ -43,6 +46,9 @@ devDependencies:
   vitepress:
     specifier: ^1.0.2
     version: 1.0.2(@algolia/client-search@4.23.2)(postcss@8.4.38)(search-insights@2.13.0)(sortablejs@1.15.2)
+  vue:
+    specifier: ^3.4.21
+    version: 3.4.21
 
 packages:
 
@@ -744,6 +750,14 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.4.21
       '@vue/shared': 3.4.21
+
+  /@vue/composition-api@1.7.2(vue@3.4.21):
+    resolution: {integrity: sha512-M8jm9J/laYrYT02665HkZ5l2fWTK4dcVg3BsDHm/pfz+MjDYwX+9FUaZyGwEyXEDonQYRCo0H7aLgdklcIELjw==}
+    peerDependencies:
+      vue: '>= 2.5 < 2.7'
+    dependencies:
+      vue: 3.4.21
+    dev: false
 
   /@vue/devtools-api@7.0.25(vue@3.4.21):
     resolution: {integrity: sha512-fL6DlRp4MSXCLYcqYvKU7QhQZWE3Hfu7X8pC25BS74coJi7uJeSWs4tmrITcwFihNmC9S5GPiffkMdckkeWjzg==}
@@ -1869,7 +1883,6 @@ packages:
         optional: true
     dependencies:
       vue: 3.4.21
-    dev: true
 
   /vue@3.4.21:
     resolution: {integrity: sha512-5hjyV/jLEIKD/jYl4cavMcnzKwjMKohureP8ejn3hhEjwhWIhWeuzL2kJAjzl/WyVsgPY56Sy4Z40C3lVshxXA==}

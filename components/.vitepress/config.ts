@@ -20,7 +20,7 @@ export default defineConfig({
                 text: 'Components',
                 items: [
                     { text: 'Modal', link: '/modal/' },
-                    { text: 'sortable', link: '/sortable/' },
+                    { text: 'Sortable', link: '/sortable/' },
                 ],
             },
         ],

@@ -22,3 +22,17 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Vitepress
+/coverage
+/src/client/shared.ts
+/src/node/shared.ts
+*.tgz
+.temp
+.vite_opt_cache
+.vscode
+cache
+temp
+examples-temp
+pnpm-global
+TODOs.md

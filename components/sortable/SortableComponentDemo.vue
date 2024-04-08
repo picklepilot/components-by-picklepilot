@@ -2,7 +2,7 @@
 import Sortable, { MultiDrag } from 'sortablejs'
 import SortableComponent from './SortableComponent.vue'
 import ModalComponent from '../modal/ModalComponent.vue'
-import { ref } from 'vue'
+import { ref } from 'vue-demi'
 mountMultiDragPlugin()
 
 export interface Column {

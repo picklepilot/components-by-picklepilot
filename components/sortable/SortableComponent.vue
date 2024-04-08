@@ -31,7 +31,8 @@
 
 <script setup lang="ts">
 import Sortable, { type Options } from 'sortablejs'
-import { ref, onMounted, watch, nextTick } from 'vue'
+// import { ref, onMounted, watch, nextTick } from 'vue'
+import { ref, onMounted, watch, nextTick, isVue2 } from 'vue-demi'
 // import '../../../dist/style.css'
 
 interface Props {
@@ -58,18 +59,19 @@ interface Props {
      * @default []
      * @type {Options}
      */
-    options?: Options
+    options?: Sortable.Options
 }
 
 const sortableClass = ref(
     'sortable-' + (Math.random() + 1).toString(36).substring(7),
 )
 
+const emit = defineEmits(['update:modelValue'])
+
 const props = withDefaults(defineProps<Props>(), {
     classes: () => [],
     options: () => ({
         animation: 150,
-        // multiDrag: true,
         selectedClass: 'selected',
     }),
 })
@@ -174,10 +176,17 @@ function syncArrayElements<T>(
                 Sortable.utils.deselect(element)
             })
         }
+
+        emit('update:modelValue', list.value)
     })
 }
 
 onMounted(() => {
     // mountMultiDragPlugin()
+    if (isVue2) {
+        console.log('Using Vue 2')
+    } else {
+        console.log('Using Vue 3')
+    }
 })
 </script>
