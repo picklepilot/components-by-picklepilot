@@ -5,13 +5,13 @@
             :model-value="tabs"
             @update:model-value="onUpdateOrder"
         >
-            <template v-slot:item="tab">
+            <template v-slot:item="tab: any">
                 <a
                     href="#"
                     @click.prevent="$emit('clicked', tab.idx)"
                     :class="
                         clsx(
-                            'flex cursor-pointer items-center rounded-t border-x border-t px-2 py-1.5 text-sm font-medium leading-none transition-all',
+                            tabClasses,
                             tab.active && 'border-zinc-200 bg-white',
                             !tab.active &&
                                 'relative border-transparent hover:bg-zinc-900/5',
@@ -33,14 +33,25 @@ import { clsx } from 'clsx'
 import SortableComponent from '../sortable/SortableComponent.vue'
 import { ref, watch } from 'vue'
 
+export interface Tab {
+    idx: number
+    id: number
+    label: string
+    active: boolean
+}
+
 interface Props {
     classes?: string[]
-    tabs: { id: number; label: string }[]
+    tabClasses?: string[]
+    tabs: Tab[]
 }
 
 // define props using withDefaults from vue api
 const props = withDefaults(defineProps<Props>(), {
     classes: () => [''],
+    tabClasses: () => [
+        'flex cursor-pointer items-center rounded-t border-x border-t px-2 py-1.5 text-sm font-medium leading-none transition-all',
+    ],
 })
 
 const emit = defineEmits(['clicked', 'update'])
@@ -54,7 +65,7 @@ watch(
     },
 )
 
-function onUpdateOrder(newTabs: { id: number; label: string }[]) {
+function onUpdateOrder(newTabs: Tab[]) {
     effectiveTabs.value = newTabs
     emit('update', newTabs)
 }
