@@ -1,3 +1,9 @@
-import DefaultTheme from 'vitepress/theme'
+import Theme from 'vitepress/theme'
+import DynamicLayout from '../components/DynamicLayout.vue'
 import './custom.css'
-export default DefaultTheme
+
+export default {
+    ...Theme,
+    // use our custom layout component that we'll create next
+    Layout: DynamicLayout,
+}

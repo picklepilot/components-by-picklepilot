@@ -1,4 +1,6 @@
 import { defineConfig } from 'vitepress'
+import { whyframe } from '@whyframe/core'
+import { whyframeVue } from '@whyframe/vue'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -28,6 +30,16 @@ export default defineConfig({
 
         socialLinks: [
             { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+        ],
+    },
+    vite: {
+        plugins: [
+            whyframe({
+                defaultSrc: '/frames/default.html',
+            }),
+            whyframeVue({
+                include: /\.(?:vue|md)$/, // also scan in markdown files
+            }),
         ],
     },
 })
