@@ -1,6 +1,6 @@
 <template>
     <ul ref="el" :class="[sortableClass, classes, 'list-none']">
-        <li v-for="(item, idx) in modelValue" :key="item.id">
+        <li v-for="(item, idx) in modelValue" :key="item.id" class="shrink-0">
             <div
                 v-if="options.handle"
                 class="drag-handle m-1 flex cursor-move items-center justify-center rounded bg-white p-1 text-sm text-zinc-400 shadow-sm ring-1 ring-zinc-100 transition-all hover:text-zinc-700 hover:shadow-md hover:ring-zinc-200"
@@ -28,10 +28,7 @@
 
 <script setup lang="ts">
 import Sortable, { type Options } from 'sortablejs'
-// import { ref, onMounted, watch, nextTick } from 'vue'
 import { ref, onMounted, watch, nextTick, isVue2 } from 'vue-demi'
-import type { Ref } from 'vue-demi'
-// import '../../../dist/style.css'
 
 interface Props {
     /**
