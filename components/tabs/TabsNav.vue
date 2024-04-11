@@ -10,13 +10,14 @@
                     href="#"
                     @click.prevent="$emit('clicked', tab.idx)"
                     :class="
-                        clsx(
-                            tabClasses,
-                            tab.active && 'border-zinc-200 bg-white',
-                            !tab.active &&
-                                'relative border-transparent hover:bg-zinc-900/5',
+                        twMerge(
+                            clsx(
+                                'flex cursor-pointer items-center rounded-t border-x border-t px-3 py-2 text-sm font-medium leading-none transition-all data-[active=false]:relative data-[active=false]:border-transparent data-[active=true]:border-zinc-200 data-[active=true]:bg-white data-[active=false]:hover:bg-zinc-900/5',
+                                tabClasses,
+                            ),
                         )
                     "
+                    :data-active="tab.active"
                 >
                     <slot name="left" v-bind="tab"></slot>
                     <span>{{ tab.label }}</span>
@@ -29,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import { twMerge } from 'tailwind-merge'
 import { clsx } from 'clsx'
 import SortableComponent from '../sortable/SortableComponent.vue'
 import { ref, watch } from 'vue'
