@@ -5,10 +5,10 @@
             :model-value="tabs"
             @update:model-value="onUpdateOrder"
         >
-            <template v-slot:item="tab: any">
+            <template v-slot:item="tab">
                 <a
                     href="#"
-                    @click.prevent="$emit('clicked', tab.idx)"
+                    @click.prevent="$emit('clicked', tab.id)"
                     :class="
                         twMerge(
                             clsx(
@@ -17,7 +17,7 @@
                             ),
                         )
                     "
-                    :data-active="tab.active"
+                    :data-active="tab.active.toString()"
                 >
                     <slot name="left" v-bind="tab"></slot>
                     <span>{{ tab.label }}</span>
