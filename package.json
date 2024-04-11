@@ -31,6 +31,9 @@
     "vue-demi": "^0.14.7"
   },
   "peerDependencies": {
+    "clsx": "^2.1.0",
+    "sortablejs": "^1.15.2",
+    "tailwind-merge": "^2.2.2",
     "vue": "^2.7.0 || >=3.0.0"
   },
   "devDependencies": {
