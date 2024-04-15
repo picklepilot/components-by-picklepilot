@@ -3,7 +3,7 @@
         :class="
             twMerge(
                 clsx(
-                    'rounded-lg border border-zinc-100 px-4 py-5 shadow-sm sm:px-6',
+                    'space-y-5 rounded-lg border border-zinc-100 px-4 py-5 shadow-sm sm:px-6',
                     classes,
                 ),
             )
