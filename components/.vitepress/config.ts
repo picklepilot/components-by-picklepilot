@@ -26,6 +26,18 @@ export default defineConfig({
                     { text: 'Color Picker', link: '/color-picker/' },
                 ],
             },
+
+            {
+                text: 'Coming Soon',
+                items: [
+                    { text: 'Alert', link: null },
+                    { text: 'Avatar', link: null },
+                    { text: 'Badge', link: null },
+                    { text: 'Button', link: null },
+                    { text: 'Dropdown', link: null },
+                    { text: 'Color Picker', link: '/color-picker/' },
+                ],
+            },
         ],
 
         socialLinks: [
