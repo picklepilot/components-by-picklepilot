@@ -45,6 +45,8 @@ interface Props {
     modelValue: boolean
 }
 
+const emit = defineEmits(['update:modelValue'])
+
 const props = withDefaults(defineProps<Props>(), {
     checked: false,
     classes: () => [],
