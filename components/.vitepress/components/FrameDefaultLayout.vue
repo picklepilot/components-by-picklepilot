@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 // Special api to mount the app
 import { createApp } from 'whyframe:app'
+import '../../main.css'
 
 const el = ref()
 
@@ -12,5 +13,12 @@ onMounted(() => {
 </script>
 
 <template>
-    <div ref="el"></div>
+    <div ref="el" class="h-full w-full"></div>
 </template>
+
+<style lang="css">
+.iframe-demo #app {
+    height: 100%;
+    width: 100%;
+}
+</style>

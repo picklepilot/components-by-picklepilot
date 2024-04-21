@@ -4,9 +4,12 @@ import { whyframeVue } from '@whyframe/vue'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-    title: 'Components by Picklepilot',
+    title: 'Pickle Jar',
     description: 'A VitePress Site',
     themeConfig: {
+        // logo: '../Logo-test.svg',
+        siteTitle: false,
+
         search: {
             provider: 'local',
         },
@@ -21,9 +24,19 @@ export default defineConfig({
             {
                 text: 'Components',
                 items: [
+                    { text: 'Button', link: '/button/' },
+                    { text: 'Color Picker', link: '/color-picker/' },
                     { text: 'Modal', link: '/modal/' },
                     { text: 'Sortable', link: '/sortable/' },
-                    { text: 'Color Picker', link: '/color-picker/' },
+                ],
+            },
+
+            {
+                text: 'Input',
+                items: [
+                    { text: 'Label', link: '/input/label/' },
+                    { text: 'Text', link: '/input/text/' },
+                    { text: 'Textarea', link: '/input/textarea/' },
                 ],
             },
 
@@ -33,7 +46,6 @@ export default defineConfig({
                     { text: 'Alert', link: null },
                     { text: 'Avatar', link: null },
                     { text: 'Badge', link: null },
-                    { text: 'Button', link: null },
                     { text: 'Dropdown', link: null },
                     { text: 'Color Picker', link: '/color-picker/' },
                 ],

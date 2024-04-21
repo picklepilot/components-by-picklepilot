@@ -1,9 +1,9 @@
 <script setup>
 import { useRoute } from 'vitepress'
 import Theme from 'vitepress/theme'
-import '../../main.css'
 // the default layout we'll create next
 import FrameDefaultLayout from './FrameDefaultLayout.vue'
+import LayoutTitle from './LayoutTitle.vue'
 
 const route = useRoute()
 </script>
@@ -14,5 +14,9 @@ const route = useRoute()
       so we don't inherit from `Theme.Layout`
     -->
     <FrameDefaultLayout v-if="route.path.startsWith('/frames/default')" />
-    <Theme.Layout v-else />
+    <Theme.Layout v-else>
+        <template #nav-bar-title-before>
+            <LayoutTitle />
+        </template>
+    </Theme.Layout>
 </template>
