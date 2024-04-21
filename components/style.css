@@ -1,2 +1,25 @@
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --vp-c-brand-1: #6E8A13;
+    --vp-button-brand-bg: #6E8A13;
+    --vp-button-brand-hover-bg: #87A321;
+    --vp-home-hero-name-color: transparent;
+    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #6E8A13, #87A321);
+
+    --pp-theme-color: theme('colors.green.500');
+}
+
+.vp-doc h1, .vp-doc h2, .vp-doc h3, .vp-doc h4, .vp-doc h5, .vp-doc h6 {
+    font-weight: 800;
+}
+
+.iframe-demo {
+    @apply border border-zinc-300/80 rounded-lg shadow-sm w-full h-[350px];
+}
+
+#app {
+    @apply min-h-screen h-screen;
+}
