@@ -1,24 +1,26 @@
-<script setup lang="ts">
-    import BaseButton from '../button/BaseButton.vue'
-
-function onClicked(evt) {
-    alert('CLICKED BUTTON', evt)
-}
-
-</script>
-
 ---
 category: '@Components'
 ---
 
+<script setup lang="ts">
+    import BaseButtonDemo from '../button/BaseButtonDemo.vue'
+</script>
+
 # Button
 
-## Demo (as-is)
+A button is a clickable element that can be used to trigger an action or event. It can be styled in different ways to match the design of your application.
 
-<iframe data-why class="w-full h-[200px] -mx-2">
-    <div class="max-w-sm w-full px-2">
-        <BaseButton variant="zinc" @click.stop.prevent="onClicked">
-            My Button
-        </BaseButton>
-    </div>
+## Demo
+
+<iframe data-why class="iframe-demo">
+    <BaseButtonDemo />
 </iframe>
+
+## Props
+
+| Prop         | Type                                        | Default |
+|--------------|---------------------------------------------|---------|
+| **classes**  | `Array<string>`                             | []      |
+| **disabled** | `boolean`                                   | false   |
+| **size**     | `"xs" \| "sm" \| "md" \| "lg" \| "xl"`      | "md"    |
+| **variant**  | `"zinc" \| "green" \| "md" \| "lg" \| "xl"` | "zinc"  |
