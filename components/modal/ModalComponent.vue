@@ -40,9 +40,9 @@
                         v-show="showModal"
                         ref="modal"
                         :class="
-                            clsx(
-                                'border border-zinc-100/50',
-                                'relative h-auto transform rounded-xl bg-white p-5 shadow-xl transition-all sm:w-full sm:max-w-lg',
+                            m(
+                                'relative h-auto w-full transform rounded-xl border border-zinc-100/50 bg-white p-5 shadow-xl transition-all sm:max-w-lg',
+                                classes,
                             )
                         "
                         @click.stop
@@ -83,8 +83,11 @@
 <script setup lang="ts">
 import { defineProps, watch, withDefaults } from 'vue'
 import clsx from 'clsx'
+import { m } from '../../utils/TextUtils'
 
 interface Props {
+    classes?: string[]
+
     /**
      * Toggle the modal visibility
      *
