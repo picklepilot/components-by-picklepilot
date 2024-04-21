@@ -2,14 +2,46 @@
     import TabsNavDemo from './TabsNavDemo.vue'
 </script>
 
----
-category: '@Components'
----
+# Tabs Nav
 
-<iframe data-why class="w-full h-[450px]">
+Tabs Nav is a navigation component that allows users to navigate between different sections of a page.
+
+
+## Demos
+
+**Classic**
+
+This is the default rendering of the tabs nav component. It resembles the file cabinet tabbed navigation style.
+
+<iframe data-why class="w-full h-auto">
     <TabsNavDemo />
 </iframe>
 
-# Tabs Nav
+```vue
+<script setup lang="ts">
+import TabsNav from '@picklepilot/components-by-picklepilot/components/tabs/TabsNav.vue'
+import { ref } from 'vue'
 
-[TODO] Describe me
+const activeTab = ref(1)
+
+const tabs = computed(
+    () => [
+        { id: 0, label: 'Tab 1', active: activeTab.value === 0 },
+        { id: 1, label: 'Tab 2', active: activeTab.value === 1 },
+        { id: 2, label: 'Tab 3', active: activeTab.value === 2 },
+    ],
+)
+
+function onClickedTab(idx: number) {
+    activeTab.value = idx
+}
+</script>
+
+<template>
+    <TabsNav
+        :tabs="tabs"
+        @clicked="onClickedTab"
+        @updated="tabs = $event"
+    />
+</template>
+```
