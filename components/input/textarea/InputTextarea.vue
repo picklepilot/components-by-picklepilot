@@ -5,7 +5,7 @@
         :placeholder="placeholder"
         :class="
             m(
-                'block w-full rounded-md border border-solid border-zinc-300/80 px-3 py-2.5 text-sm leading-none text-zinc-900 ring-[3px] ring-transparent placeholder:text-zinc-400 focus-within:border-zinc-500 focus-within:ring-[3px] focus-within:ring-zinc-200/60',
+                'block w-full rounded-md border border-solid border-zinc-300/80 px-3 py-2.5 text-sm text-zinc-900 ring-[3px] ring-transparent placeholder:text-zinc-400 focus-within:border-zinc-500 focus-within:ring-[3px] focus-within:ring-zinc-200/60',
                 ...classes,
             )
         "
