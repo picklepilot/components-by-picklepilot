@@ -1,25 +1,9 @@
-import { App } from 'vue'
-
-import BaseButton from './button/BaseButton.vue'
-import BaseCard from './card/BaseCard.vue'
-import ColorPicker from './color-picker/ColorPicker.vue'
-import InputLabel from './input/label/InputLabel.vue'
-import InputText from './input/text/InputText.vue'
-import InputTextarea from './input/textarea/InputTextarea.vue'
-import ModalComponent from './modal/ModalComponent.vue'
-import SortableComponent from './sortable/SortableComponent.vue'
-import TabsNav from './tabs/TabsNav.vue'
-
-function install(app: App) {
-    app.component('BaseButton', BaseButton)
-    app.component('BaseCard', BaseCard)
-    app.component('ColorPicker', ColorPicker)
-    app.component('InputLabel', InputLabel)
-    app.component('InputText', InputText)
-    app.component('InputTextarea', InputTextarea)
-    app.component('ModalComponent', ModalComponent)
-    app.component('SortableComponent', SortableComponent)
-    app.component('TabsNav', TabsNav)
-}
-
-export default { install }
+export { default as BaseButton } from './button/BaseButton.vue'
+export { default as BaseCard } from './card/BaseCard.vue'
+export { default as ColorPicker } from './color-picker/ColorPicker.vue'
+export { default as InputLabel } from './input/label/InputLabel.vue'
+export { default as InputText } from './input/text/InputText.vue'
+export { default as InputTextarea } from './input/textarea/InputTextarea.vue'
+export { default as ModalComponent } from './modal/ModalComponent.vue'
+export { default as SortableComponent } from './sortable/SortableComponent.vue'
+export { default as TabsNav } from './tabs/TabsNav.vue'
