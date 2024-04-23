@@ -24,6 +24,7 @@ export default defineConfig({
             {
                 text: 'Components',
                 items: [
+                    { text: 'Alert', link: '/alert/' },
                     { text: 'Button', link: '/button/' },
                     { text: 'Color Picker', link: '/color-picker/' },
                     { text: 'Modal', link: '/modal/' },
@@ -43,7 +44,6 @@ export default defineConfig({
             {
                 text: 'Coming Soon',
                 items: [
-                    { text: 'Alert', link: null },
                     { text: 'Avatar', link: null },
                     { text: 'Badge', link: null },
                     { text: 'Column Management', link: null },
