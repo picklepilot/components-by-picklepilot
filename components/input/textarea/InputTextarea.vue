@@ -9,6 +9,8 @@
                 ...classes,
             )
         "
+        @blur="$emit('blur', $event)"
+        @focus="$emit('focus', $event)"
     />
 </template>
 
@@ -23,7 +25,7 @@ interface Props {
     placeholder?: string
 }
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['blur', 'focus', 'update:modelValue'])
 
 const props = withDefaults(defineProps<Props>(), {
     classes: () => [],

@@ -9,6 +9,8 @@
                 autocomplete="off"
                 rows="6"
                 :model-value="text"
+                @blur="onBlur"
+                @focus="onFocus"
                 @update:model-value="text = $event"
             />
         </div>
@@ -21,4 +23,12 @@ import InputLabel from '../label/InputLabel.vue'
 import InputText from './InputTextarea.vue'
 
 const text = ref('')
+
+function onBlur(evt) {
+    console.log('onBlur', evt)
+}
+
+function onFocus(evt) {
+    console.log('onFocus', evt)
+}
 </script>
