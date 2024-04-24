@@ -1,17 +1,28 @@
 <template>
-    <textarea
-        v-model="effectiveValue"
-        :name="name"
-        :placeholder="placeholder"
+    <div
+        :id="`input-textarea-${id}-container`"
         :class="
             m(
-                'block w-full rounded-md border border-solid border-zinc-300/80 px-3 py-2.5 text-sm text-zinc-900 ring-[3px] ring-transparent placeholder:text-zinc-400 focus-within:border-zinc-500 focus-within:ring-[3px] focus-within:ring-zinc-200/60',
+                'block h-full w-full overflow-hidden rounded-md border border-solid border-zinc-300/80 text-sm text-zinc-900 ring-[3px] ring-transparent placeholder:text-zinc-400 focus-within:border-zinc-500 focus-within:ring-[3px] focus-within:ring-zinc-200/60',
                 ...classes,
             )
         "
-        @blur="$emit('blur', $event)"
-        @focus="$emit('focus', $event)"
-    />
+    >
+        <textarea
+            v-model="effectiveValue"
+            :id="id"
+            :name="name"
+            :placeholder="placeholder"
+            :autocomplete="autocomplete"
+            :rows="rows"
+            :class="[
+                'h-full w-full bg-transparent px-3 py-2.5',
+                ...inputClasses,
+            ]"
+            @blur="$emit('blur', $event)"
+            @focus="$emit('focus', $event)"
+        />
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -19,19 +30,26 @@ import { m } from '../../../utils/TextUtils'
 import { ref, watch } from 'vue'
 
 interface Props {
+    autocomplete?: string
     classes?: string[]
+    inputClasses?: string[]
     modelValue: string
     name: string
     placeholder?: string
+    id?: string
+    rows?: string | number
 }
 
 const emit = defineEmits(['blur', 'focus', 'update:modelValue'])
 
 const props = withDefaults(defineProps<Props>(), {
+    autocomplete: 'off',
     classes: () => [],
+    inputClasses: () => [],
     modelValue: '',
     name: '',
     placeholder: '',
+    rows: 3,
 })
 
 const effectiveValue = ref(props.modelValue)

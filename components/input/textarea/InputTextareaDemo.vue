@@ -9,6 +9,7 @@
                 autocomplete="off"
                 rows="6"
                 :model-value="text"
+                :input-classes="['resize-vertical']"
                 @blur="onBlur"
                 @focus="onFocus"
                 @update:model-value="text = $event"
