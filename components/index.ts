@@ -1,4 +1,5 @@
 export { default as BaseAlert } from './alert/BaseAlert.vue'
+export { default as BaseBadge } from './badge/BaseBadge.vue'
 export { default as BaseButton } from './button/BaseButton.vue'
 export { default as BaseCard } from './card/BaseCard.vue'
 export { default as ColorPicker } from './color-picker/ColorPicker.vue'
