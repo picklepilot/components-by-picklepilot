@@ -1145,6 +1145,11 @@ video {
   background-color: rgb(20 83 45 / var(--tw-bg-opacity));
 }
 
+.bg-indigo-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 242 255 / var(--tw-bg-opacity));
+}
+
 .bg-lime-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(101 163 13 / var(--tw-bg-opacity));
@@ -1338,11 +1343,6 @@ video {
   background-color: rgb(24 24 27 / 0.2);
 }
 
-.bg-indigo-50 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(238 242 255 / var(--tw-bg-opacity));
-}
-
 .p-1 {
   padding: 0.25rem;
 }
@@ -1425,6 +1425,11 @@ video {
   padding-bottom: 1.25rem;
 }
 
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .pt-4 {
   padding-top: 1rem;
 }
@@ -1489,6 +1494,11 @@ video {
   color: rgb(187 247 208 / var(--tw-text-opacity));
 }
 
+.text-green-600 {
+  --tw-text-opacity: 1;
+  color: rgb(22 163 74 / var(--tw-text-opacity));
+}
+
 .text-green-700 {
   --tw-text-opacity: 1;
   color: rgb(21 128 61 / var(--tw-text-opacity));
@@ -1497,6 +1507,11 @@ video {
 .text-green-800 {
   --tw-text-opacity: 1;
   color: rgb(22 101 52 / var(--tw-text-opacity));
+}
+
+.text-indigo-700 {
+  --tw-text-opacity: 1;
+  color: rgb(67 56 202 / var(--tw-text-opacity));
 }
 
 .text-orange-200 {
@@ -1554,6 +1569,11 @@ video {
   color: rgb(161 161 170 / var(--tw-text-opacity));
 }
 
+.text-zinc-600 {
+  --tw-text-opacity: 1;
+  color: rgb(82 82 91 / var(--tw-text-opacity));
+}
+
 .text-zinc-800 {
   --tw-text-opacity: 1;
   color: rgb(39 39 42 / var(--tw-text-opacity));
@@ -1562,21 +1582,6 @@ video {
 .text-zinc-900 {
   --tw-text-opacity: 1;
   color: rgb(24 24 27 / var(--tw-text-opacity));
-}
-
-.text-indigo-700 {
-  --tw-text-opacity: 1;
-  color: rgb(67 56 202 / var(--tw-text-opacity));
-}
-
-.text-green-600 {
-  --tw-text-opacity: 1;
-  color: rgb(22 163 74 / var(--tw-text-opacity));
-}
-
-.text-zinc-600 {
-  --tw-text-opacity: 1;
-  color: rgb(82 82 91 / var(--tw-text-opacity));
 }
 
 .opacity-0 {
@@ -1619,6 +1624,12 @@ video {
   outline-style: solid;
 }
 
+.\!ring-1 {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color) !important;
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000) !important;
+}
+
 .ring {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -1649,10 +1660,8 @@ video {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
-.\!ring-1 {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color) !important;
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color) !important;
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000) !important;
+.ring-\[color-mix\(in_srgb\2c _currentColor_20\%\2c _transparent\)\] {
+  --tw-ring-color: color-mix(in srgb, currentColor 20%, transparent);
 }
 
 .ring-green-50 {
@@ -1669,39 +1678,9 @@ video {
   --tw-ring-color: rgb(244 244 245 / var(--tw-ring-opacity));
 }
 
-.ring-zinc-500 {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(113 113 122 / var(--tw-ring-opacity));
-}
-
 .ring-zinc-900 {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(24 24 27 / var(--tw-ring-opacity));
-}
-
-.ring-zinc-300 {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(212 212 216 / var(--tw-ring-opacity));
-}
-
-.ring-current {
-  --tw-ring-color: currentColor;
-}
-
-.ring-\[color-mix\(in_srgb\2c _currentColor_20\%\2c _transparent\)\] {
-  --tw-ring-color: color-mix(in srgb, currentColor 20%, transparent);
-}
-
-.ring-\[color-mix\(in_srgb\2c _currentColor_60\%\2c _transparent\)\] {
-  --tw-ring-color: color-mix(in srgb, currentColor 60%, transparent);
-}
-
-.ring-\[color-mix\(in_srgb\2c _currentColor_30\%\2c _transparent\)\] {
-  --tw-ring-color: color-mix(in srgb, currentColor 30%, transparent);
-}
-
-.ring-\[color-mix\(in_srgb\2c _currentColor_25\%\2c _transparent\)\] {
-  --tw-ring-color: color-mix(in srgb, currentColor 25%, transparent);
 }
 
 .ring-offset-2 {

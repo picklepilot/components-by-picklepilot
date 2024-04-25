@@ -19,6 +19,7 @@
                 'h-full w-full bg-transparent px-3 py-2.5',
                 ...inputClasses,
             ]"
+            :readonly="readonly"
             @blur="$emit('blur', $event)"
             @focus="$emit('focus', $event)"
         />
@@ -32,11 +33,12 @@ import { ref, watch } from 'vue'
 interface Props {
     autocomplete?: string
     classes?: string[]
+    id?: string
     inputClasses?: string[]
     modelValue: string
     name: string
     placeholder?: string
-    id?: string
+    readonly?: boolean
     rows?: string | number
 }
 
@@ -49,6 +51,7 @@ const props = withDefaults(defineProps<Props>(), {
     modelValue: '',
     name: '',
     placeholder: '',
+    readonly: false,
     rows: 3,
 })
 
