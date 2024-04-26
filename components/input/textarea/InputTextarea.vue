@@ -35,7 +35,7 @@ interface Props {
     classes?: string[]
     id?: string
     inputClasses?: string[]
-    modelValue: string
+    modelValue: string | null
     name: string
     placeholder?: string
     readonly?: boolean
