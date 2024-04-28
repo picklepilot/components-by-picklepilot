@@ -28,6 +28,7 @@ export default defineConfig({
                     { text: 'Button', link: '/button/' },
                     { text: 'Color Picker', link: '/color-picker/' },
                     { text: 'Modal', link: '/modal/' },
+                    { text: 'Select', link: '/input/select/' },
                     { text: 'Sortable', link: '/sortable/' },
                 ],
             },
