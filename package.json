@@ -14,6 +14,7 @@
       "import": "./dist/components-by-picklepilot.es.js"
     },
     "./components": "./components/index.ts",
+    "./utils/TextUtils": "./utils/TextUtils.ts",
     "./dist/style.css": "./dist/index.css"
   },
   "scripts": {
