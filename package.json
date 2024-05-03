@@ -13,6 +13,7 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/components-by-picklepilot.es.js"
     },
+    "./components": "./components/index.ts"
     "./dist/style.css": "./dist/index.css"
   },
   "scripts": {
