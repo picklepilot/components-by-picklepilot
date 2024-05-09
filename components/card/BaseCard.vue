@@ -1,11 +1,9 @@
 <template>
     <div
         :class="
-            twMerge(
-                clsx(
-                    'space-y-5 rounded-lg border border-zinc-100 px-4 py-5 shadow-sm sm:px-6',
-                    classes,
-                ),
+            m(
+                'space-y-5 rounded-lg border border-zinc-300/80 px-4 py-5 shadow-sm sm:px-6',
+                classes,
             )
         "
     >
@@ -16,15 +14,19 @@
 </template>
 
 <script setup lang="ts">
-import { twMerge } from 'tailwind-merge'
-import { clsx } from 'clsx'
+import { m } from '../../utils/TextUtils'
 
 interface Props {
+    /**
+     * Additional classes to be added to the sortable container
+     *
+     * @default []
+     * @type {string[]}
+     */
     classes?: string[]
 }
 
-// define props using withDefaults from vue api
 withDefaults(defineProps<Props>(), {
-    classes: () => [''],
+    classes: () => [],
 })
 </script>
