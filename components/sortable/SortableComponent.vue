@@ -1,6 +1,10 @@
 <template>
-    <ul ref="el" :class="[sortableClass, classes, 'list-none']">
-        <li v-for="(item, idx) in modelValue" :key="item.id" class="shrink-0">
+    <ul ref="el" :class="m(sortableClass, classes, 'list-none')">
+        <li
+            v-for="(item, idx) in modelValue"
+            :key="item.id"
+            :class="m('flex shrink-0', itemClasses)"
+        >
             <div
                 v-if="options.handle"
                 class="drag-handle m-1 flex cursor-move items-center justify-center rounded bg-white p-1 text-sm text-zinc-400 shadow-sm ring-1 ring-zinc-100 transition-all hover:text-zinc-700 hover:shadow-md hover:ring-zinc-200"
@@ -21,7 +25,7 @@
                 </svg>
             </div>
 
-            <slot name="item" v-bind="{ ...item, idx }"></slot>
+            <slot name="item" v-bind="getItemBindings(item, idx)"></slot>
         </li>
     </ul>
 </template>
@@ -29,6 +33,12 @@
 <script setup lang="ts">
 import Sortable, { type Options } from 'sortablejs'
 import { ref, onMounted, watch, nextTick, isVue2 } from 'vue-demi'
+import { m } from '../../utils/TextUtils'
+
+interface Item {
+    idx: number
+    [key: string]: any
+}
 
 interface Props {
     /**
@@ -40,13 +50,21 @@ interface Props {
     classes?: string[]
 
     /**
+     * Additional classes to be added to the sortable container <li> elements
+     *
+     * @default []
+     * @type {string[]}
+     */
+    itemClasses?: string[]
+
+    /**
      * The model value to be sorted/dragged
      * Generally expected to be an array of objects
      *
      * @default []
      * @type {Record<string, any>[]}
      */
-    modelValue: Record<string, any>[]
+    modelValue: Item[]
 
     /**
      * The options to be passed to the sortable instance
@@ -65,6 +83,7 @@ const emit = defineEmits(['update:modelValue'])
 
 const props = withDefaults(defineProps<Props>(), {
     classes: () => [],
+    itemClasses: () => [],
     options: () => ({
         animation: 150,
         selectedClass: 'selected',
@@ -174,6 +193,10 @@ function syncArrayElements<T>(
 
         emit('update:modelValue', list.value)
     })
+}
+
+function getItemBindings(item: Item, idx: number) {
+    return { ...item, idx }
 }
 
 onMounted(() => {

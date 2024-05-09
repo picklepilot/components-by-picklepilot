@@ -6,8 +6,6 @@ category: '@Components'
 import SortableComponentDemo from './SortableComponentDemo.vue'
 </script>
 
-<SortableComponentDemo />
-
 # Sortable
 
 This is simply just another Vue wrapper for the Sortablejs plugin (https://github.com/SortableJS/Sortable). It accepts all the basic non-addon options, except one. This version of the wrapper enables support for multi-drag.
@@ -25,13 +23,16 @@ const showModal = ref<boolean>(false)
 </script>
 
 <template>
-  <div>
-    <ModalComponent />
-  </div>
+    <div>
+        <ModalComponent />
+    </div>
 </template>
 ```
-
 
 ## Demo (without Multi-drag)
 
 The following demo is a single drag implementation.
+
+<iframe data-why class="iframe-demo">
+    <SortableComponentDemo />
+</iframe>
