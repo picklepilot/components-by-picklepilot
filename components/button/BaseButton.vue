@@ -10,7 +10,6 @@
                 colorClasses,
                 sizeClasses,
                 classes,
-                experimentalBgClass,
             )
         "
     >
@@ -37,10 +36,8 @@
 </template>
 
 <script setup lang="ts">
-import colors from 'tailwindcss/colors'
 import { computed } from 'vue'
 import { m } from '../../utils/TextUtils'
-import { onMounted } from 'vue-demi'
 
 interface Props {
     classes?: string[]
@@ -60,10 +57,6 @@ const props = withDefaults(defineProps<Props>(), {
     variant: 'zinc',
     stop: 500,
     processing: false,
-})
-
-const experimentalBgClass = computed(() => {
-    return colors[props.variant][props.stop]
 })
 
 const bgClasses = computed(() => {
@@ -104,9 +97,5 @@ const sizeClasses = computed(() => {
         'px-4 py-2': props.size === 'lg',
         'px-4 py-2 text-lg': props.size === 'xl',
     }
-})
-
-onMounted(() => {
-    console.log('mounted', colors)
 })
 </script>
