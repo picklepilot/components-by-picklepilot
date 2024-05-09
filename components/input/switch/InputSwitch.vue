@@ -25,7 +25,7 @@
         </button>
         <span
             class="ml-3 cursor-pointer"
-            id="annual-billing-label"
+            :id="labelledBy"
             @click="checked = !checked"
         >
             <slot></slot>
