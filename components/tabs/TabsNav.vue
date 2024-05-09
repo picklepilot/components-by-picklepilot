@@ -39,7 +39,7 @@ import SortableComponent from '../sortable/SortableComponent.vue'
 import { ref, watch } from 'vue'
 
 export interface Tab {
-    idx: number
+    idx?: number
     id: number
     label: string
     active: boolean
