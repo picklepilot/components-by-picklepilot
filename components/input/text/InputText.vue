@@ -10,6 +10,7 @@
                 ...classes,
             )
         "
+        @focus="emit('focus', $event)"
     />
 </template>
 
@@ -24,7 +25,7 @@ interface Props {
     placeholder?: string
 }
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['focus', 'update:modelValue'])
 
 const props = withDefaults(defineProps<Props>(), {
     classes: () => [],
