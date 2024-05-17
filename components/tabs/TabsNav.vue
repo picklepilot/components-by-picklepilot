@@ -16,6 +16,7 @@
                                 classic
                                     ? 'px-3 py-2 text-sm font-medium leading-none transition-all data-[active=false]:relative data-[active=false]:border-transparent data-[active=true]:border-zinc-200 data-[active=true]:bg-white data-[active=false]:hover:bg-zinc-900/5'
                                     : 'flex cursor-pointer items-center rounded border-0 px-3 py-2.5 text-sm font-medium leading-none transition-all data-[active=false]:relative data-[active=true]:bg-white data-[active=true]:shadow-sm data-[active=false]:hover:bg-zinc-900/5 data-[active=false]:text-zinc-500 data-[active=false]:hover:text-zinc-800 hover:no-underline',
+                                tab.classes || '',
                                 tabClasses,
                             ),
                         )
@@ -43,6 +44,8 @@ export interface Tab {
     id: number
     label: string
     active: boolean
+    disabled: boolean
+    classes?: string[]
 }
 
 interface Props {
