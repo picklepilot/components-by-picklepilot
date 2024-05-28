@@ -1,5 +1,12 @@
 <template>
     <div class="flex items-center text-[13px]">
+        <span
+            class="cursor-pointer"
+            :id="labelledBy"
+            @click="checked = !checked"
+        >
+            <slot></slot>
+        </span>
         <button
             type="button"
             :class="
@@ -23,13 +30,6 @@
                 "
             ></span>
         </button>
-        <span
-            class="ml-3 cursor-pointer"
-            :id="labelledBy"
-            @click="checked = !checked"
-        >
-            <slot></slot>
-        </span>
     </div>
 </template>
 
