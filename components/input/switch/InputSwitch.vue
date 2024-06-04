@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center text-[13px]">
         <span
-            class="cursor-pointer"
+            class="grow cursor-pointer"
             :id="labelledBy"
             @click="checked = !checked"
         >
