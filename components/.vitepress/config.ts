@@ -27,6 +27,7 @@ export default defineConfig({
                     { text: 'Alert', link: '/alert/' },
                     { text: 'Button', link: '/button/' },
                     { text: 'Color Picker', link: '/color-picker/' },
+                    { text: 'Faceted Filters', link: '/faceted-filters/' },
                     { text: 'Modal', link: '/modal/' },
                     { text: 'Select', link: '/input/select/' },
                     { text: 'Sortable', link: '/sortable/' },
