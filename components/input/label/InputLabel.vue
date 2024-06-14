@@ -13,10 +13,11 @@ import { defineProps } from 'vue'
 
 interface Props {
     classes?: string[]
-    forId: string
+    forId?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
     classes: () => [],
+    forId: '',
 })
 </script>

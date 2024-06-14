@@ -41,7 +41,7 @@ import type { Ref } from 'vue'
 interface Props {
     checked: boolean
     classes?: string[]
-    labelledBy: string
+    labelledBy?: string
     modelValue: boolean
 }
 

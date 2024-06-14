@@ -35,7 +35,7 @@ import { ref } from 'vue'
 import InputLabel from '../label/InputLabel.vue'
 import InputText from './InputTextarea.vue'
 
-const text = ref('')
+const text = ref(null)
 const readOnlyText = ref('This is a read only text.')
 
 function onBlur(evt) {
