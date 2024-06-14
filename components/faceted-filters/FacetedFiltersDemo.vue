@@ -4,7 +4,7 @@
             <FacetedFilters :model-value="filters" @update:modelValue="filters = $event" />    
         </div>
         <div class="w-full max-w-sm space-y-1.5 p-5 h-full">
-            <div class="h-full bg-zinc-100 rounded-lg p-4 overflow-auto">
+            <div class="h-full bg-zinc-100 rounded-lg p-4 overflow-y-auto overflow-x-hidden">
                 <pre>{{ filters }}</pre>
             </div>
         </div>
@@ -19,7 +19,7 @@ const filters = ref([
     {
         attribute: 'category',
         attributeDisplay: 'Category',
-        options: ['Electronics', 'Clothing', 'Books'],
+        options: ['Electronics and awesome long text truncate me', 'Clothing', 'Books'],
         values: ['Books'],
     },
     {

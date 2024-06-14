@@ -1,22 +1,24 @@
 <template>
     <div :class="m(
-        'flex flex-col space-y-2',
+        'w-full flex flex-col space-y-2',
         classes
     )">
         <div v-if="effectiveFilters.length === 0">
             No filter, yet.
         </div>
-        <ul v-for="(filter, idx) in effectiveFilters" :key="`filter-${idx}`">
+        <ul v-for="(filter, idx) in effectiveFilters" :key="`filter-${idx}`" class="w-full">
             <li :class="m(
-                'space-y-1',
+                'space-y-1 w-full',
             )">
                 <div class="cursor-pointer text-zinc-900 font-bold flex items-center justify-between" @click="toggleCollapseFilter(filter.attribute)">
                     <span>{{ filter.attributeDisplay }}</span>
                     <span class="px-0.5">{{ collapsedFilters.includes(filter.attribute) ? '⏴' : '⏷' }}</span>
                 </div>
                 <ul v-show="!collapsedFilters.includes(filter.attribute)">
-                    <li v-for="(option, idx) in filter.options" :key="`value-${idx}`" class="flex items-center justify-between">
-                        <label :for="`pj-faceted-filters-input-${uniqueId}-${filter.attribute}-${idx}`">{{ option }}</label>
+                    <li v-for="(option, idx) in filter.options" :key="`value-${idx}`" class="flex items-center space-x-3">
+                        <label :for="`pj-faceted-filters-input-${uniqueId}-${filter.attribute}-${idx}`" class="grow truncate">
+                            {{ option }}
+                        </label>
                         <input type="checkbox" v-model="filter.values" :value="option" :id="`pj-faceted-filters-input-${uniqueId}-${filter.attribute}-${idx}`" class="h-4 w-4 text-zinc-600 border-zinc-600 rounded focus:ring-zinc-500" />
                     </li>
                 </ul>
