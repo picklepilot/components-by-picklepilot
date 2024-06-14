@@ -11,7 +11,7 @@
             )
         "
         @blur="$emit('blur', $event)"
-        @enter="$emit('enter', $event)"
+        @keyup.enter="$emit('enter', $event)"
         @focus="$emit('focus', $event)"
     />
 </template>
