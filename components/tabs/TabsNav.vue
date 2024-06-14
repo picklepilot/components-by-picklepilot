@@ -24,7 +24,7 @@
                     :data-active="tab.active.toString()"
                 >
                     <slot name="left" v-bind="tab"></slot>
-                    <span>{{ tab.label }}</span>
+                    <span v-html="tab.label" />
                     <slot name="right" v-bind="tab"></slot>
                 </a>
             </template>

@@ -1,5 +1,12 @@
 <template>
     <div class="flex items-center text-[13px]">
+        <span
+            class="grow cursor-pointer"
+            :id="labelledBy"
+            @click="checked = !checked"
+        >
+            <slot></slot>
+        </span>
         <button
             type="button"
             :class="
@@ -23,13 +30,6 @@
                 "
             ></span>
         </button>
-        <span
-            class="ml-3 cursor-pointer"
-            :id="labelledBy"
-            @click="checked = !checked"
-        >
-            <slot></slot>
-        </span>
     </div>
 </template>
 
@@ -39,7 +39,6 @@ import { ref, watch } from 'vue'
 import type { Ref } from 'vue'
 
 interface Props {
-    checked: boolean
     classes?: string[]
     labelledBy?: string
     modelValue: boolean
@@ -48,27 +47,25 @@ interface Props {
 const emit = defineEmits(['update:modelValue'])
 
 const props = withDefaults(defineProps<Props>(), {
-    checked: false,
     classes: () => [],
     labelledBy: '',
     modelValue: false,
 })
 
-const checked: Ref<boolean> = ref(false)
-const effectiveValue: Ref<boolean> = ref(props.modelValue)
+const checked: Ref<boolean> = ref(props.modelValue)
 
 watch(
     () => props.modelValue,
     () => {
-        effectiveValue.value = props.modelValue
+        checked.value = props.modelValue
     },
     { immediate: true },
 )
 
 watch(
-    () => effectiveValue.value,
+    () => checked.value,
     () => {
-        emit('update:modelValue', effectiveValue.value)
+        emit('update:modelValue', checked.value)
     },
 )
 </script>
