@@ -71,7 +71,6 @@
                         >
                             <slot name="title"></slot>
                         </div>
-
                         <slot></slot>
                     </div>
                 </transition>

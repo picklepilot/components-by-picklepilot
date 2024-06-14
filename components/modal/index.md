@@ -5,6 +5,8 @@ category: '@Components'
 <script setup lang="ts">
 import BaseButton from '../button/BaseButton.vue'
 import ModalComponent from './ModalComponent.vue' 
+import InputLabel from '../input/label/InputLabel.vue'
+import InputText from '../input/text/InputText.vue'
 import { ref } from 'vue' 
 
 const showModal = ref(false)
@@ -47,6 +49,10 @@ const showModal = ref<boolean>(false)
 <ModalComponent :show-modal="showModal" @close="showModal = false">
     <template #title>Modal Title</template>
     <div class="mt-5">Here is some modal content</div>
+    <div class="space-y-1">
+      <InputLabel for-id="test-input">Input label</InputLabel>
+      <InputText id="test-input" /> 
+    </div>
 </ModalComponent>
 
 To control the width of the modal, simply use the `classes` prop and pass in the desired Tailwind CSS classes. So for example, `md:max-w-4xl`.
