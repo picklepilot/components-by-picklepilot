@@ -16,7 +16,7 @@
                 </div>
                 <ul v-show="!collapsedFilters.includes(filter.attribute)">
                     <li v-for="(option, idx) in filter.options" :key="`value-${idx}`" class="flex items-center space-x-3">
-                        <label :for="`pj-faceted-filters-input-${uniqueId}-${filter.attribute}-${idx}`" class="grow truncate">
+                        <label :for="`pj-faceted-filters-input-${uniqueId}-${filter.attribute}-${idx}`" class="grow truncate font-normal">
                             {{ option }}
                         </label>
                         <input type="checkbox" v-model="filter.values" :value="option" :id="`pj-faceted-filters-input-${uniqueId}-${filter.attribute}-${idx}`" class="h-4 w-4 text-zinc-600 border-zinc-600 rounded focus:ring-zinc-500" />
