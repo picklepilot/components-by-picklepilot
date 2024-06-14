@@ -1,6 +1,7 @@
 <template>
     <div :class="m(
-        'flex flex-col space-y-2'
+        'flex flex-col space-y-2',
+        classes
     )">
         <div v-if="effectiveFilters.length === 0">
             No filter, yet.
