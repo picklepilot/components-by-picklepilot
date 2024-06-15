@@ -30,13 +30,7 @@
 <script setup lang="ts">
 import { m } from '../../utils/TextUtils'
 import { ref, defineEmits, defineProps, watch, withDefaults } from 'vue'
-
-type FacetedFilterItem = {
-    attribute: string
-    attributeDisplay: string
-    options: any[]
-    values: any[]
-}
+import { type FacetedFilterItem } from './models/FacetedFilterItem'
 
 const emit = defineEmits(['update:modelValue'])
 

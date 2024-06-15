@@ -12,3 +12,5 @@ export { default as FacetedFilters } from './faceted-filters/FacetedFiltersBase.
 export { default as ModalComponent } from './modal/ModalComponent.vue'
 export { default as SortableComponent } from './sortable/SortableComponent.vue'
 export { default as TabsNav } from './tabs/TabsNav.vue'
+
+export { type FacetedFilterItem } from './faceted-filters/models/FacetedFilterItem'
