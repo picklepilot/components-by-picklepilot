@@ -2,7 +2,7 @@
     <div class="mx-auto mb-4 h-[400px] overflow-auto rounded-lg bg-zinc-50">
         <ModalComponent :show-modal="showModal" @close="showModal = false" />
 
-        <div v-for="group in list" :key="group.id">
+        <div v-for="(group, idx) in list" :key="group.id">
             <h2 class="sticky top-0 bg-zinc-50 p-3 text-lg font-semibold">
                 {{ group.name }}
             </h2>
@@ -18,6 +18,7 @@
                     multiDrag: true,
                     selectedClass: 'selected',
                 }"
+                @update:modelValue="onUpdatedList(idx, $event)"
             >
                 <template v-slot:item="{ name }">
                     <div class="flex w-full">
@@ -105,5 +106,10 @@ function mountMultiDragPlugin() {
     }
 
     Sortable.mount(new MultiDrag())
+}
+
+function onUpdatedList(idx: number, params: any) {
+    console.log('updated list', params)
+    list.value[idx].columns = params
 }
 </script>

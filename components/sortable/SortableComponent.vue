@@ -109,6 +109,8 @@ function indicesParams(e: Sortable.SortableEvent): {
 const options = ref({})
 const el = ref<HTMLElement | null>(null)
 const sortable = ref<Sortable | null>(null)
+const list = ref<any[]>(props.modelValue)
+
 
 function initSortable() {
     const target = document.querySelector(
@@ -116,7 +118,7 @@ function initSortable() {
     ) as HTMLElement
     if (target) {
         destroySortable()
-        sortable.value = new Sortable(target, props.options)
+        sortable.value = new Sortable(target, options.value)
     }
 }
 
@@ -131,7 +133,7 @@ watch(
             ...props.options,
             onUpdate: (e: Sortable.SortableEvent) => {
                 const { domElements, from, to } = indicesParams(e)
-                syncArrayElements(props.modelValue, domElements, from, to)
+                syncArrayElements(list.value, domElements, from, to)
             },
         }
 
@@ -140,17 +142,25 @@ watch(
     { immediate: true },
 )
 
+watch(
+    () => props.modelValue,
+    () => {
+        list.value = props.modelValue
+        initSortable()
+    },
+)
+
 onMounted(() => {
     initSortable()
 })
 
 function syncArrayElements<T>(
-    list: any,
+    listItems: any,
     domElements: HTMLElement[],
     from: number[],
     to: number[],
 ) {
-    const originalArray = [...list.value]
+    const originalArray = [...listItems]
 
     // Credits: https://stackoverflow.com/a/69574526
     const swapIndex = (array: T[], from: number, to: number) =>
@@ -170,18 +180,18 @@ function syncArrayElements<T>(
 
     let newArray = originalArray
     let currentTo = to[0]
-    const targetElements = from.map((idx) => list.value[idx])
-    let lastMovedElement = null
+    const targetElements = from.map((idx) => originalArray[idx])
+    let lastMovedElement: any = null
     targetElements.forEach((element, idx) => {
         lastMovedElement = element
-        currentTo = newArray.indexOf(lastMovedElement)
+        currentTo = to[idx] // newArray.findIndex(item => item.id === lastMovedElement.id)
         if (currentTo === -1) currentTo = to[idx]
-        const fromIndex = newArray.indexOf(element)
+        const fromIndex = newArray.findIndex(item => item.id === element.id)
         newArray = swapIndex(newArray, fromIndex, currentTo)
     })
 
     nextTick(() => {
-        // When list is ref, assign array to list.value
+        // When list is ref, assign array to list
         list.value = newArray
 
         // If multiDrag is enabled, deselect all elements
@@ -200,11 +210,6 @@ function getItemBindings(item: Item, idx: number) {
 }
 
 onMounted(() => {
-    // mountMultiDragPlugin()
-    if (isVue2) {
-        console.log('Using Vue 2')
-    } else {
-        console.log('Using Vue 3')
-    }
+   // do nothing
 })
 </script>
