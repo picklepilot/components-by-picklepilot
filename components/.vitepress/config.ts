@@ -37,6 +37,7 @@ export default defineConfig({
             {
                 text: 'Input',
                 items: [
+                    { text: 'Checkbox', link: '/input/checkbox/' },
                     { text: 'Label', link: '/input/label/' },
                     { text: 'Text', link: '/input/text/' },
                     { text: 'Textarea', link: '/input/textarea/' },
