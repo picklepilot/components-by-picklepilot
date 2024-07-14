@@ -20,8 +20,9 @@
 
         <div
             :class="
-                clsx(
+                m(
                     'fixed inset-0 z-[9998] w-screen overflow-y-auto p-10',
+                    ...containerClasses,
                     !showModal && 'pointer-events-none',
                 )
             "
@@ -87,6 +88,8 @@ import { m } from '../../utils/TextUtils'
 interface Props {
     classes?: string[]
 
+    containerClasses?: string[]
+
     /**
      * Toggle the modal visibility
      *
@@ -96,7 +99,10 @@ interface Props {
     showModal: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {})
+const props = withDefaults(defineProps<Props>(), {
+    classes: () => [],
+    containerClasses: () => [],
+})
 
 watch(
     () => props.showModal,
