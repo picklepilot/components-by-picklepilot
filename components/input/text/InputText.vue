@@ -22,7 +22,7 @@ import { ref, watch } from 'vue'
 
 interface Props {
     classes?: string[]
-    modelValue: string
+    modelValue: string | null
     name: string
     placeholder?: string
 }
@@ -36,12 +36,12 @@ const props = withDefaults(defineProps<Props>(), {
     placeholder: '',
 })
 
-const effectiveValue = ref(props.modelValue)
+const effectiveValue = ref(props.modelValue || '')
 
 watch(
     () => props.modelValue,
     () => {
-        effectiveValue.value = props.modelValue
+        effectiveValue.value = props.modelValue || ''
     },
     { immediate: true },
 )
