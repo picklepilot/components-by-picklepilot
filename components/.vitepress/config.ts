@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { whyframe } from '@whyframe/core'
 import { whyframeVue } from '@whyframe/vue'
+import markdownItTaskLists from 'markdown-it-task-lists'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -26,8 +27,9 @@ export default defineConfig({
                 items: [
                     { text: 'Alert', link: '/alert/' },
                     { text: 'Button', link: '/button/' },
-                    { text: 'Color Picker', link: '/color-picker/' },
-                    { text: 'Faceted Filters', link: '/faceted-filters/' },
+                    { text: 'Color picker', link: '/color-picker/' },
+                    { text: 'Dropdown menu', link: '/dropdown-menu/' },
+                    { text: 'Faceted filters', link: '/faceted-filters/' },
                     { text: 'Modal', link: '/modal/' },
                     { text: 'Select', link: '/input/select/' },
                     { text: 'Sortable', link: '/sortable/' },
@@ -46,9 +48,7 @@ export default defineConfig({
 
             {
                 text: 'Enterprise',
-                items: [
-                    { text: 'Typeahead', link: '/typeahead/' },
-                ],
+                items: [{ text: 'Typeahead', link: '/typeahead/' }],
             },
 
             {
@@ -57,9 +57,7 @@ export default defineConfig({
                     { text: 'Avatar', link: null },
                     { text: 'Badge', link: null },
                     { text: 'Column Management', link: null },
-                    { text: 'Dropdown', link: null },
                     { text: 'Windowed Toolbar', link: null },
-
                 ],
             },
         ],
@@ -77,5 +75,10 @@ export default defineConfig({
                 include: /\.(?:vue|md)$/, // also scan in markdown files
             }),
         ],
+    },
+    markdown: {
+        config: (md) => {
+            md.use(markdownItTaskLists)
+        },
     },
 })

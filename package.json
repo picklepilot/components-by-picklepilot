@@ -30,6 +30,7 @@
     "@heroicons/vue": "^2.1.5",
     "@types/sortablejs": "^1.15.8",
     "clsx": "^2.1.0",
+    "markdown-it-task-lists": "^2.1.1",
     "path": "^0.12.7",
     "sortablejs": "^1.15.2",
     "vue-demi": "^0.14.7"

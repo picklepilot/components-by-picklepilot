@@ -25,6 +25,11 @@
     font-weight: 800;
 }
 
+.main .vp-doc h6 {
+    color: #71717a; /* TW zinc-500 */
+    font-weight: 700;
+}
+
 .iframe-demo {
     @apply h-[350px] w-full rounded-lg border border-zinc-300/80 shadow-sm;
 }
