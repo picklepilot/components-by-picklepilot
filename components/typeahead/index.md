@@ -6,13 +6,12 @@
 
 Advanced typeahead component that can utilize an advanced data source.
 
-
 ## Demos
 
 **Basic**
 
 Demo of the typeahead module for development.
 
-<iframe data-why class="w-full h-auto">
+<iframe data-why class="w-full min-h-96">
     <TypeaheadDemo />
 </iframe>

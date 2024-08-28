@@ -1,17 +1,21 @@
 <template>
-    <div :class="classes.container || 'relative w-full rounded-lg'">
+    <div :class="m('relative w-full rounded-lg', classes.container)">
         <Combobox v-model="selected" immediate>
             <div class="relative">
                 <div
                     :class="
-                        classes.inputContainer ||
-                        'relative w-full cursor-default overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50 text-left ring-2 ring-transparent focus-within:border-indigo-500 focus-within:ring-indigo-200/60 hover:bg-zinc-50 focus:bg-white focus:shadow focus:outline-none sm:text-sm'
+                        m(
+                            'relative w-full cursor-default overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50 text-left ring-2 ring-transparent focus-within:border-indigo-500 focus-within:ring-indigo-200/60 hover:bg-zinc-50 focus:bg-white focus:shadow focus:outline-none sm:text-sm',
+                            classes.inputContainer,
+                        )
                     "
                 >
                     <ComboboxInput
                         :class="
-                            classes.inputElement ||
-                            'w-full rounded-lg border-none bg-zinc-50 py-2.5 pl-3 pr-10 text-sm leading-5 text-zinc-900 focus-within:border-none'
+                            m(
+                                'w-full rounded-lg border-none bg-zinc-50 py-2.5 pl-3 pr-10 text-sm leading-5 text-zinc-900 focus-within:border-none',
+                                classes.inputElement,
+                            )
                         "
                         @change="query = $event.target.value"
                     />
@@ -26,20 +30,61 @@
                         />
                     </ComboboxButton>
                 </div>
-                <ComboboxOptions
-                    class="absolute z-10 mt-1 max-h-[400px] w-full min-w-[500px] overflow-y-auto overflow-x-hidden rounded-lg bg-white p-3 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                <transition
+                    enter-active-class="transition duration-100 ease-out"
+                    enter-from-class="transform scale-95 opacity-0"
+                    enter-to-class="transform scale-100 opacity-100"
+                    leave-active-class="transition duration-75 ease-out"
+                    leave-from-class="transform scale-100 opacity-100"
+                    leave-to-class="transform scale-95 opacity-0"
                 >
-                    <div v-if="items.length === 0 && query === ''">
-                        Nothing found!
-                    </div>
-                </ComboboxOptions>
+                    <ComboboxOptions
+                        :class="
+                            m(
+                                'absolute z-10 mt-1 max-h-[400px] w-full min-w-[500px] overflow-y-auto overflow-x-hidden rounded-lg bg-white p-3 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm',
+                                classes.comboboxOptionsContainer,
+                            )
+                        "
+                    >
+                        <div v-if="filteredItems.length === 0 && query === ''">
+                            <slot v-if="$slots.empty" name="empty"></slot>
+                            <span v-else>No results</span>
+                        </div>
+
+                        <slot
+                            v-if="$slots.options"
+                            name="options"
+                            v-bind="{ filteredItems }"
+                        ></slot>
+
+                        <div v-else>
+                            <ComboboxOption
+                                v-for="item in filteredItems"
+                                :key="item[uidProperty]"
+                                :value="item[valueProperty]"
+                                v-slot="{ active, selected }"
+                            >
+                                <div
+                                    class="rounded-lg p-2"
+                                    :class="{
+                                        'bg-blue-500 text-white': active,
+                                        'bg-white text-black': !active,
+                                    }"
+                                >
+                                    {{ item[displayProperty] }}
+                                </div>
+                            </ComboboxOption>
+                        </div>
+                    </ComboboxOptions>
+                </transition>
             </div>
         </Combobox>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
+import { m } from '../../utils/TextUtils'
 import {
     Combobox,
     ComboboxButton,
@@ -53,29 +98,44 @@ const props = withDefaults(
     defineProps<{
         items?: any[]
         classes?: {
-            container?: string[]
-            inputContainer?: string[]
-            inputElement?: string[]
-            comboboxOptionsContainer?: string[]
+            container?: string
+            inputContainer?: string
+            inputElement?: string
+            comboboxOptionsContainer?: string
         }
+        searcher?: (query: string) => Promise<any[]>
+        uidProperty?: string
+        valueProperty?: string
+        displayProperty?: string
     }>(),
     {
         items: () => [],
         classes: () => ({
-            container: ['relative w-full rounded-lg'],
-            inputContainer: [
-                'relative w-full cursor-default overflow-hidden border border-zinc-200 bg-zinc-50 text-left ring-2 ring-transparent focus-within:border-indigo-500 focus-within:ring-indigo-200/60 hover:bg-zinc-50 focus:bg-white focus:shadow focus:outline-none sm:text-sm',
-            ],
-            inputeElement: [
-                'w-full border-none bg-zinc-50 py-2.5 pl-3 pr-10 text-sm leading-5 text-zinc-900 focus-within:border-none',
-            ],
-            comboboxOptionsContainer: [
-                'absolute z-10 mt-1 max-h-[400px] w-full min-w-[500px] overflow-y-auto overflow-x-hidden rounded-lg bg-white p-3 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm',
-            ],
+            container: '',
+            inputContainer: '',
+            inputeElement: '',
+            comboboxOptionsContainer: '',
         }),
+        displayProperty: 'name',
+        searcher: undefined,
+        uidProperty: 'id',
+        valueProperty: 'value',
     },
 )
 
-const selected = ref<any>(props.items[0])
+const filteredItems = ref<any[]>([])
 const query = ref<string>('')
+const selected = ref<any>(props.items[0])
+
+watch(
+    () => query.value,
+    async () => {
+        if (props.searcher) {
+            filteredItems.value = await props.searcher(query.value)
+        } else {
+            filteredItems.value = []
+        }
+    },
+    // { immediate: true }
+)
 </script>
