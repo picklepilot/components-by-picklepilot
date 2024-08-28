@@ -1,6 +1,6 @@
 <template>
     <div :class="m('relative w-full rounded-lg', classes.container)">
-        <Combobox v-model="selected" immediate>
+        <Combobox v-model="activeItem" immediate>
             <div class="relative">
                 <div
                     :class="
@@ -17,6 +17,7 @@
                                 classes.inputElement,
                             )
                         "
+                        :displayValue="displayProperty"
                         @change="query = $event.target.value"
                     />
                     <ComboboxButton
@@ -72,6 +73,7 @@
                                     }"
                                 >
                                     {{ item[displayProperty] }}
+                                    {{ selected ? '✓' : '' }}
                                 </div>
                             </ComboboxOption>
                         </div>
@@ -83,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { m } from '../../utils/TextUtils'
 import {
     Combobox,
@@ -96,6 +98,8 @@ import { ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 
 const props = withDefaults(
     defineProps<{
+        modelValue?: any
+        defaultItems?: any[]
         items?: any[]
         classes?: {
             container?: string
@@ -106,9 +110,10 @@ const props = withDefaults(
         searcher?: (query: string) => Promise<any[]>
         uidProperty?: string
         valueProperty?: string
-        displayProperty?: string
+        displayProperty?: (item: any) => string
     }>(),
     {
+        defaultItems: () => [],
         items: () => [],
         classes: () => ({
             container: '',
@@ -116,16 +121,24 @@ const props = withDefaults(
             inputeElement: '',
             comboboxOptionsContainer: '',
         }),
-        displayProperty: 'name',
+        displayProperty: (item: any) => item.name,
         searcher: undefined,
         uidProperty: 'id',
         valueProperty: 'value',
+        modelValue: undefined,
     },
 )
 
 const filteredItems = ref<any[]>([])
 const query = ref<string>('')
-const selected = ref<any>(props.items[0])
+const activeItem = ref<any>(props.modelValue)
+
+watch(
+    () => props.modelValue,
+    (value) => {
+        activeItem.value = value
+    },
+)
 
 watch(
     () => query.value,
@@ -138,4 +151,17 @@ watch(
     },
     // { immediate: true }
 )
+
+watch(
+    () => props.defaultItems,
+    (items) => {
+        filteredItems.value = items
+        console.log('filteredItems', filteredItems.value)
+    },
+    { immediate: true },
+)
+
+onMounted(() => {
+    console.log('ACTIVE ITEM', props.modelValue, activeItem.value)
+})
 </script>
