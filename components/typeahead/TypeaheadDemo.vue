@@ -2,13 +2,13 @@
     <div
         class="flex h-[550px] h-full items-start justify-center rounded-xl bg-zinc-100 p-6"
     >
-        <TypeaheadBase :searcher="searcher" value-property="name">
+        <BaseTypeahead :searcher="searcher" value-property="name">
             <template #empty>Nothing to show!</template>
-        </TypeaheadBase>
+        </BaseTypeahead>
     </div>
 </template>
 <script setup lang="ts">
-import TypeaheadBase from './TypeaheadBase.vue'
+import BaseTypeahead from './BaseTypeahead.vue'
 
 const mockData = [
     {
