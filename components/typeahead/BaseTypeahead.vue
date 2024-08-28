@@ -156,12 +156,11 @@ watch(
     () => props.defaultItems,
     (items) => {
         filteredItems.value = items
-        console.log('filteredItems', filteredItems.value)
     },
     { immediate: true },
 )
 
 onMounted(() => {
-    console.log('ACTIVE ITEM', props.modelValue, activeItem.value)
+    // console.log('ACTIVE ITEM', props.modelValue, activeItem.value)
 })
 </script>
