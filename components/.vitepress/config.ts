@@ -45,6 +45,13 @@ export default defineConfig({
             },
 
             {
+                text: 'Enterprise',
+                items: [
+                    { text: 'Typeahead', link: '/typeahead/' },
+                ],
+            },
+
+            {
                 text: 'Coming Soon',
                 items: [
                     { text: 'Avatar', link: null },
@@ -52,6 +59,7 @@ export default defineConfig({
                     { text: 'Column Management', link: null },
                     { text: 'Dropdown', link: null },
                     { text: 'Windowed Toolbar', link: null },
+
                 ],
             },
         ],

@@ -26,6 +26,8 @@
     "docs:preview": "vitepress preview components"
   },
   "dependencies": {
+    "@headlessui/vue": "^0.0.0-insiders.49c081d",
+    "@heroicons/vue": "^2.1.5",
     "@types/sortablejs": "^1.15.8",
     "clsx": "^2.1.0",
     "path": "^0.12.7",
