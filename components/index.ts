@@ -19,3 +19,4 @@ export { default as SortableComponent } from './sortable/SortableComponent.vue'
 export { default as TabsNav } from './tabs/TabsNav.vue'
 
 export { type FacetedFilterItem } from './faceted-filters/models/FacetedFilterItem'
+export type { ToolbarItem, ToolbarItemGroup } from './toolbar/ToolBarItem'
