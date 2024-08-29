@@ -27,6 +27,7 @@
         "tw:watch": "npx tailwindcss -i ./components/style.css -o ./components/main.css --watch"
     },
     "dependencies": {
+        "@floating-ui/vue": "^1.1.4",
         "@fortawesome/fontawesome-free": "^6.6.0",
         "@headlessui/vue": "^0.0.0-insiders.49c081d",
         "@heroicons/vue": "^2.1.5",
