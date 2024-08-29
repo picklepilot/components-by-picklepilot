@@ -64,13 +64,7 @@
 <script setup lang="ts">
 import { m } from '../../utils/TextUtils'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-
-type DropdownItem = {
-    disabled?: boolean
-    icon?: string
-    label?: string
-    onClick?: () => void
-}
+import { type DropdownItem } from './DropdownItem'
 
 withDefaults(
     defineProps<{

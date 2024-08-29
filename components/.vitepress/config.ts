@@ -33,6 +33,7 @@ export default defineConfig({
                     { text: 'Modal', link: '/modal/' },
                     { text: 'Select', link: '/input/select/' },
                     { text: 'Sortable', link: '/sortable/' },
+                    { text: 'Toolbar', link: '/toolbar/' },
                 ],
             },
 
