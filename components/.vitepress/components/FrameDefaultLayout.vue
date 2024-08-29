@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 // Special api to mount the app
 import { createApp } from 'whyframe:app'
 import '../../main.css'
+import '../../../node_modules/@fortawesome/fontawesome-free/css/all.min.css'
 
 const el = ref()
 

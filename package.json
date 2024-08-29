@@ -1,70 +1,72 @@
 {
-  "name": "components-by-picklepilot",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "files": [
-    "components",
-    "dist"
-  ],
-  "module": "./dist/components-by-picklepilot.es.js",
-  "exports": {
-    ".": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/components-by-picklepilot.es.js"
+    "name": "components-by-picklepilot",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "files": [
+        "components",
+        "dist"
+    ],
+    "module": "./dist/components-by-picklepilot.es.js",
+    "exports": {
+        ".": {
+            "types": "./dist/types/index.d.ts",
+            "import": "./dist/components-by-picklepilot.es.js"
+        },
+        "./components": "./components/index.ts",
+        "./utils/TextUtils": "./utils/TextUtils.ts",
+        "./dist/style.css": "./dist/index.css"
     },
-    "./components": "./components/index.ts",
-    "./utils/TextUtils": "./utils/TextUtils.ts",
-    "./dist/style.css": "./dist/index.css"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview",
-    "docs:dev": "vitepress dev components",
-    "docs:build": "vitepress build components",
-    "docs:preview": "vitepress preview components"
-  },
-  "dependencies": {
-    "@headlessui/vue": "^0.0.0-insiders.49c081d",
-    "@heroicons/vue": "^2.1.5",
-    "@types/sortablejs": "^1.15.8",
-    "clsx": "^2.1.0",
-    "markdown-it-task-lists": "^2.1.1",
-    "path": "^0.12.7",
-    "sortablejs": "^1.15.2",
-    "vue-demi": "^0.14.7"
-  },
-  "peerDependencies": {
-    "clsx": "^2.1.0",
-    "sortablejs": "^1.15.2",
-    "tailwind-merge": "^2.2.2",
-    "vue": "^2.7.0 || >=3.0.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.12.5",
-    "@vitejs/plugin-vue": "^5.0.4",
-    "@vue/test-utils": "^2.4.5",
-    "@whyframe/core": "^0.1.11",
-    "@whyframe/vue": "^0.1.7",
-    "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
-    "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.13",
-    "tailwind-merge": "^2.2.2",
-    "tailwindcss": "^3.4.3",
-    "vite": "^5.2.8",
-    "vite-plugin-dts": "^3.8.1",
-    "vite-plugin-lib-inject-css": "^2.0.1",
-    "vitepress": "^1.0.2",
-    "vitest": "^1.4.0",
-    "vue": "^3.4.21",
-    "vue-tsc": "^2.0.11"
-  },
-  "postcss": {
-    "plugins": {
-      "tailwindcss": {},
-      "autoprefixer": {}
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc && vite build",
+        "preview": "vite preview",
+        "docs:dev": "vitepress dev components",
+        "docs:build": "vitepress build components",
+        "docs:preview": "vitepress preview components",
+        "tw:watch": "npx tailwindcss -i ./components/style.css -o ./components/main.css --watch"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.6.0",
+        "@headlessui/vue": "^0.0.0-insiders.49c081d",
+        "@heroicons/vue": "^2.1.5",
+        "@types/sortablejs": "^1.15.8",
+        "clsx": "^2.1.0",
+        "markdown-it-task-lists": "^2.1.1",
+        "path": "^0.12.7",
+        "sortablejs": "^1.15.2",
+        "vue-demi": "^0.14.7"
+    },
+    "peerDependencies": {
+        "clsx": "^2.1.0",
+        "sortablejs": "^1.15.2",
+        "tailwind-merge": "^2.2.2",
+        "vue": "^2.7.0 || >=3.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.12.5",
+        "@vitejs/plugin-vue": "^5.0.4",
+        "@vue/test-utils": "^2.4.5",
+        "@whyframe/core": "^0.1.11",
+        "@whyframe/vue": "^0.1.7",
+        "autoprefixer": "^10.4.19",
+        "postcss": "^8.4.38",
+        "prettier": "^3.2.5",
+        "prettier-plugin-tailwindcss": "^0.5.13",
+        "tailwind-merge": "^2.2.2",
+        "tailwindcss": "^3.4.3",
+        "vite": "^5.2.8",
+        "vite-plugin-dts": "^3.8.1",
+        "vite-plugin-lib-inject-css": "^2.0.1",
+        "vitepress": "^1.0.2",
+        "vitest": "^1.4.0",
+        "vue": "^3.4.21",
+        "vue-tsc": "^2.0.11"
+    },
+    "postcss": {
+        "plugins": {
+            "tailwindcss": {},
+            "autoprefixer": {}
+        }
     }
-  }
 }
