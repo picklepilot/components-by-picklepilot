@@ -22,7 +22,7 @@
             menuItems: '',
             menuItem: '',
         }"
-        :items="item.children as DropdownItem[][]"
+        :items="items"
     >
         <template #trigger>
             <span
@@ -40,6 +40,7 @@ import BaseButton from '../button/BaseButton.vue'
 import BaseDropdownMenu from '../dropdown-menu/BaseDropdownMenu.vue'
 import type { ToolbarItem } from './ToolBarItem'
 import type { DropdownItem } from '../dropdown-menu/DropdownItem'
+import { computed } from 'vue'
 
 const props = withDefaults(
     defineProps<{
@@ -47,4 +48,6 @@ const props = withDefaults(
     }>(),
     {},
 )
+
+const items = computed<DropdownItem[][]>(() => props.item.children || [])
 </script>
