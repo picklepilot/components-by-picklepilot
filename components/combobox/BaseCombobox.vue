@@ -62,7 +62,8 @@
                         v-slot="{ selected, active }"
                     >
                         <slot
-                            v-if="$slots.item"
+                            v-if="$slots.option"
+                            name="option"
                             v-bind="{ item, selected, active }"
                         ></slot>
 

@@ -4,7 +4,19 @@
             <BaseCombobox
                 :display-value="(item) => item.name"
                 :items="mockData"
-            />
+            >
+                <template v-slot:option="{ item, selected, active }">
+                    <li
+                        class="relative cursor-default select-none rounded-lg py-2 pl-10 pr-4"
+                        :class="{
+                            'bg-zinc-100': active,
+                            'text-zinc-900': !active,
+                        }"
+                    >
+                        {{ item.name }}
+                    </li>
+                </template>
+            </BaseCombobox>
         </div>
     </div>
 </template>
