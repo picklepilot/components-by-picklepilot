@@ -4,6 +4,14 @@
             <BaseCombobox
                 :display-value="(item) => item.name"
                 :items="mockData"
+                :model-value="{
+                    id: 2,
+                    name: 'Beta',
+                    description:
+                        'This item is the second one, often used for testing.',
+                    tag: 'intermediate',
+                    header: 'Common',
+                }"
             >
                 <template v-slot:option="{ item, selected, active }">
                     <li

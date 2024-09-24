@@ -117,6 +117,7 @@ const emit = defineEmits(['change'])
 
 const props = withDefaults(
     defineProps<{
+        modelValue?: any
         classes?: {
             container?: string
             inputContainer?: string
@@ -135,6 +136,7 @@ const props = withDefaults(
         }),
         displayValue: (item: any) => item.name,
         items: () => [],
+        modelValue: null,
     },
 )
 
@@ -162,6 +164,14 @@ let selected = ref(props.items[0])
 let query = ref('')
 
 const filteredItems = ref<any[]>([])
+
+watch(
+    () => props.modelValue,
+    (value) => {
+        selected.value = value
+    },
+    { immediate: true },
+)
 
 watch(
     () => query.value,
