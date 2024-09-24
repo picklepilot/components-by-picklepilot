@@ -168,7 +168,7 @@ const filteredItems = ref<any[]>([])
 watch(
     () => props.modelValue,
     (value) => {
-        selected.value = value
+        selected.value = value || props.items[0]
     },
     { immediate: true },
 )
