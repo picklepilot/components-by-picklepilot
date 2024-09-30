@@ -2,8 +2,10 @@
     <div
         class="flex h-[550px] h-full items-start justify-center rounded-xl bg-zinc-100 p-6"
     >
+        <pre>{{ activeItem }}</pre>
+
         <BaseTypeahead
-            v-model="mockData[0]"
+            v-model="activeItem"
             :default-items="mockData"
             :searcher="searcher"
             value-property="name"
@@ -37,6 +39,7 @@
 <script setup lang="ts">
 import BaseTypeahead from './BaseTypeahead.vue'
 import { ComboboxOption } from '@headlessui/vue'
+import { ref } from 'vue'
 
 const mockData = [
     {
@@ -75,6 +78,8 @@ const mockData = [
         header: 'Expert',
     },
 ]
+
+const activeItem = ref(mockData[0])
 
 async function searcher(query: string) {
     return Promise.resolve(

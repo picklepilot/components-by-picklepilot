@@ -1,6 +1,6 @@
 <template>
     <div :class="m('relative w-full rounded-lg', classes.container)">
-        <Combobox v-model="activeItem" immediate nullable>
+        <Combobox v-model="activeItem" immediate :nullable="nullable">
             <div class="relative">
                 <div
                     :class="
@@ -96,6 +96,8 @@ import {
 } from '@headlessui/vue'
 import { ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 
+const emit = defineEmits(['update:modelValue'])
+
 const props = withDefaults(
     defineProps<{
         modelValue?: any
@@ -111,6 +113,7 @@ const props = withDefaults(
         uidProperty?: string
         valueProperty?: string
         displayProperty?: (item: any) => string
+        nullable?: boolean
     }>(),
     {
         defaultItems: () => [],
@@ -126,6 +129,7 @@ const props = withDefaults(
         uidProperty: 'id',
         valueProperty: 'value',
         modelValue: undefined,
+        nullable: false,
     },
 )
 
@@ -160,7 +164,11 @@ watch(
     { immediate: true },
 )
 
-onMounted(() => {
-    // console.log('ACTIVE ITEM', props.modelValue, activeItem.value)
-})
+watch(
+    () => activeItem.value,
+    (item) => {
+        emit('update:modelValue', item)
+    },
+    { immediate: false },
+)
 </script>

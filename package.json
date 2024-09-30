@@ -29,7 +29,7 @@
     "dependencies": {
         "@floating-ui/vue": "^1.1.4",
         "@fortawesome/fontawesome-free": "^6.6.0",
-        "@headlessui/vue": "^0.0.0-insiders.49c081d",
+        "@headlessui/vue": "^0.0.0-insiders.5ca68a9",
         "@heroicons/vue": "^2.1.5",
         "@types/sortablejs": "^1.15.8",
         "clsx": "^2.1.0",
