@@ -5,26 +5,6 @@
             :key="item.id"
             :class="m('flex shrink-0', itemClasses)"
         >
-            <div
-                v-if="options.handle"
-                class="drag-handle m-1 flex cursor-move items-center justify-center rounded bg-white p-1 text-sm text-zinc-400 shadow-sm ring-1 ring-zinc-100 transition-all hover:text-zinc-700 hover:shadow-md hover:ring-zinc-200"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="h-3 w-3"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
-                    />
-                </svg>
-            </div>
-
             <slot name="item" v-bind="getItemBindings(item, idx)"></slot>
         </li>
     </ul>

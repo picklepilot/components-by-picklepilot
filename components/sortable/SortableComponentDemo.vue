@@ -22,6 +22,11 @@
             >
                 <template v-slot:item="{ name }">
                     <div class="flex w-full">
+                        <span>
+                            <i
+                                class="fa-regular fa-grip-vertical drag-handle p-2 text-zinc-400"
+                            ></i>
+                        </span>
                         <div class="p-2 text-sm">
                             {{ name }}
                         </div>
