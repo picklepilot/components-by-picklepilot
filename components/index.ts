@@ -17,6 +17,7 @@ export { default as InputTextarea } from './input/textarea/InputTextarea.vue'
 export { default as ModalComponent } from './modal/ModalComponent.vue'
 export { default as SortableComponent } from './sortable/SortableComponent.vue'
 export { default as TabsNav } from './tabs/TabsNav.vue'
+export { default as TipsPanel } from './tips-panel/TipsPanel.vue'
 
 export { type FacetedFilterItem } from './faceted-filters/models/FacetedFilterItem'
 export type { ToolbarItem, ToolbarItemGroup } from './toolbar/ToolBarItem'

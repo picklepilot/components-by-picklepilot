@@ -50,7 +50,10 @@ export default defineConfig({
 
             {
                 text: 'Enterprise',
-                items: [{ text: 'Typeahead', link: '/typeahead/' }],
+                items: [
+                    { text: 'Typeahead', link: '/typeahead/' },
+                    { text: 'Tips panel', link: '/tips-panel/' },
+                ],
             },
 
             {
