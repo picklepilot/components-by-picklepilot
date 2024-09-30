@@ -49,6 +49,7 @@
                         @click.stop
                     >
                         <button
+                            v-if="!disabled.includes('close-button')"
                             @click="$emit('close', false)"
                             class="absolute right-4 top-4 text-zinc-400 hover:text-zinc-800"
                         >
@@ -88,6 +89,14 @@ import { m } from '../../utils/TextUtils'
 interface Props {
     classes?: string[]
 
+    /**
+     * Array of disabled elements/functionalities
+     *
+     * @default []
+     * @type {string[]}
+     */
+    disabled?: string[]
+
     containerClasses?: string[]
 
     /**
@@ -102,6 +111,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
     classes: () => [],
     containerClasses: () => [],
+    disabled: () => [],
 })
 
 watch(
