@@ -78,6 +78,7 @@ function unhighlightElement(target: string) {
     background-color: rgba(255, 252, 127, 0.35); /* TW: text-yellow-300 */
     z-index: 2;
     transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
 }
 
 .tip-highlight.active::after {
