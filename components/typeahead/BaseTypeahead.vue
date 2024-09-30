@@ -1,6 +1,6 @@
 <template>
     <div :class="m('relative w-full rounded-lg', classes.container)">
-        <Combobox v-model="activeItem" immediate>
+        <Combobox v-model="activeItem" immediate nullable>
             <div class="relative">
                 <div
                     :class="
