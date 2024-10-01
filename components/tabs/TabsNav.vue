@@ -3,7 +3,7 @@
         <SortableComponent
             :classes="['flex space-x-0.5', classic && 'px-6']"
             :model-value="tabs"
-            @update:model-value="onUpdateOrder"
+            @update:modelValue="onUpdateOrder"
         >
             <template v-slot:item="tab">
                 <a
