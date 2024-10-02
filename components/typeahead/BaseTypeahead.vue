@@ -1,6 +1,6 @@
 <template>
     <div :class="m('relative w-full rounded-lg', classes.container)">
-        <Combobox v-model="activeItem" immediate :nullable="nullable">
+        <Combobox v-model="activeItem" :immediate="immediate" :nullable="nullable">
             <div class="relative">
                 <div
                     ref="reference"
@@ -120,6 +120,7 @@ const props = withDefaults(
         displayProperty?: (item: any) => string
         nullable?: boolean
         placeholder?: string
+        immediate?: boolean
     }>(),
     {
         defaultItems: () => [],
@@ -137,6 +138,7 @@ const props = withDefaults(
         modelValue: undefined,
         nullable: false,
         placeholder: 'Search...',
+        immediate: false,
     },
 )
 
