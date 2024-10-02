@@ -18,6 +18,7 @@
                             )
                         "
                         :displayValue="displayProperty"
+                        :placeholder="placeholder"
                         @change="query = $event.target.value"
                     />
                     <ComboboxButton
@@ -85,7 +86,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import { m } from '../../utils/TextUtils'
 import {
     Combobox,
@@ -114,6 +115,7 @@ const props = withDefaults(
         valueProperty?: string
         displayProperty?: (item: any) => string
         nullable?: boolean
+        placeholder?: string
     }>(),
     {
         defaultItems: () => [],
@@ -130,6 +132,7 @@ const props = withDefaults(
         valueProperty: 'value',
         modelValue: undefined,
         nullable: false,
+        placeholder: 'Search...',
     },
 )
 
