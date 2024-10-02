@@ -45,7 +45,7 @@
                         ref="floating"
                         :class="
                             m(
-                                'absolute z-10 w-full min-w-[500px] overflow-y-auto overflow-x-hidden rounded-lg bg-white p-3 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm',
+                                'fixed left-0 z-10 overflow-y-auto overflow-x-hidden rounded-lg bg-white p-3 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm',
                                 classes.comboboxOptionsContainer,
                             )
                         "
@@ -149,13 +149,20 @@ const floating = ref()
 const BUFFER = 20
 
 const { floatingStyles } = useFloating(reference, floating, {
+    strategy: 'fixed',
+    transform: false,
     middleware: [
-        autoPlacement(),
+        autoPlacement({
+            allowedPlacements: ['top-start', 'bottom-start'],
+        }),
         size({
-            apply({ availableWidth, availableHeight, elements }) {
-                // Change styles, e.g.
+            apply({ availableHeight, elements }) {
+                const minMaxWidth =
+                    elements.reference.getBoundingClientRect().width
+
                 Object.assign(elements.floating.style, {
-                    maxWidth: `${availableWidth - BUFFER}px`,
+                    minWidth: `${minMaxWidth}px`,
+                    maxWidth: `${minMaxWidth - BUFFER}px`,
                     maxHeight: `${availableHeight - BUFFER}px`,
                 })
             },
