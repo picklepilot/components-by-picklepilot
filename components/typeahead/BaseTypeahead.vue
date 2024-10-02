@@ -3,6 +3,7 @@
         <Combobox v-model="activeItem" immediate :nullable="nullable">
             <div class="relative">
                 <div
+                    ref="reference"
                     :class="
                         m(
                             'relative w-full cursor-default overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50 text-left ring-2 ring-transparent focus-within:border-indigo-500 focus-within:ring-indigo-200/60 hover:bg-zinc-50 focus:bg-white focus:shadow focus:outline-none sm:text-sm',
@@ -41,12 +42,14 @@
                     leave-to-class="transform scale-95 opacity-0"
                 >
                     <ComboboxOptions
+                        ref="floating"
                         :class="
                             m(
-                                'absolute z-10 mt-1 max-h-[400px] w-full min-w-[500px] overflow-y-auto overflow-x-hidden rounded-lg bg-white p-3 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm',
+                                'absolute z-10 w-full min-w-[500px] overflow-y-auto overflow-x-hidden rounded-lg bg-white p-3 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm',
                                 classes.comboboxOptionsContainer,
                             )
                         "
+                        :style="floatingStyles"
                     >
                         <div v-if="filteredItems.length === 0 && query === ''">
                             <slot v-if="$slots.empty" name="empty"></slot>
@@ -96,6 +99,7 @@ import {
     ComboboxOption,
 } from '@headlessui/vue'
 import { ChevronUpDownIcon } from '@heroicons/vue/20/solid'
+import { autoPlacement, autoUpdate, size, useFloating } from '@floating-ui/vue'
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -139,6 +143,26 @@ const props = withDefaults(
 const filteredItems = ref<any[]>([])
 const query = ref<string>('')
 const activeItem = ref<any>(props.modelValue)
+
+const reference = ref()
+const floating = ref()
+const BUFFER = 20
+
+const { floatingStyles } = useFloating(reference, floating, {
+    middleware: [
+        autoPlacement(),
+        size({
+            apply({ availableWidth, availableHeight, elements }) {
+                // Change styles, e.g.
+                Object.assign(elements.floating.style, {
+                    maxWidth: `${availableWidth - BUFFER}px`,
+                    maxHeight: `${availableHeight - BUFFER}px`,
+                })
+            },
+        }),
+    ],
+    whileElementsMounted: autoUpdate,
+})
 
 watch(
     () => props.modelValue,
