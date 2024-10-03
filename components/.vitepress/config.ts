@@ -30,6 +30,7 @@ export default defineConfig({
                     { text: 'Color picker', link: '/color-picker/' },
                     { text: 'Combobox', link: '/combobox/' },
                     { text: 'Dropdown menu', link: '/dropdown-menu/' },
+                    { text: 'Empty state', link: '/empty-state/' },
                     { text: 'Faceted filters', link: '/faceted-filters/' },
                     { text: 'Modal', link: '/modal/' },
                     { text: 'Select', link: '/input/select/' },
