@@ -39,7 +39,7 @@
                                     : 'text-gray-900',
                                 'group flex w-full items-center space-x-2 rounded-md border-none bg-transparent px-2.5 py-2.5 leading-none text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900',
                             ]"
-                            @click="item.onClick"
+                            @click="handleClick(item, $event)"
                         >
                             <span
                                 v-if="item.icon"
@@ -66,7 +66,7 @@ import { m } from '../../utils/TextUtils'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { type DropdownItem } from './DropdownItem'
 
-withDefaults(
+const props = withDefaults(
     defineProps<{
         items: DropdownItem[][]
         classes?: {
@@ -76,6 +76,7 @@ withDefaults(
             menuItem?: string
             menuItemIcon?: string
         }
+        context?: any
     }>(),
     {
         classes: () => ({
@@ -85,6 +86,13 @@ withDefaults(
             menuItem: '',
             menuItemIcon: '',
         }),
+        context: () => ({}),
     },
 )
+
+function handleClick(item: any, evt: any) {
+    if (item.onClick) {
+        item.onClick(props.context, evt)
+    }
+}
 </script>
