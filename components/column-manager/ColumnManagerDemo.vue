@@ -6,12 +6,26 @@
             :existing-columns="existingColumns"
             :searcher="searcher"
             :onPickedColumn="(item) => item"
+            :group-menu-items="groupMenuItems"
         >
             <template v-slot:option="{ item, selected, active }">
                 <div :class="active ? 'bg-green-500' : ''">{{ item.name }}</div>
             </template>
             <template v-slot:column="{ slotProps }">
-                <div>{{ slotProps.name }}</div>
+                <div class="flex flex-col p-2">
+                    <div>{{ slotProps.name }}</div>
+                    <div class="mt-1 text-sm text-zinc-500">
+                        {{ slotProps.description }}
+                    </div>
+                </div>
+            </template>
+
+            <template #drag-handle>
+                <span
+                    class="drag-handle relative top-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-md leading-none hover:bg-zinc-200"
+                >
+                    <i class="fa-regular fa-lemon text-sm"></i>
+                </span>
             </template>
 
             <div v-if="columnManager" class="rounded-xl bg-zinc-100 p-8">
@@ -76,6 +90,18 @@ const existingColumns = [
         tag: 'final',
         header: 'Expert',
     },
+]
+
+const groupMenuItems = [
+    [
+        {
+            icon: 'fa-robot',
+            label: 'AI some stuff',
+            onClick: (context: any) => {
+                console.log('AI some stuff', context)
+            },
+        },
+    ],
 ]
 
 async function searcher(query: string) {

@@ -7,10 +7,10 @@
                 class="rounded-xl border border-zinc-300/80 bg-zinc-50 shadow-sm"
             >
                 <h2
-                    class="sticky top-0 flex items-center justify-between rounded-t-xl border-b border-zinc-300/80 bg-zinc-50 px-4 py-3"
+                    class="sticky top-0 z-20 flex items-center justify-between rounded-t-xl border-b border-zinc-300/80 bg-zinc-50 px-4 py-3"
                 >
                     <span class="text-base font-semibold">{{ groupName }}</span>
-                    <span class="text-sm">
+                    <span v-if="groupMenuItems" class="text-sm">
                         <BaseDropdownMenu
                             :classes="{
                                 menu: '',
@@ -20,7 +20,11 @@
                                 menuItem: 'rounded-xl',
                                 menuItemIcon: 'group-hover:bg-indigo-300',
                             }"
-                            :items="items"
+                            :items="[
+                                ...groupMenuItems,
+                                defaultGroupDropdownMenuItems,
+                            ]"
+                            :context="{ groupName }"
                         >
                             <template #trigger>
                                 <i class="fa-regular fa-ellipsis-v"></i>
@@ -62,11 +66,7 @@
                 >
                     <template v-slot:item="itemSlotProps">
                         <div class="group flex w-full">
-                            <span
-                                class="drag-handle flex h-6 w-6 shrink-0 items-center justify-center self-center rounded-md leading-none hover:bg-zinc-200"
-                            >
-                                <i class="fa-regular fa-grip-dots-vertical"></i>
-                            </span>
+                            <slot name="drag-handle"></slot>
 
                             <slot
                                 name="column"
@@ -148,13 +148,8 @@
                     </BaseTypeahead>
 
                     <BaseButton
-                        :classes="[
-                            'text-sm flex items-center justify-center w-8 h-8 rounded-lg border-none bg-transparent hover:bg-zinc-200 text-zinc-400 group-hover:text-zinc-500 group-hover:hover:text-zinc-800',
-                        ]"
-                    >
-                        <i class="fa-regular fa-empty-set"></i>
-                    </BaseButton>
-                    <BaseButton
+                        v-if="Object.keys(editableColumns).length > 1"
+                        @click="removeGroup(groupName)"
                         :classes="[
                             'text-sm flex items-center justify-center w-8 h-8 rounded-lg border-none bg-transparent hover:bg-zinc-200 text-zinc-400 group-hover:text-zinc-500 group-hover:hover:text-zinc-800',
                         ]"
@@ -220,6 +215,7 @@ const props = withDefaults(
         existingColumns?: any[]
         onPickedColumn: (groupName: string, column: any) => any
         searcher: (query: string) => Promise<any[]>
+        groupMenuItems?: any[]
     }>(),
     {
         defaultItems: () => [],
@@ -230,6 +226,7 @@ const props = withDefaults(
             comboboxOptionsContainer: '',
         }),
         existingColumns: () => [],
+        groupMenuItems: () => [],
     },
 )
 
@@ -268,6 +265,26 @@ function addGroup() {
 }
 
 /**
+ * Handler for the remove group button click event.
+ * @param {string} groupName - The group name of the column
+ */
+function removeGroup(groupName: string) {
+    delete editableColumns.value[groupName]
+    emit('update:existingColumns', ungroupColumns(editableColumns.value))
+}
+
+/**
+ * Handler for the reset to default columns button click event.
+ * @param {string} groupName - The group name of the column
+ */
+function clearAllColumns(groupName: string) {
+    editableColumns.value = {
+        ...editableColumns.value,
+        [groupName]: [],
+    }
+}
+
+/**
  * Handler for the sortable component update event.
  * @param {string} groupName - The group name of the column
  * @param {any} params - The updated column list
@@ -294,26 +311,26 @@ function onPickedNewColumn(groupName: string, value: any) {
     emit('update:existingColumns', ungroupColumns(editableColumns.value))
 }
 
-const items = [
-    [
-        {
-            icon: 'fa-function',
-            label: 'Add function column',
+const defaultGroupDropdownMenuItems = [
+    {
+        icon: 'fa-empty-set',
+        label: 'Clear all columns',
+        onClick: (context: any) => {
+            clearAllColumns(context.groupName)
         },
-    ],
-    [
-        {
-            icon: 'fa-rotate-left',
-            label: 'Reset to default columns',
+    },
+    {
+        icon: 'fa-trash',
+        label: 'Remove group',
+        onClick: (context: any) => {
+            removeGroup(context.groupName)
         },
-        {
-            icon: 'fa-empty-set',
-            label: 'Clear all columns',
-        },
-    ],
+    },
 ]
 
 defineExpose({
+    clearAllColumns,
     focusedColumn,
+    removeGroup,
 })
 </script>
