@@ -38,7 +38,7 @@ withDefaults(
             title?: string
         }
         description?: string
-        icon: string
+        icon?: string
         title: string
     }>(),
     {
@@ -49,6 +49,7 @@ withDefaults(
             icon: '',
             title: '',
         }),
+        icon: '',
     },
 )
 </script>
