@@ -1628,6 +1628,10 @@ video {
   background-color: rgb(24 24 27 / 0.2);
 }
 
+.bg-zinc-300\/80 {
+  background-color: rgb(212 212 216 / 0.8);
+}
+
 .p-1 {
   padding: 0.25rem;
 }
