@@ -7,6 +7,7 @@ export { default as BaseDropdownMenu } from './dropdown-menu/BaseDropdownMenu.vu
 export { default as BaseToolbar } from './toolbar/BaseToolbar.vue'
 export { default as BaseTypeahead } from './typeahead/BaseTypeahead.vue'
 export { default as ColorPicker } from './color-picker/ColorPicker.vue'
+export { default as EmptyState } from './empty-state/EmptyState.vue'
 export { default as FacetedFilters } from './faceted-filters/FacetedFiltersBase.vue'
 export { default as InputCheckbox } from './input/checkbox/InputCheckbox.vue'
 export { default as InputLabel } from './input/label/InputLabel.vue'
