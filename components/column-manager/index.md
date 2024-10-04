@@ -12,6 +12,6 @@ Opinionated column management module. Optional side slot for managing each colum
 
 Demo of the column management module.
 
-<iframe data-why class="w-full min-h-96">
+<iframe data-why class="w-full h-[900px]">
     <ColumnManagerDemo />
 </iframe>

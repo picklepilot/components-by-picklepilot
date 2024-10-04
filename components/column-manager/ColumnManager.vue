@@ -49,39 +49,34 @@
                     />
                 </div>
 
-                <SortableComponent
-                    v-model="editableColumns[groupName]"
-                    :classes="['rounded-xl']"
-                    :item-classes="[
-                        'cursor-default px-2 py-1 pr-3 hover:bg-zinc-200/60 [&.selected]:bg-green-200',
-                    ]"
+                <Sortable
+                    :list="editableColumns[groupName]"
+                    item-key="id"
+                    tag="div"
                     :options="{
                         animation: 150,
                         group: 'shared-columns',
                         handle: '.drag-handle',
                         multiDrag: true,
                         selectedClass: 'selected',
+                        emptyInsertThreshold: 100,
                     }"
-                    @update:modelValue="onUpdatedList(groupName, $event)"
                 >
-                    <template v-slot:item="itemSlotProps">
-                        <div class="group flex w-full">
+                    <template #item="{ element, index }">
+                        <div
+                            class="group flex w-full [&.selected]:bg-blue-100"
+                            @click="onClickedListItem"
+                        >
                             <slot name="drag-handle"></slot>
 
-                            <slot
-                                name="column"
-                                :slotProps="itemSlotProps"
-                            ></slot>
+                            <slot name="column" :slotProps="element"></slot>
 
                             <div
                                 class="ml-auto flex items-center space-x-1.5 p-1"
                             >
                                 <button
                                     @click.prevent.stop="
-                                        removeColumn(
-                                            groupName,
-                                            itemSlotProps.idx,
-                                        )
+                                        removeColumn(groupName, index)
                                     "
                                     class="flex h-6 w-6 items-center justify-center rounded text-xs text-zinc-400 ring-1 ring-transparent transition-all hover:bg-zinc-200 hover:text-zinc-700"
                                 >
@@ -90,9 +85,7 @@
                                 <button
                                     @click.prevent.stop="
                                         focusedColumn =
-                                            editableColumns[groupName][
-                                                itemSlotProps.idx
-                                            ]
+                                            editableColumns[groupName][index]
                                     "
                                     class="flex h-6 w-6 items-center justify-center rounded text-xs text-zinc-400 ring-1 ring-transparent transition-all hover:text-zinc-700 hover:shadow-md hover:ring-zinc-200 group-hover:bg-white group-hover:shadow-sm group-hover:ring-zinc-300/80"
                                 >
@@ -101,7 +94,7 @@
                             </div>
                         </div>
                     </template>
-                </SortableComponent>
+                </Sortable>
 
                 <div
                     class="group flex items-center justify-end space-x-2 border-t border-zinc-300/80 p-2"
@@ -187,6 +180,8 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { Sortable } from 'sortablejs-vue3'
+import { default as realSortable } from 'sortablejs'
 
 import {
     BaseButton,
@@ -194,7 +189,6 @@ import {
     BaseTypeahead,
     EmptyState,
     InputText,
-    SortableComponent,
 } from '../'
 
 import { ComboboxOption } from '@headlessui/vue'
@@ -242,6 +236,14 @@ watch(
     { immediate: false },
 )
 
+function onClickedListItem(evt: any) {
+    if (evt.currentTarget.classList.contains('selected')) {
+        realSortable.utils.deselect(evt.currentTarget)
+    } else {
+        realSortable.utils.select(evt.currentTarget)
+    }
+}
+
 /**
  * Handler for the remove column button click event.
  * @param {string} groupName - The group name of the column
@@ -288,10 +290,11 @@ function clearAllColumns(groupName: string) {
  * Handler for the sortable component update event.
  * @param {string} groupName - The group name of the column
  * @param {any} params - The updated column list
+ *
+ * @deprecated
  */
 function onUpdatedList(groupName: string, params: any) {
     editableColumns.value = { ...editableColumns.value, [groupName]: params }
-    console.log('DRAG ENDED', ungroupColumns(editableColumns.value))
     emit('update:existingColumns', ungroupColumns(editableColumns.value))
 }
 
@@ -301,8 +304,7 @@ function onUpdatedList(groupName: string, params: any) {
  * @param {any} value - The selected column
  */
 function onPickedNewColumn(groupName: string, value: any) {
-    // const decoratedColumn = props.onPickedColumn(groupName, value)
-
+    value.group = groupName
     editableColumns.value = {
         ...editableColumns.value,
         [groupName]: [...editableColumns.value[groupName], value],

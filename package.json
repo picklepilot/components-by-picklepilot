@@ -29,13 +29,14 @@
     "dependencies": {
         "@floating-ui/vue": "^1.1.4",
         "@fortawesome/fontawesome-free": "^6.6.0",
-        "@headlessui/vue": "^0.0.0-insiders.5ca68a9",
+        "@headlessui/vue": "^0.0.0-insiders.02b43d0",
         "@heroicons/vue": "^2.1.5",
         "@types/sortablejs": "^1.15.8",
         "clsx": "^2.1.0",
         "markdown-it-task-lists": "^2.1.1",
         "path": "^0.12.7",
         "sortablejs": "^1.15.2",
+        "sortablejs-vue3": "^1.2.11",
         "vue-demi": "^0.14.7"
     },
     "peerDependencies": {
@@ -53,9 +54,9 @@
         "autoprefixer": "^10.4.19",
         "postcss": "^8.4.38",
         "prettier": "^3.2.5",
-        "prettier-plugin-tailwindcss": "^0.5.13",
-        "tailwind-merge": "^2.2.2",
-        "tailwindcss": "^3.4.3",
+        "prettier-plugin-tailwindcss": "^0.6.8",
+        "tailwind-merge": "^2.5.3",
+        "tailwindcss": "^3.4.13",
         "vite": "^5.2.8",
         "vite-plugin-dts": "^3.8.1",
         "vite-plugin-lib-inject-css": "^2.0.1",

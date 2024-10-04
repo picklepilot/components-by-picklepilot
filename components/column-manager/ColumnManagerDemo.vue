@@ -1,5 +1,5 @@
 <template>
-    <div class="h-[550px] overflow-auto rounded-xl bg-white p-6">
+    <div class="h-[800px] overflow-auto rounded-xl bg-zinc-100 p-6">
         <ColumnManager
             ref="columnManager"
             :default-items="defaultItems"
@@ -22,9 +22,11 @@
 
             <template #drag-handle>
                 <span
-                    class="drag-handle relative top-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-md leading-none hover:bg-zinc-200"
+                    class="drag-handle relative top-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-md leading-none hover:bg-zinc-200 group-has-[.selected]:bg-green-200"
                 >
-                    <i class="fa-regular fa-lemon text-sm"></i>
+                    <i
+                        class="fa-regular fa-lemon text-sm group-has-[.selected]:hidden"
+                    ></i>
                 </span>
             </template>
 
@@ -37,6 +39,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import ColumnManager from './ColumnManager.vue'
+import Sortable, { MultiDrag } from 'sortablejs'
+mountMultiDragPlugin()
 
 const columnManager = ref()
 
@@ -74,21 +78,21 @@ const existingColumns = [
         name: 'Gamma',
         description: 'The third item, represents an advanced concept.',
         tag: 'advanced',
-        header: 'Other',
+        group: 'Default',
     },
     {
         id: 4,
         name: 'Delta',
         description: 'This item is frequently associated with change.',
         tag: 'expert',
-        header: 'Expert',
+        group: 'Default',
     },
     {
         id: 5,
         name: 'Epsilon',
         description: 'The fifth item, often the final step in a sequence.',
         tag: 'final',
-        header: 'Expert',
+        group: 'Default',
     },
 ]
 
@@ -110,5 +114,13 @@ async function searcher(query: string) {
             item.name.toLowerCase().includes(query.toLowerCase()),
         ),
     )
+}
+
+function mountMultiDragPlugin() {
+    if (typeof window === 'undefined') {
+        return
+    }
+
+    Sortable.mount(new MultiDrag())
 }
 </script>
