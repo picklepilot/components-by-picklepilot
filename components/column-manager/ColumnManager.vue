@@ -102,7 +102,7 @@
                     <BaseTypeahead
                         :classes="dropDownClasses"
                         :default-items="defaultItems"
-                        :display-property="(_item: any) => ''"
+                        :display-property="() => ''"
                         :nullable="true"
                         :searcher="searcher"
                         placeholder="Add a column to group"
