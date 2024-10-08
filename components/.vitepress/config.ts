@@ -55,6 +55,7 @@ export default defineConfig({
                     { text: 'Column manager', link: '/column-manager/' },
                     { text: 'Typeahead', link: '/typeahead/' },
                     { text: 'Tips panel', link: '/tips-panel/' },
+                    { text: 'Windowed Toolbar', link: '/ui-window-toolbar/' },
                 ],
             },
 
@@ -64,7 +65,6 @@ export default defineConfig({
                     { text: 'Avatar', link: null },
                     { text: 'Badge', link: null },
                     { text: 'Column Management', link: null },
-                    { text: 'Windowed Toolbar', link: null },
                 ],
             },
         ],
