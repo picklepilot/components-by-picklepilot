@@ -52,7 +52,6 @@ export default defineConfig({
             {
                 text: 'Enterprise',
                 items: [
-                    { text: 'Column manager', link: '/column-manager/' },
                     { text: 'Typeahead', link: '/typeahead/' },
                     { text: 'Tips panel', link: '/tips-panel/' },
                 ],

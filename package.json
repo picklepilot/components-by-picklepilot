@@ -36,7 +36,6 @@
         "markdown-it-task-lists": "^2.1.1",
         "path": "^0.12.7",
         "sortablejs": "^1.15.2",
-        "sortablejs-vue3": "^1.2.11",
         "vue-demi": "^0.14.7"
     },
     "peerDependencies": {
