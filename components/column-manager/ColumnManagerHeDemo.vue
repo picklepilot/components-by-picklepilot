@@ -14,14 +14,12 @@
             </template>
 
             <template v-slot:column="{ slotProps }">
-                <div class="ml-2 grow self-center truncate">
-                    {{ slotProps.name }}
-                </div>
+                <div class="grow self-center">{{ slotProps.name }}</div>
             </template>
 
             <template #drag-handle>
                 <span
-                    class="drag-handle relative top-1 ml-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-md leading-none hover:bg-zinc-200 group-has-[.selected]:bg-green-200"
+                    class="drag-handle relative top-2 flex h-6 w-6 shrink-0 items-center justify-center rounded-md leading-none hover:bg-zinc-200 group-has-[.selected]:bg-green-200"
                 >
                     <i
                         class="fa-regular fa-lemon text-sm group-has-[.selected]:hidden"
@@ -102,21 +100,6 @@ const existingColumns = [
         id: 6,
         name: 'Default',
         description: 'The sixth item, often the final step in a sequence.',
-        group: 'Second Group',
-    },
-
-    {
-        id: 7,
-        name: 'One more column',
-        description: 'The sixth item, often the final step in a sequence.',
-        group: 'Second Group',
-    },
-
-    {
-        id: 8,
-        name: 'This one has a longer name to truncate',
-        description: 'The sixth item, often the final step in a sequence.',
-        group: 'Second Group',
     },
 ]
 
