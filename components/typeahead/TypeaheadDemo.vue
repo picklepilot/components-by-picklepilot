@@ -1,39 +1,40 @@
 <template>
-    <div
-        class="flex h-[550px] h-full items-start justify-center rounded-xl bg-zinc-100 p-6"
-    >
-        <pre>{{ activeItem }}</pre>
-
-        <BaseTypeahead
-            v-model="activeItem"
-            :default-items="mockData"
-            :searcher="searcher"
-            value-property="name"
-        >
-            <template #empty>Nothing to show!</template>
-            <template #options="{ filteredItems }">
-                <div class="grid grid-cols-1 gap-2">
-                    <ComboboxOption
-                        v-for="item in filteredItems"
-                        as="template"
-                        :key="item.id || item._id"
-                        :value="item"
-                        v-slot="{ selected, active }"
-                    >
-                        <li
-                            class="relative flex min-h-12 cursor-default select-none items-center justify-between space-x-8 rounded-lg px-3 py-1.5"
-                            :class="{
-                                'bg-zinc-100 text-blue-500': active,
-                                'text-zinc-900': !active,
-                            }"
+    <div class="h-[350px] overflow-auto rounded-xl bg-zinc-100 p-6">
+        <div class="flex h-[900px] items-center justify-center">
+            <BaseTypeahead
+                v-model="activeItem"
+                :default-items="mockData"
+                :searcher="searcher"
+                value-property="name"
+                placeholder="Search for an item..."
+            >
+                <template #empty>Nothing to show!</template>
+                <template #options="{ filteredItems }">
+                    <div class="grid grid-cols-1 gap-2">
+                        <ComboboxOption
+                            v-for="item in filteredItems"
+                            as="template"
+                            :key="item.id || item._id"
+                            :value="item"
+                            v-slot="{ selected, active }"
                         >
-                            <span v-html="item.name"></span>
-                            <span v-if="selected" class="text-blue-500">✓</span>
-                        </li>
-                    </ComboboxOption>
-                </div>
-            </template>
-        </BaseTypeahead>
+                            <li
+                                class="relative flex min-h-12 cursor-default select-none items-center justify-between space-x-8 rounded-lg px-3 py-1.5"
+                                :class="{
+                                    'bg-zinc-100 text-blue-500': active,
+                                    'text-zinc-900': !active,
+                                }"
+                            >
+                                <span v-html="item.name"></span>
+                                <span v-if="selected" class="text-blue-500"
+                                    >✓</span
+                                >
+                            </li>
+                        </ComboboxOption>
+                    </div>
+                </template>
+            </BaseTypeahead>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
