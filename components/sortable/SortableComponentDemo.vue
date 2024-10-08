@@ -1,5 +1,7 @@
 <template>
-    <div class="mx-auto mb-4 h-[400px] overflow-auto rounded-lg bg-zinc-50">
+    <div
+        class="mx-auto mb-4 flex h-[400px] overflow-auto rounded-lg bg-zinc-50"
+    >
         <ModalComponent :show-modal="showModal" @close="showModal = false" />
 
         <div v-for="(group, idx) in list" :key="group.id">
@@ -7,7 +9,7 @@
                 {{ group.name }}
             </h2>
             <SortableComponent
-                v-model="group.columns"
+                :model-value="list[idx].columns"
                 :item-classes="[
                     'cursor-default px-2 pr-3 hover:bg-zinc-100 [&.selected]:bg-green-200',
                 ]"
@@ -53,6 +55,8 @@
                 </template>
             </SortableComponent>
         </div>
+
+        <pre>{{ list }}</pre>
     </div>
 </template>
 
