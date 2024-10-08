@@ -7,17 +7,14 @@
             :searcher="searcher"
             :onPickedColumn="(item) => item"
             :group-menu-items="groupMenuItems"
+            @update:existingColumns="onUpdatedColumns"
         >
             <template v-slot:option="{ item, selected, active }">
                 <div :class="active ? 'bg-green-500' : ''">{{ item.name }}</div>
             </template>
+
             <template v-slot:column="{ slotProps }">
-                <div class="flex flex-col p-2">
-                    <div>{{ slotProps.name }}</div>
-                    <div class="mt-1 text-sm text-zinc-500">
-                        {{ slotProps.description }}
-                    </div>
-                </div>
+                <div class="grow self-center">{{ slotProps.name }}</div>
             </template>
 
             <template #drag-handle>
@@ -31,7 +28,7 @@
             </template>
 
             <div v-if="columnManager" class="rounded-xl bg-zinc-100 p-8">
-                {{ columnManager.focusedColumn }}
+                <pre>{{ updatedColumns }}</pre>
             </div>
         </ColumnManager>
     </div>
@@ -68,7 +65,12 @@ const defaultItems = ref([
     {
         id: 5,
         name: 'Epsilon',
-        description: 'The fifth item, often the final step in a sequence.',
+        description: 'The fifth item, never the final step in a sequence.',
+    },
+    {
+        id: 6,
+        name: 'Pickles',
+        description: 'The sixth item, often the final step in a sequence.',
     },
 ])
 
@@ -92,7 +94,12 @@ const existingColumns = [
         name: 'Epsilon',
         description: 'The fifth item, often the final step in a sequence.',
         tag: 'final',
-        group: 'Default',
+        group: 'Second Group',
+    },
+    {
+        id: 6,
+        name: 'Default',
+        description: 'The sixth item, often the final step in a sequence.',
     },
 ]
 
@@ -114,6 +121,12 @@ async function searcher(query: string) {
             item.name.toLowerCase().includes(query.toLowerCase()),
         ),
     )
+}
+
+const updatedColumns = ref(existingColumns)
+function onUpdatedColumns(columns: any) {
+    console.log('Updated columns:', columns)
+    updatedColumns.value = columns
 }
 
 function mountMultiDragPlugin() {

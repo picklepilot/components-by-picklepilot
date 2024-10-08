@@ -1110,6 +1110,10 @@ video {
   border-color: rgb(212 212 216 / var(--tw-divide-opacity));
 }
 
+.self-center {
+  align-self: center;
+}
+
 .overflow-auto {
   overflow: auto;
 }
@@ -1990,6 +1994,10 @@ video {
   opacity: 1;
 }
 
+.opacity-40 {
+  opacity: 0.4;
+}
+
 .opacity-50 {
   opacity: 0.5;
 }
@@ -2202,6 +2210,53 @@ video {
   min-height: 100vh;
 }
 
+.tree-node--with-tree-line {
+  position: relative;
+}
+
+.tree-line {
+  position: absolute;
+  background-color: #bbb;
+}
+
+.tree-vline {
+  width: 1px;
+  top: 0;
+  bottom: 0;
+}
+
+.tree-hline {
+  height: 1px;
+  top: 50%;
+  width: 10px;
+}
+
+.he-tree--rtl {
+  direction: rtl;
+}
+
+.he-tree-drag-placeholder {
+  background: #ddf2f9;
+  border: 1px dashed #00d9ff;
+  width: 100%;
+}
+
+.he-tree__open-icon {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+       user-select: none;
+  display: inline-block;
+}
+
+.he-tree__open-icon.open {
+  transform: rotate(90deg);
+}
+
+.he-tree__open-icon svg {
+  width: 1em;
+}
+
 .placeholder\:text-zinc-400::-moz-placeholder {
   --tw-text-opacity: 1;
   color: rgb(161 161 170 / var(--tw-text-opacity));
@@ -2258,6 +2313,10 @@ video {
 .hover\:bg-zinc-200:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(228 228 231 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-zinc-200\/60:hover {
+  background-color: rgb(228 228 231 / 0.6);
 }
 
 .hover\:bg-zinc-50:hover {

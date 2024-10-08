@@ -10,6 +10,19 @@ function groupBy(array: any[], keyFunction: (item: any) => string) {
 }
 
 export function groupColumns(columns: any[]) {
+    const grouped = groupBy(columns, function (c: any) {
+        return c.group || 'Default'
+    })
+
+    return Object.entries(grouped).map(([group, columns]) => {
+        return {
+            group,
+            text: group,
+            levelName: 'group',
+            children: columns,
+        }
+    })
+
     return groupBy(columns, function (c: any) {
         return c.group || 'Default'
     })
