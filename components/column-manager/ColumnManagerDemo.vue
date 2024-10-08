@@ -2,6 +2,16 @@
     <div class="h-[800px] overflow-auto rounded-xl bg-zinc-100 p-6">
         <ColumnManager
             ref="columnManager"
+            :classes="{
+                groupContainer:
+                    'bg-white rounded-none first:rounded-t-xl last:rounded-b-xl border-none',
+                groupHeader: 'rounded-none',
+                groupsContainer:
+                    'space-y-0 rounded-t-xl rounded-b-xl overflow-hidden border border-zinc-300/80 p-0 h-auto',
+            }"
+            :drop-down-classes="{
+                comboboxOptionsContainer: 'z-50',
+            }"
             :default-items="defaultItems"
             :existing-columns="existingColumns"
             :searcher="searcher"

@@ -1,13 +1,30 @@
 <template>
     <div class="flex h-full space-x-6">
-        <div class="h-full w-[350px] shrink-0 space-y-3 overflow-auto px-2">
+        <div
+            :class="
+                m(
+                    'h-full w-[350px] shrink-0 space-y-3 overflow-auto px-2',
+                    classes.groupsContainer,
+                )
+            "
+        >
             <div
                 v-for="(_group, groupName, idx) in editableColumns"
                 :key="`column-management-group-${idx}`"
-                class="rounded-xl border border-zinc-300/80 bg-zinc-50 shadow-sm"
+                :class="
+                    m(
+                        'rounded-xl border border-zinc-300/80 bg-zinc-50 shadow-sm',
+                        classes.groupContainer,
+                    )
+                "
             >
                 <h2
-                    class="sticky top-0 z-20 flex items-center justify-between rounded-t-xl border-b border-zinc-300/80 bg-zinc-50 px-4 py-3"
+                    :class="
+                        m(
+                            'sticky top-0 z-20 flex items-center justify-between rounded-t-xl border-b border-zinc-300/80 bg-zinc-50 px-4 py-3',
+                            classes.groupHeader,
+                        )
+                    "
                 >
                     <span class="text-base font-semibold">{{ groupName }}</span>
                     <span v-if="groupMenuItems" class="text-sm">
@@ -187,6 +204,7 @@
 </template>
 
 <script setup lang="ts">
+import { m } from '../../utils/TextUtils'
 import { ref, watch } from 'vue'
 import { nextTick } from 'vue-demi'
 import { Sortable } from 'sortablejs-vue3'
@@ -209,6 +227,11 @@ const emit = defineEmits(['update:existingColumns'])
 
 const props = withDefaults(
     defineProps<{
+        classes?: {
+            groupContainer?: string
+            groupHeader?: string
+            groupsContainer?: string
+        }
         defaultItems?: any[]
         dropDownClasses?: {
             container?: string
@@ -222,6 +245,11 @@ const props = withDefaults(
         groupMenuItems?: any[]
     }>(),
     {
+        classes: () => ({
+            groupContainer: '',
+            groupHeader: '',
+            groupsContainer: '',
+        }),
         defaultItems: () => [],
         dropDownClasses: () => ({
             container: '',
