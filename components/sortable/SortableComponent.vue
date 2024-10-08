@@ -1,18 +1,18 @@
 <template>
-    <ul ref="el" :class="m(sortableClass, classes, 'list-none')">
-        <li
+    <div ref="sortableEl" :class="m(sortableClass, classes, 'list-none')">
+        <div
             v-for="(item, idx) in modelValue"
             :key="item.id"
             :class="m('flex shrink-0', itemClasses)"
         >
             <slot name="item" v-bind="getItemBindings(item, idx)"></slot>
-        </li>
-    </ul>
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
-import Sortable, { type Options } from 'sortablejs'
-import { ref, onMounted, watch, nextTick, isVue2 } from 'vue-demi'
+import Sortable from 'sortablejs'
+import { ref, onMounted, watch, nextTick } from 'vue-demi'
 import { m } from '../../utils/TextUtils'
 
 interface Item {
@@ -87,10 +87,9 @@ function indicesParams(e: Sortable.SortableEvent): {
 }
 
 const options = ref({})
-const el = ref<HTMLElement | null>(null)
+const sortableEl = ref<HTMLElement | null>(null)
 const sortable = ref<Sortable | null>(null)
 const list = ref<any[]>(props.modelValue)
-
 
 function initSortable() {
     const target = document.querySelector(
@@ -111,7 +110,8 @@ watch(
     () => {
         options.value = {
             ...props.options,
-            onUpdate: (e: Sortable.SortableEvent) => {
+            onEnd: (e: Sortable.SortableEvent) => {
+                console.log('ON UPDATE', e)
                 const { domElements, from, to } = indicesParams(e)
                 syncArrayElements(list.value, domElements, from, to)
             },
@@ -142,6 +142,8 @@ function syncArrayElements<T>(
 ) {
     const originalArray = [...listItems]
 
+    console.log('originalArray', originalArray)
+
     // Credits: https://stackoverflow.com/a/69574526
     const swapIndex = (array: T[], from: number, to: number) =>
         from < to
@@ -161,14 +163,18 @@ function syncArrayElements<T>(
     let newArray = originalArray
     let currentTo = to[0]
     const targetElements = from.map((idx) => originalArray[idx])
+    console.log('targetElements', targetElements)
+
     let lastMovedElement: any = null
     targetElements.forEach((element, idx) => {
         lastMovedElement = element
         currentTo = to[idx] // newArray.findIndex(item => item.id === lastMovedElement.id)
         if (currentTo === -1) currentTo = to[idx]
-        const fromIndex = newArray.findIndex(item => item.id === element.id)
+        const fromIndex = newArray.findIndex((item) => item.id === element.id)
         newArray = swapIndex(newArray, fromIndex, currentTo)
     })
+
+    console.log('NEW ARRAY', newArray)
 
     nextTick(() => {
         // When list is ref, assign array to list
@@ -190,6 +196,6 @@ function getItemBindings(item: Item, idx: number) {
 }
 
 onMounted(() => {
-   // do nothing
+    // do nothing
 })
 </script>
