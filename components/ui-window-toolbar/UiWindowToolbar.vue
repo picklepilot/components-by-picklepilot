@@ -9,6 +9,9 @@
             v-for="windowDef in windows"
             :key="`ui-window-${windowDef.id}`"
             v-bind="windowDef"
+            :effective-component="
+                componentMapping[windowDef.effectiveComponent]
+            "
             @close="$emit('close', $event)"
         />
     </div>
