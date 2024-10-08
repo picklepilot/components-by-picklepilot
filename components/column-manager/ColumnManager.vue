@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-full space-x-6">
+    <div :class="m('flex h-full', classes.container)">
         <div
             :class="
                 m(
@@ -21,7 +21,7 @@
                 <h2
                     :class="
                         m(
-                            'sticky top-0 z-20 flex items-center justify-between rounded-t-xl border-b border-zinc-300/80 bg-zinc-50 px-4 py-3',
+                            'flex items-center justify-between rounded-t-xl border-b border-zinc-300/80 bg-zinc-50 px-4 py-3',
                             classes.groupHeader,
                         )
                     "
@@ -33,7 +33,7 @@
                                 menu: '',
                                 menuButton:
                                     'h-7 w-7 rounded-lg flex items-center justify-center hover:bg-zinc-200',
-                                menuItems: '',
+                                menuItems: 'z-50',
                                 menuItem: 'rounded-xl',
                                 menuItemIcon: 'group-hover:bg-indigo-300',
                             }"
@@ -49,6 +49,61 @@
                         </BaseDropdownMenu>
                     </span>
                 </h2>
+
+                <div
+                    v-if="addingColumnToGroup === groupName"
+                    class="group flex items-center justify-end space-x-2 border-b border-zinc-200 p-2"
+                >
+                    <BaseTypeahead
+                        :classes="dropDownClasses"
+                        :default-items="defaultItems"
+                        :display-property="(_item: any) => ''"
+                        :nullable="true"
+                        :searcher="searcher"
+                        placeholder="Add a column to group"
+                        @update:modelValue="
+                            onPickedNewColumn(groupName, $event)
+                        "
+                    >
+                        <template #empty>
+                            <EmptyState
+                                icon="fa-exclamation-circle"
+                                title="No columns found"
+                                description="There are no columns to show at this time. Try a different search."
+                                :classes="{
+                                    container:
+                                        'flex flex-col items-center justify-center border-2 border-dashed border-zinc-300/60 rounded-xl p-6',
+                                    icon: 'text-zinc-500',
+                                }"
+                            />
+                        </template>
+                        <template #options="{ filteredItems }">
+                            <div class="grid grid-cols-1 gap-2">
+                                <ComboboxOption
+                                    v-for="item in filteredItems"
+                                    as="template"
+                                    :key="item._id"
+                                    :value="item"
+                                    v-slot="{ selected, active }"
+                                >
+                                    <slot
+                                        name="option"
+                                        v-bind="{ item, selected, active }"
+                                    />
+                                </ComboboxOption>
+                            </div>
+                        </template>
+                    </BaseTypeahead>
+
+                    <BaseButton
+                        @click="addingColumnToGroup = ''"
+                        :classes="[
+                            'text-sm flex items-center justify-center w-10 h-10 rounded-lg border-none bg-transparent hover:bg-zinc-100 text-zinc-400 group-hover:text-zinc-500 group-hover:hover:text-zinc-800',
+                        ]"
+                    >
+                        <i class="fa-regular fa-xmark"></i>
+                    </BaseButton>
+                </div>
 
                 <div
                     v-if="editableColumns[groupName].length === 0"
@@ -120,67 +175,12 @@
                         </div>
                     </template>
                 </Sortable>
-
-                <div
-                    class="group flex items-center justify-end space-x-2 border-t border-zinc-300/80 p-2"
-                >
-                    <BaseTypeahead
-                        :classes="dropDownClasses"
-                        :default-items="defaultItems"
-                        :display-property="(_item: any) => ''"
-                        :nullable="true"
-                        :searcher="searcher"
-                        placeholder="Add a column to group"
-                        @update:modelValue="
-                            onPickedNewColumn(groupName, $event)
-                        "
-                    >
-                        <template #empty>
-                            <EmptyState
-                                icon="fa-exclamation-circle"
-                                title="No columns found"
-                                description="There are no columns to show at this time. Try a different search."
-                                :classes="{
-                                    container:
-                                        'flex flex-col items-center justify-center border-2 border-dashed border-zinc-300/60 rounded-xl p-6',
-                                    icon: 'text-zinc-500',
-                                }"
-                            />
-                        </template>
-                        <template #options="{ filteredItems }">
-                            <div class="grid grid-cols-1 gap-2">
-                                <ComboboxOption
-                                    v-for="item in filteredItems"
-                                    as="template"
-                                    :key="item._id"
-                                    :value="item"
-                                    v-slot="{ selected, active }"
-                                >
-                                    <slot
-                                        name="option"
-                                        v-bind="{ item, selected, active }"
-                                    />
-                                </ComboboxOption>
-                            </div>
-                        </template>
-                    </BaseTypeahead>
-
-                    <!--BaseButton
-                        v-if="Object.keys(editableColumns).length > 1"
-                        @click="removeGroup(groupName)"
-                        :classes="[
-                            'text-sm flex items-center justify-center w-8 h-8 rounded-lg border-none bg-transparent hover:bg-zinc-200 text-zinc-400 group-hover:text-zinc-500 group-hover:hover:text-zinc-800',
-                        ]"
-                    >
-                        <i class="fa-regular fa-trash"></i>
-                    </BaseButton-->
-                </div>
             </div>
 
-            <div class="mt-4 flex shadow-sm">
+            <div :class="m('mt-4 flex shadow-sm', classes.newGroupContainer)">
                 <InputText
                     :classes="[
-                        'grow focus-within:border-indigo-500 focus-within:ring-indigo-200/60 rounded-lg rounded-r-none',
+                        'grow focus-within:border-indigo-500 focus-within:ring-indigo-200/60 rounded-lg rounded-r-none py-2.5 bg-white',
                     ]"
                     id="column-attribute-display"
                     name="column-attribute-display"
@@ -189,13 +189,14 @@
                 />
                 <BaseButton
                     :classes="[
-                        'px-3 py-2 rounded-lg rounded-l-none shrink-0 justify-center border border-l-0 border-zinc-300/80 hover:bg-zinc-100 text-zinc-700 hover:text-zinc-900',
-                        newGroupName ? 'bg-white' : 'bg-zinc-300/80',
+                        'px-3 py-2.5 rounded-lg rounded-l-none shrink-0 justify-center border-y border-r border-solid border-l-0 border-zinc-300/80 hover:bg-zinc-100 bg-white',
+                        !newGroupName
+                            ? 'pointer-events-none text-zinc-400'
+                            : 'text-zinc-700 hover:text-zinc-900',
                     ]"
-                    :disabled="!newGroupName"
                     @click="addGroup()"
                 >
-                    Add new group
+                    <i class="fa-regular fa-plus" aria-hidden="true"></i>
                 </BaseButton>
             </div>
         </div>
@@ -221,16 +222,17 @@ import {
 import { ComboboxOption } from '@headlessui/vue'
 
 import { groupColumns, ungroupColumns } from './ColumnManagerUtils'
-import { group } from 'console'
 
 const emit = defineEmits(['update:existingColumns'])
 
 const props = withDefaults(
     defineProps<{
         classes?: {
+            container?: string
             groupContainer?: string
             groupHeader?: string
             groupsContainer?: string
+            newGroupContainer?: string
         }
         defaultItems?: any[]
         dropDownClasses?: {
@@ -246,9 +248,11 @@ const props = withDefaults(
     }>(),
     {
         classes: () => ({
+            container: '',
             groupContainer: '',
             groupHeader: '',
             groupsContainer: '',
+            newGroupContainer: '',
         }),
         defaultItems: () => [],
         dropDownClasses: () => ({
@@ -263,9 +267,9 @@ const props = withDefaults(
 )
 
 const editableColumns = ref<any>(groupColumns(props.existingColumns))
-//const editableColumns = ref<any>(props.existingColumns)
 const focusedColumn = ref<any>()
 const newGroupName = ref<string>('')
+const addingColumnToGroup = ref<string>('')
 
 watch(
     () => props.existingColumns,
@@ -460,6 +464,13 @@ function onPickedNewColumn(groupName: string, value: any) {
 }
 
 const defaultGroupDropdownMenuItems = [
+    {
+        icon: 'fa-plus',
+        label: 'Add column to group',
+        onClick: (context: any) => {
+            addingColumnToGroup.value = context.groupName
+        },
+    },
     {
         icon: 'fa-empty-set',
         label: 'Clear all columns',

@@ -4,13 +4,15 @@
             ref="columnManager"
             :classes="{
                 groupContainer:
-                    'bg-white rounded-none first:rounded-t-xl last:rounded-b-xl border-none',
-                groupHeader: 'rounded-none',
+                    'bg-white rounded-none first:rounded-t-xl last:rounded-b-xl border-t-0 border-x-0 border-b border-zinc-200',
+                groupHeader:
+                    'rounded-none py-1.5 pr-1.5 border-b border-zinc-200',
                 groupsContainer:
                     'space-y-0 rounded-t-xl rounded-b-xl overflow-hidden border border-zinc-300/80 p-0 h-auto',
+                newGroupContainer: 'p-2 shadow-none',
             }"
             :drop-down-classes="{
-                comboboxOptionsContainer: 'z-50',
+                comboboxOptionsContainer: 'z-[51]',
             }"
             :default-items="defaultItems"
             :existing-columns="existingColumns"
