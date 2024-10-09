@@ -1,7 +1,7 @@
 <template>
     <Menu as="div" :class="m('relative inline-block text-left', classes.menu)">
         <div>
-            <MenuButton :class="m('', classes.menuButton)">
+            <MenuButton ref="reference" :class="m('', classes.menuButton)">
                 <slot name="trigger"></slot>
             </MenuButton>
         </div>
@@ -15,12 +15,14 @@
             leave-to-class="transform scale-95 opacity-0"
         >
             <MenuItems
+                ref="floating"
                 :class="
                     m(
-                        'absolute right-0 top-full z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-lg bg-white shadow-lg ring-1 ring-black/5 focus:outline-none',
+                        'fixed left-0 z-10 overflow-y-auto overflow-x-hidden rounded-lg bg-white p-3 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm',
                         classes.menuItems,
                     )
                 "
+                :style="floatingStyles"
             >
                 <div
                     v-for="(group, i) in items"
@@ -62,9 +64,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { m } from '../../utils/TextUtils'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { type DropdownItem } from './DropdownItem'
+import { autoPlacement, autoUpdate, size, useFloating } from '@floating-ui/vue'
 
 const props = withDefaults(
     defineProps<{
@@ -89,6 +93,33 @@ const props = withDefaults(
         context: () => ({}),
     },
 )
+
+const reference = ref()
+const floating = ref()
+const BUFFER = 20
+
+const { floatingStyles } = useFloating(reference, floating, {
+    strategy: 'fixed',
+    transform: false,
+    middleware: [
+        autoPlacement({
+            allowedPlacements: ['top-start', 'bottom-start'],
+        }),
+        size({
+            apply({ availableHeight, elements }) {
+                const minMaxWidth =
+                    elements.reference.getBoundingClientRect().width
+
+                Object.assign(elements.floating.style, {
+                    minWidth: `${minMaxWidth}px`,
+                    // maxWidth: `${minMaxWidth - BUFFER}px`,
+                    maxHeight: `${availableHeight - BUFFER}px`,
+                })
+            },
+        }),
+    ],
+    whileElementsMounted: autoUpdate,
+})
 
 function handleClick(item: any, evt: any) {
     if (item.onClick) {
