@@ -9,6 +9,7 @@
                     menuItem: '',
                 }"
                 :items="items"
+                :allowed-placements="['bottom-end', 'top-end']"
             >
                 <template #trigger>
                     <span

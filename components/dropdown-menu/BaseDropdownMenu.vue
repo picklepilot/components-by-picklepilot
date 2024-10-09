@@ -70,6 +70,8 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { type DropdownItem } from './DropdownItem'
 import { autoPlacement, autoUpdate, size, useFloating } from '@floating-ui/vue'
 
+type AllowedPlacement = 'top-start' | 'bottom-start' | 'top-end' | 'bottom-end'
+
 const props = withDefaults(
     defineProps<{
         items: DropdownItem[][]
@@ -81,6 +83,7 @@ const props = withDefaults(
             menuItemIcon?: string
         }
         context?: any
+        allowedPlacements?: AllowedPlacement[]
     }>(),
     {
         classes: () => ({
@@ -91,6 +94,7 @@ const props = withDefaults(
             menuItemIcon: '',
         }),
         context: () => ({}),
+        allowedPlacements: () => ['top-start', 'bottom-start'],
     },
 )
 
@@ -103,7 +107,7 @@ const { floatingStyles } = useFloating(reference, floating, {
     transform: false,
     middleware: [
         autoPlacement({
-            allowedPlacements: ['top-start', 'bottom-start'],
+            allowedPlacements: props.allowedPlacements,
         }),
         size({
             apply({ availableHeight, elements }) {
