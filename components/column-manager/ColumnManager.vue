@@ -182,8 +182,8 @@
                     :classes="[
                         'grow focus-within:border-indigo-500 focus-within:ring-indigo-200/60 rounded-lg rounded-r-none py-2.5 bg-white',
                     ]"
-                    id="column-attribute-display"
-                    name="column-attribute-display"
+                    id="column-manager-new-group-name"
+                    name="column-manager-new-group-name"
                     placeholder="New group name"
                     v-model="newGroupName"
                 />
@@ -490,6 +490,7 @@ const defaultGroupDropdownMenuItems = [
 defineExpose({
     clearAllColumns,
     focusedColumn,
+    onPickedNewColumn,
     removeGroup,
 })
 </script>
