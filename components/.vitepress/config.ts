@@ -33,6 +33,7 @@ export default defineConfig({
                     { text: 'Empty state', link: '/empty-state/' },
                     { text: 'Faceted filters', link: '/faceted-filters/' },
                     { text: 'Modal', link: '/modal/' },
+                    { text: 'Popover', link: '/popover/' },
                     { text: 'Select', link: '/input/select/' },
                     { text: 'Sortable', link: '/sortable/' },
                     { text: 'Toolbar', link: '/toolbar/' },
