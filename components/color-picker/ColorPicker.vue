@@ -17,11 +17,11 @@
                             swatch.text,
                             {
                                 'ring-[1.5px] ring-zinc-900 ring-offset-2':
-                                    props.modelValue === swatch.background,
+                                    props.modelValue === swatch.hex,
                             },
                         )
                     "
-                    @click="$emit('update:modelValue', modifier + swatch.name)"
+                    @click="$emit('update:modelValue', swatch.hex)"
                 ></div>
             </div>
         </div>
@@ -36,26 +36,17 @@ type TailwindColorModifier = 'bg-' | 'text-' | 'ring-' | 'border-'
 
 interface Props {
     /**
-     * The existing Tailwind color class
-     * @example 'bg-blue-500'
+     * A hex color string value
+     * @example '#f0fdf4'
      *
      * @default ''
      * @type {string}
      */
     modelValue: string
-
-    /**
-     * The leading modifier for the Tailwind class (eg. 'bg-')
-     *
-     * @default ''
-     * @type {TailwindColorModifier}
-     */
-    modifier: TailwindColorModifier
 }
 
 const props = withDefaults(defineProps<Props>(), {})
 
-// const modifier = ref('')
 const tailwindColorDefs = ref({
     green: [
         {
@@ -372,11 +363,78 @@ const tailwindColorDefs = ref({
             hex: '#7c2d12',
         },
     ],
+
+    stone: [
+        {
+            name: 'stone-50',
+            background: 'bg-stone-50',
+            text: 'text-stone-800',
+            hex: '#f7f7f7',
+        },
+        {
+            name: 'stone-100',
+            background: 'bg-stone-100',
+            text: 'text-stone-800',
+            hex: '#e1e1e1',
+        },
+        {
+            name: 'stone-200',
+            background: 'bg-stone-200',
+            text: 'text-stone-800',
+            hex: '#cfcfcf',
+        },
+        {
+            name: 'stone-300',
+            background: 'bg-stone-300',
+            text: 'text-stone-800',
+            hex: '#b1b1b1',
+        },
+        {
+            name: 'stone-400',
+            background: 'bg-stone-400',
+            text: 'text-stone-800',
+            hex: '#9e9e9e',
+        },
+        {
+            name: 'stone-500',
+            background: 'bg-stone-500',
+            text: 'text-stone-800',
+            hex: '#828282',
+        },
+        {
+            name: 'stone-600',
+            background: 'bg-stone-600',
+            text: 'text-stone-200',
+            hex: '#636363',
+        },
+        {
+            name: 'stone-700',
+            background: 'bg-stone-700',
+            text: 'text-stone-200',
+            hex: '#4c4c4c',
+        },
+        {
+            name: 'stone-800',
+            background: 'bg-stone-800',
+            text: 'text-stone-200',
+            hex: '#333333',
+        },
+        {
+            name: 'stone-900',
+            background: 'bg-stone-900',
+            text: 'text-stone-200',
+            hex: '#1f1f1f',
+        },
+    ],
 })
+
+const editableValue = ref('')
 
 watch(
     () => props.modelValue,
-    () => {},
+    () => {
+        editableValue.value = props.modelValue
+    },
     { immediate: true },
 )
 </script>
