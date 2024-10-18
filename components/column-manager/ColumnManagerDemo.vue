@@ -6,7 +6,7 @@
                 groupContainer:
                     'bg-white rounded-none first:rounded-t-xl last:rounded-b-xl border-t-0 border-x-0 border-b border-zinc-200',
                 groupHeader:
-                    'rounded-none py-1.5 pr-1.5 border-b border-zinc-200',
+                    'rounded-none py-1.5 pr-1.5 pl-2 border-b border-zinc-200',
                 groupsContainer:
                     'space-y-0 rounded-t-xl rounded-b-xl overflow-hidden border border-zinc-300/80 p-0 h-auto',
                 newGroupContainer: 'p-2 shadow-none',
@@ -18,6 +18,7 @@
             :existing-columns="existingColumns"
             :searcher="searcher"
             :onPickedColumn="(item) => item"
+            :group-configuration="groupConfiguration"
             :group-menu-items="groupMenuItems"
             @update:existingColumns="onUpdatedColumns"
         >
@@ -54,6 +55,15 @@ import Sortable, { MultiDrag } from 'sortablejs'
 mountMultiDragPlugin()
 
 const columnManager = ref()
+
+const groupConfiguration = ref({
+    Default: {
+        color: '#f97316',
+    },
+    'Second Group': {
+        color: '#f97316',
+    },
+})
 
 const defaultItems = ref([
     {

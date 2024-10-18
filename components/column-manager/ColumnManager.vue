@@ -26,7 +26,35 @@
                         )
                     "
                 >
-                    <span class="text-base font-semibold">{{ groupName }}</span>
+                    <span
+                        class="flex items-center space-x-2 text-base font-semibold"
+                    >
+                        <BasePopover
+                            :classes="{
+                                menu: 'leading-none',
+                                menuButton: 'rounded p-1 hover:bg-zinc-200/80',
+                            }"
+                        >
+                            <template #trigger>
+                                <span
+                                    class="block h-3 w-3 rounded-full"
+                                    :style="`background-color: ${editableGroupConfiguration[groupName].color || defaultGroupColor};`"
+                                ></span>
+                            </template>
+                            <ColorPicker
+                                v-model="
+                                    editableGroupConfiguration[groupName].color
+                                "
+                                @update:modelValue="
+                                    editableGroupConfiguration[
+                                        groupName
+                                    ].color = $event
+                                "
+                            />
+                        </BasePopover>
+
+                        <span>{{ groupName }}</span>
+                    </span>
                     <span v-if="groupMenuItems" class="text-sm">
                         <BaseDropdownMenu
                             :classes="{
@@ -210,6 +238,8 @@ import { ref, watch } from 'vue'
 import { nextTick } from 'vue-demi'
 import { Sortable } from 'sortablejs-vue3'
 import { default as realSortable } from 'sortablejs'
+import BasePopover from '../popover/BasePopover.vue'
+import ColorPicker from '../color-picker/ColorPicker.vue'
 
 import {
     BaseButton,
@@ -245,6 +275,8 @@ const props = withDefaults(
         onPickedColumn: (groupName: string, column: any) => any
         searcher: (query: string) => Promise<any[]>
         groupMenuItems?: any[]
+        groupConfiguration?: any
+        defaultGroupColor?: string
     }>(),
     {
         classes: () => ({
@@ -263,6 +295,8 @@ const props = withDefaults(
         }),
         existingColumns: () => [],
         groupMenuItems: () => [],
+        groupConfiguration: () => ({}),
+        defaultGroupColor: '#e7e5e4',
     },
 )
 
@@ -270,11 +304,20 @@ const editableColumns = ref<any>(groupColumns(props.existingColumns))
 const focusedColumn = ref<any>()
 const newGroupName = ref<string>('')
 const addingColumnToGroup = ref<string>('')
+const editableGroupConfiguration = ref<any>(props.groupConfiguration)
 
 watch(
     () => props.existingColumns,
     (newVal) => {
         editableColumns.value = groupColumns(newVal)
+    },
+    { immediate: false },
+)
+
+watch(
+    () => props.groupConfiguration,
+    () => {
+        editableGroupConfiguration.value = props.groupConfiguration
     },
     { immediate: false },
 )
