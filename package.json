@@ -5,7 +5,8 @@
     "type": "module",
     "files": [
         "components",
-        "dist"
+        "dist",
+        "utils"
     ],
     "module": "./dist/components-by-picklepilot.es.js",
     "exports": {
