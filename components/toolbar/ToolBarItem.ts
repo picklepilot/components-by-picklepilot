@@ -8,6 +8,9 @@ export type ToolbarItem = {
     onClick?: () => void
     position?: 'left' | 'right'
     tooltip?: string
+    classes?: {
+        button?: string
+    }
 }
 
 export type ToolbarItemGroup = {

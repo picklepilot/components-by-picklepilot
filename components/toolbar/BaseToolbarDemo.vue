@@ -24,6 +24,9 @@ const toolbarConfig: ToolbarItemGroup[] = [
             {
                 icon: 'fa-columns',
                 tooltip: 'Manage columns',
+                classes: {
+                    button: 'bg-blue-100',
+                },
             },
             {
                 icon: 'fa-filter',

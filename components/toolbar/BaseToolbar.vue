@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { m } from '../../utils/TextUtils'
-import type { ToolbarItem, ToolbarItemGroup } from './ToolBarItem'
+import type { ToolbarItemGroup } from './ToolBarItem'
 import BaseToolbarItem from './BaseToolbarItem.vue'
 
 const props = withDefaults(

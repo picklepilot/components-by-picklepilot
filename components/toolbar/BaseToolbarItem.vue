@@ -1,9 +1,10 @@
 <template>
     <BaseButton
         v-if="!item.children"
-        :classes="[
-            'h-9 w-9 border-none flex items-center justify-center rounded-lg font-medium p-2 text-xs leading-none bg-transparent text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100',
-        ]"
+        :classes="m(
+                   'h-9 w-9 border-none flex items-center justify-center rounded-lg font-medium p-2 text-xs leading-none bg-transparent text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100',
+                    item.classes?.button || '',
+                )"
         :disabled="item.disabled"
         v-tooltip="{
             content: item.tooltip,
@@ -17,7 +18,7 @@
     <BaseDropdownMenu
         v-else
         :classes="{
-            menu: 'h-8 w-8 border-none flex items-center justify-center rounded-md font-medium p-2 text-xs leading-none bg-transparent text-zinc-700 hover:text-zinc-900 hover:bg-zinc-900/10',
+            menu: m('h-8 w-8 border-none flex items-center justify-center rounded-md font-medium p-2 text-xs leading-none bg-transparent text-zinc-700 hover:text-zinc-900 hover:bg-zinc-900/10', item.classes?.button || ''),
             menuButton: '',
             menuItems: '',
             menuItem: '',
@@ -41,6 +42,7 @@ import BaseDropdownMenu from '../dropdown-menu/BaseDropdownMenu.vue'
 import type { ToolbarItem } from './ToolBarItem'
 import type { DropdownItem } from '../dropdown-menu/DropdownItem'
 import { computed } from 'vue'
+import { m } from '../../utils/TextUtils'
 
 const props = withDefaults(
     defineProps<{
