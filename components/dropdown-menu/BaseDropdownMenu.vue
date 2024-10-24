@@ -36,10 +36,13 @@
                     >
                         <button
                             :class="[
-                                active
-                                    ? 'bg-violet-500 text-white'
-                                    : 'text-gray-900',
-                                'group flex w-full items-center space-x-2 rounded-md border-none bg-transparent px-2.5 py-2.5 leading-none text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900',
+                                m(
+                                    active
+                                        ? 'bg-violet-500 text-white'
+                                        : 'text-gray-900',
+                                    'group flex w-full items-center space-x-2 rounded-md border-none bg-transparent px-2.5 py-2.5 leading-none text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900',
+                                    item.classes?.button,
+                                ),
                             ]"
                             @click="handleClick(item, $event)"
                         >
@@ -49,6 +52,7 @@
                                     m(
                                         'inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-zinc-900/10 leading-none group-hover:bg-indigo-400',
                                         classes.menuItemIcon,
+                                        item.classes?.buttonIcon,
                                     )
                                 "
                             >
@@ -64,43 +68,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { autoPlacement, autoUpdate, size, useFloating } from '@floating-ui/vue'
 import { m } from '../../utils/TextUtils'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import { onMounted, ref, watch } from 'vue'
 import { type DropdownItem } from './DropdownItem'
-import { autoPlacement, autoUpdate, size, useFloating } from '@floating-ui/vue'
 
 type AllowedPlacement = 'top-start' | 'bottom-start' | 'top-end' | 'bottom-end'
 
 const props = withDefaults(
     defineProps<{
-        items: DropdownItem[][]
+        allowedPlacements?: AllowedPlacement[]
+        buffer?: number
         classes?: {
             menu?: string
             menuButton?: string
             menuItems?: string
             menuItem?: string
+            menuItemButton?: string
             menuItemIcon?: string
         }
         context?: any
-        allowedPlacements?: AllowedPlacement[]
+        items: DropdownItem[][]
     }>(),
     {
+        allowedPlacements: () => ['top-start', 'bottom-start'],
+        buffer: 20,
         classes: () => ({
             menu: '',
             menuButton: '',
             menuItems: '',
             menuItem: '',
+            menuItemButton: '',
             menuItemIcon: '',
         }),
         context: () => ({}),
-        allowedPlacements: () => ['top-start', 'bottom-start'],
     },
 )
 
 const reference = ref()
 const floating = ref()
-const BUFFER = 20
+const BUFFER = ref(props.buffer)
 
 const { floatingStyles } = useFloating(reference, floating, {
     strategy: 'fixed',
@@ -117,7 +125,7 @@ const { floatingStyles } = useFloating(reference, floating, {
                 Object.assign(elements.floating.style, {
                     minWidth: `${minMaxWidth}px`,
                     // maxWidth: `${minMaxWidth - BUFFER}px`,
-                    maxHeight: `${availableHeight - BUFFER}px`,
+                    maxHeight: `${availableHeight - BUFFER.value}px`,
                 })
             },
         }),
@@ -130,4 +138,15 @@ function handleClick(item: any, evt: any) {
         item.onClick(props.context, evt)
     }
 }
+
+watch(
+    () => props.buffer,
+    (value) => {
+        BUFFER.value = value
+    },
+)
+
+onMounted(() => {
+    BUFFER.value = props.buffer
+})
 </script>

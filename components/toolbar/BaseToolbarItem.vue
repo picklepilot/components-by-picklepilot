@@ -1,10 +1,10 @@
 <template>
     <BaseButton
         v-if="!item.children"
-        :classes="m(
-                   'h-9 w-9 border-none flex items-center justify-center rounded-lg font-medium p-2 text-xs leading-none bg-transparent text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100',
-                    item.classes?.button || '',
-                )"
+        :classes="[m(
+            'h-9 w-9 border-none flex items-center justify-center rounded-lg font-medium p-2 text-xs leading-none bg-transparent text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100',
+            item.classes?.button || '',
+        )]"
         :disabled="item.disabled"
         v-tooltip="{
             content: item.tooltip,
@@ -20,10 +20,12 @@
         :classes="{
             menu: m('h-8 w-8 border-none flex items-center justify-center rounded-md font-medium p-2 text-xs leading-none bg-transparent text-zinc-700 hover:text-zinc-900 hover:bg-zinc-900/10', item.classes?.button || ''),
             menuButton: '',
-            menuItems: '',
+            menuItems: item.classes?.menuItems || '',
             menuItem: '',
         }"
         :items="items"
+        :allowed-placements="['top-start', 'bottom-start', 'bottom-end', 'top-end']"
+        :buffer="0"
     >
         <template #trigger>
             <span

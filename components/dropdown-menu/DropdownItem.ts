@@ -3,4 +3,8 @@ export type DropdownItem = {
     icon?: string
     label?: string
     onClick?: () => void
+    classes?: {
+        button?: string
+        buttonIcon?: string
+    }
 }

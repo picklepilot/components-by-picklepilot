@@ -26,6 +26,8 @@ const toolbarConfig: ToolbarItemGroup[] = [
                 tooltip: 'Manage columns',
                 classes: {
                     button: 'bg-blue-100',
+                    buttonIcon:
+                        'bg-zinc-900/10 leading-none group-hover:bg-lime-400',
                 },
             },
             {
@@ -67,11 +69,19 @@ const toolbarConfig: ToolbarItemGroup[] = [
         children: [
             {
                 icon: 'fa-pen',
+                classes: {
+                    menuItems: 'rounded-lg p-0.5',
+                },
                 children: [
                     [
                         {
                             icon: 'fa-plus',
                             label: 'Click me',
+                            classes: {
+                                button: 'rounded-md px-2.5 py-1 text-zinc-700',
+                                buttonIcon:
+                                    'bg-zinc-900/10 leading-none group-hover:bg-lime-400',
+                            },
                         },
                     ],
                 ],

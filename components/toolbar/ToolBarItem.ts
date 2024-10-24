@@ -10,6 +10,8 @@ export type ToolbarItem = {
     tooltip?: string
     classes?: {
         button?: string
+        buttonIcon?: string
+        menuItems?: string
     }
 }
 
