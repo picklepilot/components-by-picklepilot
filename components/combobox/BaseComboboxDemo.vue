@@ -2,16 +2,11 @@
     <div class="h-[350px] overflow-auto rounded-xl bg-zinc-100 p-6">
         <div class="flex h-[900px] items-center justify-center">
             <BaseCombobox
-                :display-value="(item) => item.name"
+                :display-value="(item) => item?.name"
                 :items="mockData"
-                :model-value="{
-                    id: 2,
-                    name: 'Beta',
-                    description:
-                        'This item is the second one, often used for testing.',
-                    tag: 'intermediate',
-                    header: 'Common',
-                }"
+                :model-value="pickedValue"
+                immediate
+                nullable
             >
                 <template v-slot:option="{ item, selected, active }">
                     <li
@@ -29,8 +24,10 @@
     </div>
 </template>
 <script setup lang="ts">
+import { ref } from 'vue'
 import BaseCombobox from './BaseCombobox.vue'
 
+const pickedValue = ref(null)
 const mockData = [
     {
         id: 1,

@@ -1,5 +1,5 @@
 <template>
-    <Combobox v-model="selected" immediate>
+    <Combobox v-model="selected" :immediate="immediate" :nullable="nullable">
         <div class="relative">
             <div
                 ref="reference"
@@ -126,6 +126,8 @@ const props = withDefaults(
         }
         displayValue?: (item: any) => string
         items?: any[]
+        nullable?: boolean
+        immediate?: boolean
     }>(),
     {
         classes: () => ({
@@ -137,6 +139,8 @@ const props = withDefaults(
         displayValue: (item: any) => item.name,
         items: () => [],
         modelValue: null,
+        nullable: false,
+        immediate: false,
     },
 )
 
@@ -160,7 +164,7 @@ useFloating(reference, floating, {
 })
 
 const comboboxButton = ref()
-let selected = ref(props.items[0])
+let selected = ref(null)
 let query = ref('')
 
 const filteredItems = ref<any[]>([])
@@ -168,7 +172,7 @@ const filteredItems = ref<any[]>([])
 watch(
     () => props.modelValue,
     (value) => {
-        selected.value = value || props.items[0]
+        selected.value = value || !props.nullable ? props.items[0] : null
     },
     { immediate: true },
 )
