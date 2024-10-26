@@ -625,6 +625,14 @@ video {
   bottom: -0.5rem;
 }
 
+.-right-3 {
+  right: -0.75rem;
+}
+
+.-top-3 {
+  top: -0.75rem;
+}
+
 .bottom-0 {
   bottom: 0px;
 }
@@ -655,6 +663,14 @@ video {
 
 .top-4 {
   top: 1rem;
+}
+
+.-right-1 {
+  right: -0.25rem;
+}
+
+.-top-1 {
+  top: -0.25rem;
 }
 
 .z-10 {
@@ -837,6 +853,10 @@ video {
 
 .h-full {
   height: 100%;
+}
+
+.h-3\.5 {
+  height: 0.875rem;
 }
 
 .min-h-12 {
@@ -1802,6 +1822,10 @@ video {
   padding: 0px;
 }
 
+.p-0\.5 {
+  padding: 0.125rem;
+}
+
 .p-1 {
   padding: 0.25rem;
 }
@@ -1913,6 +1937,10 @@ video {
   padding-left: 2.5rem;
 }
 
+.pl-2 {
+  padding-left: 0.5rem;
+}
+
 .pl-3 {
   padding-left: 0.75rem;
 }
@@ -1939,18 +1967,6 @@ video {
 
 .pt-4 {
   padding-top: 1rem;
-}
-
-.pr-0 {
-  padding-right: 0px;
-}
-
-.pl-0 {
-  padding-left: 0px;
-}
-
-.pl-2 {
-  padding-left: 0.5rem;
 }
 
 .text-left {
@@ -1992,6 +2008,10 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-\[9px\] {
+  font-size: 9px;
 }
 
 .font-bold {
@@ -2176,6 +2196,14 @@ video {
 .text-zinc-900 {
   --tw-text-opacity: 1;
   color: rgb(24 24 27 / var(--tw-text-opacity));
+}
+
+.text-\[\] {
+  color: ;
+}
+
+.text-\[px\] {
+  color: px;
 }
 
 .opacity-0 {
@@ -2528,6 +2556,10 @@ video {
   background-color: rgb(228 228 231 / 0.6);
 }
 
+.hover\:bg-zinc-200\/80:hover {
+  background-color: rgb(228 228 231 / 0.8);
+}
+
 .hover\:bg-zinc-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(250 250 250 / var(--tw-bg-opacity));
@@ -2535,15 +2567,6 @@ video {
 
 .hover\:bg-zinc-900\/10:hover {
   background-color: rgb(24 24 27 / 0.1);
-}
-
-.hover\:bg-zinc-300:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(212 212 216 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-zinc-200\/80:hover {
-  background-color: rgb(228 228 231 / 0.8);
 }
 
 .hover\:text-zinc-700:hover {
@@ -2640,6 +2663,11 @@ video {
 .group:hover .group-hover\:bg-indigo-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(129 140 248 / var(--tw-bg-opacity));
+}
+
+.group:hover .group-hover\:bg-lime-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(163 230 53 / var(--tw-bg-opacity));
 }
 
 .group:hover .group-hover\:bg-white {

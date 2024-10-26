@@ -33,6 +33,8 @@ const toolbarConfig: ToolbarItemGroup[] = [
             {
                 icon: 'fa-filter',
                 tooltip: 'Filter data',
+                count: 24,
+                statusColor: '#ff9900',
                 onClick: () => {
                     console.log('CLICKED FILTER ICON')
                 },

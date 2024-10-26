@@ -1,10 +1,12 @@
 <template>
     <BaseButton
         v-if="!item.children"
-        :classes="[m(
-            'h-9 w-9 border-none flex items-center justify-center rounded-lg font-medium p-2 text-xs leading-none bg-transparent text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100',
-            item.classes?.button || '',
-        )]"
+        :classes="[
+            m(
+                'h-9 w-9 border-none flex items-center justify-center rounded-lg font-medium p-2 text-xs leading-none bg-transparent text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 relative',
+                item.classes?.button || '',
+            ),
+        ]"
         :disabled="item.disabled"
         v-tooltip="{
             content: item.tooltip,
@@ -13,18 +15,32 @@
         @click="item.onClick"
     >
         <i :class="['fa-regular', item.icon]"></i>
+        <span
+            v-if="item.count"
+            class="absolute -right-1 -top-1 flex h-3.5 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-medium text-white"
+            :style="{ backgroundColor: item.statusColor || '#ef4444' }"
+            >{{ item.count }}</span
+        >
     </BaseButton>
 
     <BaseDropdownMenu
         v-else
         :classes="{
-            menu: m('h-8 w-8 border-none flex items-center justify-center rounded-md font-medium p-2 text-xs leading-none bg-transparent text-zinc-700 hover:text-zinc-900 hover:bg-zinc-900/10', item.classes?.button || ''),
+            menu: m(
+                'h-8 w-8 border-none flex items-center justify-center rounded-md font-medium p-2 text-xs leading-none bg-transparent text-zinc-700 hover:text-zinc-900 hover:bg-zinc-900/10',
+                item.classes?.button || '',
+            ),
             menuButton: '',
             menuItems: item.classes?.menuItems || '',
             menuItem: '',
         }"
         :items="items"
-        :allowed-placements="['top-start', 'bottom-start', 'bottom-end', 'top-end']"
+        :allowed-placements="[
+            'top-start',
+            'bottom-start',
+            'bottom-end',
+            'top-end',
+        ]"
         :buffer="0"
     >
         <template #trigger>
