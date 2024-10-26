@@ -198,7 +198,7 @@ watch(
     () => props.items,
     () => {
         filteredItems.value = props.items
-        selected.value = !props.nullable ? props.items[0] : null
+        // selected.value = !props.nullable ? props.items[0] : null
     },
     { deep: true },
 )
