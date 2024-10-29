@@ -68,18 +68,37 @@
 </template>
 
 <script setup lang="ts">
-import { autoPlacement, autoUpdate, size, useFloating } from '@floating-ui/vue'
+import {
+    autoPlacement,
+    autoUpdate,
+    offset,
+    size,
+    useFloating,
+} from '@floating-ui/vue'
 import { m } from '../../utils/TextUtils'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { onMounted, ref, watch } from 'vue'
 import { type DropdownItem } from './DropdownItem'
 
-type AllowedPlacement = 'top-start' | 'bottom-start' | 'top-end' | 'bottom-end'
+type AllowedPlacement =
+    | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end'
 
 const props = withDefaults(
     defineProps<{
         allowedPlacements?: AllowedPlacement[]
         buffer?: number
+        offset?: number
         classes?: {
             menu?: string
             menuButton?: string
@@ -103,6 +122,7 @@ const props = withDefaults(
             menuItemIcon: '',
         }),
         context: () => ({}),
+        offset: 8,
     },
 )
 
@@ -114,6 +134,7 @@ const { floatingStyles } = useFloating(reference, floating, {
     strategy: 'fixed',
     transform: false,
     middleware: [
+        offset(props.offset),
         autoPlacement({
             allowedPlacements: props.allowedPlacements,
         }),
