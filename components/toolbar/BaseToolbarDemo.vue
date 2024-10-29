@@ -74,6 +74,11 @@ const toolbarConfig: ToolbarItemGroup[] = [
                 classes: {
                     menuItems: 'rounded-lg p-0.5',
                 },
+                menuConfig: {
+                    allowedPlacements: ['bottom-end'],
+                    buffer: 20,
+                    offset: 8,
+                },
                 children: [
                     [
                         {

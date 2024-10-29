@@ -35,13 +35,11 @@
             menuItem: '',
         }"
         :items="items"
-        :allowed-placements="[
-            'top-start',
-            'bottom-start',
-            'bottom-end',
-            'top-end',
-        ]"
-        :buffer="0"
+        :allowed-placements="
+            item.menuConfig?.allowedPlacements || ['bottom-start']
+        "
+        :buffer="item.menuConfig?.buffer || 20"
+        :offset="item.menuConfig?.offset || 8"
     >
         <template #trigger>
             <span

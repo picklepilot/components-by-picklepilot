@@ -1,7 +1,26 @@
 import type { DropdownItem } from '../dropdown-menu/DropdownItem'
 
+type AllowedPlacement =
+    | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end'
+
 export type ToolbarItem = {
     children?: DropdownItem[][]
+    menuConfig?: {
+        allowedPlacements?: AllowedPlacement[]
+        buffer?: number
+        offset?: number
+    }
     classes?: {
         button?: string
         buttonIcon?: string
