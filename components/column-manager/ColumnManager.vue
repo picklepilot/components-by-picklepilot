@@ -57,14 +57,8 @@
                     </span>
                     <span v-if="groupMenuItems" class="text-sm">
                         <BaseDropdownMenu
-                            :classes="{
-                                menu: '',
-                                menuButton:
-                                    'h-7 w-7 rounded-lg flex items-center justify-center hover:bg-zinc-200',
-                                menuItems: 'z-50',
-                                menuItem: 'rounded-xl',
-                                menuItemIcon: 'group-hover:bg-indigo-300',
-                            }"
+                            :allowed-placements="['bottom-end']"
+                            :classes="classes.groupMenuClasses"
                             :items="[
                                 ...groupMenuItems,
                                 defaultGroupDropdownMenuItems,
@@ -263,6 +257,13 @@ const props = withDefaults(
             groupHeader?: string
             groupsContainer?: string
             newGroupContainer?: string
+            groupMenuClasses?: {
+                menu?: string
+                menuButton?: string
+                menuItems?: string
+                menuItem?: string
+                menuItemIcon?: string
+            }
         }
         defaultItems?: any[]
         dropDownClasses?: {
@@ -285,6 +286,14 @@ const props = withDefaults(
             groupHeader: '',
             groupsContainer: '',
             newGroupContainer: '',
+            groupMenuClasses: {
+                menu: '',
+                menuButton:
+                    'h-7 w-7 rounded-lg flex items-center justify-center hover:bg-zinc-200',
+                menuItems: 'z-50',
+                menuItem: 'rounded-xl',
+                menuItemIcon: 'group-hover:bg-indigo-300',
+            },
         }),
         defaultItems: () => [],
         dropDownClasses: () => ({
