@@ -30,6 +30,7 @@
                         class="flex items-center space-x-2 text-base font-semibold"
                     >
                         <BasePopover
+                            v-if="editableGroupConfiguration[groupName]"
                             :classes="{
                                 menu: 'leading-none',
                                 menuButton: 'rounded p-1 hover:bg-zinc-200/80',
@@ -245,7 +246,7 @@ import {
 
 import { ComboboxOption } from '@headlessui/vue'
 
-import { groupColumns, ungroupColumns } from './ColumnManagerUtils'
+import { groupColumns, mergeColumnGroupsWithDefaults, ungroupColumns } from './ColumnManagerUtils'
 
 const emit = defineEmits(['update:existingColumns'])
 
@@ -313,7 +314,7 @@ const editableColumns = ref<any>(groupColumns(props.existingColumns))
 const focusedColumn = ref<any>()
 const newGroupName = ref<string>('')
 const addingColumnToGroup = ref<string>('')
-const editableGroupConfiguration = ref<any>(props.groupConfiguration)
+const editableGroupConfiguration = ref<any>(mergeColumnGroupsWithDefaults(props.groupConfiguration))
 
 watch(
     () => props.existingColumns,
@@ -326,7 +327,7 @@ watch(
 watch(
     () => props.groupConfiguration,
     () => {
-        editableGroupConfiguration.value = props.groupConfiguration
+        editableGroupConfiguration.value = mergeColumnGroupsWithDefaults(props.groupConfiguration)
     },
     { immediate: false },
 )
