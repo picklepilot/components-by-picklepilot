@@ -1,7 +1,36 @@
 <template>
     <div :class="m('relative w-full rounded-lg', classes.container)">
-        <Combobox v-model="activeItem" :immediate="immediate" :nullable="nullable">
+        <Combobox
+            v-model="activeItem"
+            :immediate="immediate"
+            :nullable="nullable"
+            :multiple="multiple"
+        >
             <div class="relative">
+                <div v-if="activeItem.length" class="min-h-[37px] w-full p-1">
+                    <BaseBadge
+                        v-for="(value, i) in activeItem"
+                        :key="`query-value-${i}`"
+                        :classes="[
+                            'group text-xs pl-2.5 pr-1 py-1 m-1 bg-zinc-200',
+                        ]"
+                    >
+                        {{ displayProperty(value) }}
+                        <BaseButton
+                            @click="
+                                activeItem = activeItem.filter(
+                                    (_: any, index: number) => index !== i,
+                                )
+                            "
+                            :classes="[
+                                'ml-1.5 rounded-full h-5 w-5 flex items-center justify-center p-0 bg-zinc-200 hover:bg-zinc-50 border-none text-zinc-700 hover:text-zinc-900',
+                            ]"
+                        >
+                            <i class="fa-regular fa-xmark text-[10px]"></i>
+                        </BaseButton>
+                    </BaseBadge>
+                </div>
+
                 <div
                     ref="reference"
                     :class="
@@ -77,7 +106,7 @@
                                         'bg-white text-black': !active,
                                     }"
                                 >
-                                    {{ item[displayProperty] }}
+                                    {{ displayProperty(item) }}
                                     {{ selected ? '✓' : '' }}
                                 </div>
                             </ComboboxOption>
@@ -101,55 +130,56 @@ import {
 } from '@headlessui/vue'
 import { ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import { autoPlacement, autoUpdate, size, useFloating } from '@floating-ui/vue'
+import { BaseBadge, BaseButton } from '..'
 
 const emit = defineEmits(['update:modelValue'])
 
 const props = withDefaults(
     defineProps<{
-        modelValue?: any
-        defaultItems?: any[]
-        items?: any[]
         classes?: {
+            comboboxOptionsContainer?: string
             container?: string
             inputContainer?: string
             inputElement?: string
-            comboboxOptionsContainer?: string
         }
+        defaultItems?: any[]
+        displayProperty?: (item: any) => string
+        immediate?: boolean
+        items?: any[]
+        modelValue?: any
+        multiple: boolean
+        nullable?: boolean
+        placeholder?: string
         searcher?: (query: string) => Promise<any[]>
         uidProperty?: string
         valueProperty?: string
-        displayProperty?: (item: any) => string
-        nullable?: boolean
-        placeholder?: string
-        immediate?: boolean
     }>(),
     {
-        defaultItems: () => [],
-        items: () => [],
         classes: () => ({
+            comboboxOptionsContainer: '',
             container: '',
             inputContainer: '',
             inputeElement: '',
-            comboboxOptionsContainer: '',
         }),
+        defaultItems: () => [],
         displayProperty: (item: any) => item.name,
-        searcher: undefined,
-        uidProperty: 'id',
-        valueProperty: 'value',
+        immediate: false,
+        items: () => [],
         modelValue: undefined,
         nullable: false,
         placeholder: 'Search...',
-        immediate: false,
+        searcher: undefined,
+        uidProperty: 'id',
+        valueProperty: 'value',
     },
 )
 
-const filteredItems = ref<any[]>([])
-const query = ref<string>('')
 const activeItem = ref<any>(props.modelValue)
-
-const reference = ref()
-const floating = ref()
 const BUFFER = 20
+const filteredItems = ref<any[]>([])
+const floating = ref()
+const query = ref<string>('')
+const reference = ref()
 
 const { floatingStyles } = useFloating(reference, floating, {
     strategy: 'fixed',
