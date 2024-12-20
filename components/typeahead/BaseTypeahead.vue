@@ -20,6 +20,7 @@
                         "
                         :displayValue="displayProperty"
                         :placeholder="placeholder"
+                        autocomplete="off"
                         @change="query = $event.target.value"
                     />
                     <ComboboxButton
