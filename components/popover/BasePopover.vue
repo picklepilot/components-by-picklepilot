@@ -39,10 +39,17 @@ import { m } from '../../utils/TextUtils'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import { autoPlacement, autoUpdate, size, useFloating } from '@floating-ui/vue'
 
-type AllowedPlacement = 'top-start' | 'bottom-start' | 'top-end' | 'bottom-end'
+type AllowedPlacement =
+    | 'top-start'
+    | 'bottom-start'
+    | 'top-end'
+    | 'bottom-end'
+    | 'left'
+    | 'right'
 
 const props = withDefaults(
     defineProps<{
+        buffer?: number
         classes?: {
             menu?: string
             menuButton?: string
@@ -54,6 +61,7 @@ const props = withDefaults(
         allowedPlacements?: AllowedPlacement[]
     }>(),
     {
+        buffer: 20,
         classes: () => ({
             menu: '',
             menuButton: '',
@@ -68,7 +76,7 @@ const props = withDefaults(
 
 const reference = ref()
 const floating = ref()
-const BUFFER = 20
+const BUFFER = ref(props.buffer)
 
 const { floatingStyles } = useFloating(reference, floating, {
     strategy: 'fixed',
@@ -84,11 +92,13 @@ const { floatingStyles } = useFloating(reference, floating, {
 
                 Object.assign(elements.floating.style, {
                     minWidth: `${minMaxWidth}px`,
-                    maxHeight: `${availableHeight - BUFFER}px`,
+                    maxHeight: `${availableHeight - BUFFER.value}px`,
                 })
             },
         }),
     ],
     whileElementsMounted: autoUpdate,
 })
+
+defineExpose({ open: floating })
 </script>
