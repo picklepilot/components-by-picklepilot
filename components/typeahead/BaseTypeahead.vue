@@ -21,7 +21,7 @@
                         :displayValue="displayProperty"
                         :placeholder="placeholder"
                         aria-autocomplete="none"
-                        autocomplete="off"
+                        :autocomplete="'off'"
                         @change="query = $event.target.value"
                     />
                     <ComboboxButton
