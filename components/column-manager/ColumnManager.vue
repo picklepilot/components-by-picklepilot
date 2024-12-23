@@ -246,7 +246,11 @@ import {
 
 import { ComboboxOption } from '@headlessui/vue'
 
-import { groupColumns, mergeColumnGroupsWithDefaults, ungroupColumns } from './ColumnManagerUtils'
+import {
+    groupColumns,
+    mergeColumnGroupsWithDefaults,
+    ungroupColumns,
+} from './ColumnManagerUtils'
 
 const emit = defineEmits(['update:existingColumns'])
 
@@ -314,7 +318,9 @@ const editableColumns = ref<any>(groupColumns(props.existingColumns))
 const focusedColumn = ref<any>()
 const newGroupName = ref<string>('')
 const addingColumnToGroup = ref<string>('')
-const editableGroupConfiguration = ref<any>(mergeColumnGroupsWithDefaults(props.groupConfiguration))
+const editableGroupConfiguration = ref<any>(
+    mergeColumnGroupsWithDefaults(props.groupConfiguration),
+)
 
 watch(
     () => props.existingColumns,
@@ -327,7 +333,9 @@ watch(
 watch(
     () => props.groupConfiguration,
     () => {
-        editableGroupConfiguration.value = mergeColumnGroupsWithDefaults(props.groupConfiguration)
+        editableGroupConfiguration.value = mergeColumnGroupsWithDefaults(
+            props.groupConfiguration,
+        )
     },
     { immediate: false },
 )
@@ -414,8 +422,6 @@ function syncArrayElements<T>(
 ) {
     const originalArray = [...listItems]
 
-    console.log('originalArray', originalArray)
-
     // Credits: https://stackoverflow.com/a/69574526
     const swapIndex = (array: T[], from: number, to: number) =>
         from < to
@@ -435,7 +441,6 @@ function syncArrayElements<T>(
     let newArray = originalArray
     let currentTo = to[0]
     const targetElements = from.map((idx) => originalArray[idx])
-    console.log('targetElements', targetElements)
 
     let lastMovedElement: any = null
     targetElements.forEach((element, idx) => {
@@ -445,8 +450,6 @@ function syncArrayElements<T>(
         const fromIndex = newArray.findIndex((item) => item.id === element.id)
         newArray = swapIndex(newArray, fromIndex, currentTo)
     })
-
-    console.log('NEW ARRAY', newArray)
 
     nextTick(() => {
         // When list is ref, assign array to list
