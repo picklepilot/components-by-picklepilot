@@ -14,6 +14,7 @@
 import Sortable from 'sortablejs'
 import { ref, onMounted, watch, nextTick } from 'vue-demi'
 import { m } from '../../utils/TextUtils'
+import { type Tab } from '../tabs/Tab'
 
 interface Item {
     idx: number
@@ -27,7 +28,7 @@ interface Props {
      * @default []
      * @type {string[]}
      */
-    classes?: string[]
+    classes?: (string | boolean)[]
 
     /**
      * Additional classes to be added to the sortable container <li> elements
@@ -44,7 +45,7 @@ interface Props {
      * @default []
      * @type {Record<string, any>[]}
      */
-    modelValue: Item[]
+    modelValue: Item[] | Tab[]
 
     /**
      * The options to be passed to the sortable instance
