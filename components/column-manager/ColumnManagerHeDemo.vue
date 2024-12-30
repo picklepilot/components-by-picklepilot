@@ -109,7 +109,7 @@ const groupMenuItems = [
             icon: 'fa-robot',
             label: 'AI some stuff',
             onClick: (context: any) => {
-                console.log('AI some stuff', context)
+                // console.log('AI some stuff', context)
             },
         },
     ],
@@ -125,7 +125,6 @@ async function searcher(query: string) {
 
 const updatedColumns = ref(existingColumns)
 function onUpdatedColumns(columns: any) {
-    console.log('Updated columns:', columns)
     updatedColumns.value = columns
 }
 

@@ -203,7 +203,6 @@ watch(
     () => props.existingColumns,
     (newVal) => {
         editableColumns.value = groupColumns(newVal)
-        console.log('editableColumns', editableColumns.value)
     },
     { immediate: true },
 )

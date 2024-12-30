@@ -258,7 +258,7 @@ function stopResize() {
 
 function dragMouseDown(event) {
     if (!event.target.classList.contains('ui-window-toolbar')) {
-        console.log('dragMouseDown not a class')
+        console.warn('dragMouseDown not a class')
         return false
     }
 

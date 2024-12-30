@@ -4,6 +4,7 @@
             <BaseTypeahead
                 v-model="activeItem"
                 :default-items="mockData"
+                :multiple="true"
                 :searcher="searcher"
                 value-property="name"
                 placeholder="Search for an item..."
@@ -80,7 +81,7 @@ const mockData = [
     },
 ]
 
-const activeItem = ref(mockData[0])
+const activeItem = ref([mockData[0], mockData[2]])
 
 async function searcher(query: string) {
     return Promise.resolve(

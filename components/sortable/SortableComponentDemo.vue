@@ -118,7 +118,6 @@ function mountMultiDragPlugin() {
 }
 
 function onUpdatedList(idx: number, params: any) {
-    console.log('updated list', params)
     list.value[idx].columns = params
 }
 </script>

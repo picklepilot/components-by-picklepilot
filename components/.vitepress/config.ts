@@ -36,6 +36,7 @@ export default defineConfig({
                     { text: 'Popover', link: '/popover/' },
                     { text: 'Select', link: '/input/select/' },
                     { text: 'Sortable', link: '/sortable/' },
+                    { text: 'Tabs nav', link: '/tabs/' },
                     { text: 'Toolbar', link: '/toolbar/' },
                 ],
             },

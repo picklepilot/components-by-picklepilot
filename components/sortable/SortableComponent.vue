@@ -14,6 +14,7 @@
 import Sortable from 'sortablejs'
 import { ref, onMounted, watch, nextTick } from 'vue-demi'
 import { m } from '../../utils/TextUtils'
+import { type Tab } from '../tabs/Tab'
 
 interface Item {
     idx: number
@@ -27,7 +28,7 @@ interface Props {
      * @default []
      * @type {string[]}
      */
-    classes?: string[]
+    classes?: (string | boolean)[]
 
     /**
      * Additional classes to be added to the sortable container <li> elements
@@ -44,7 +45,7 @@ interface Props {
      * @default []
      * @type {Record<string, any>[]}
      */
-    modelValue: Item[]
+    modelValue: Item[] | Tab[]
 
     /**
      * The options to be passed to the sortable instance
@@ -111,7 +112,6 @@ watch(
         options.value = {
             ...props.options,
             onEnd: (e: Sortable.SortableEvent) => {
-                console.log('ON UPDATE', e)
                 const { domElements, from, to } = indicesParams(e)
                 syncArrayElements(list.value, domElements, from, to)
             },
@@ -142,8 +142,6 @@ function syncArrayElements<T>(
 ) {
     const originalArray = [...listItems]
 
-    console.log('originalArray', originalArray)
-
     // Credits: https://stackoverflow.com/a/69574526
     const swapIndex = (array: T[], from: number, to: number) =>
         from < to
@@ -163,7 +161,6 @@ function syncArrayElements<T>(
     let newArray = originalArray
     let currentTo = to[0]
     const targetElements = from.map((idx) => originalArray[idx])
-    console.log('targetElements', targetElements)
 
     let lastMovedElement: any = null
     targetElements.forEach((element, idx) => {
@@ -173,8 +170,6 @@ function syncArrayElements<T>(
         const fromIndex = newArray.findIndex((item) => item.id === element.id)
         newArray = swapIndex(newArray, fromIndex, currentTo)
     })
-
-    console.log('NEW ARRAY', newArray)
 
     nextTick(() => {
         // When list is ref, assign array to list
