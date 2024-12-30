@@ -9,7 +9,7 @@
                 borderClasses,
                 colorClasses,
                 sizeClasses,
-                classes,
+                ...classes,
             )
         "
     >
@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { m } from '../../utils/TextUtils'
+import { m } from '../../utils'
 
 interface Props {
     classes?: string[]
@@ -53,10 +53,10 @@ const emit = defineEmits(['click'])
 const props = withDefaults(defineProps<Props>(), {
     classes: () => [''],
     disabled: false,
-    size: 'md',
-    variant: 'zinc',
-    stop: 500,
     processing: false,
+    size: 'md',
+    stop: 500,
+    variant: 'zinc',
 })
 
 const bgClasses = computed(() => {
