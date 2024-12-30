@@ -24,3 +24,8 @@ export { default as UiWindowToolbar } from './ui-window-toolbar/UiWindowToolbar.
 
 export { type FacetedFilterItem } from './faceted-filters/models/FacetedFilterItem'
 export type { ToolbarItem, ToolbarItemGroup } from './toolbar/ToolBarItem'
+export {
+    type EditableProperty,
+    type PropertyType,
+    PropertyEditor,
+} from './property-editor'
