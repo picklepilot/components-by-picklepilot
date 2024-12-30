@@ -109,7 +109,6 @@ import {
     ComboboxButton,
     ComboboxOptions,
     ComboboxOption,
-    TransitionRoot,
 } from '@headlessui/vue'
 import { ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 
