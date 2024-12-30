@@ -16,8 +16,8 @@
                         class="inline-flex shrink-0 items-center justify-center space-x-1.5"
                     >
                         <span>Open me</span>
-                        <ChevronUpDownIcon
-                            class="h-5 w-5 text-zinc-400"
+                        <i
+                            class="fa-regular fa-angle-down h-5 w-5 text-zinc-400"
                             aria-hidden="true"
                         />
                     </span>
@@ -28,7 +28,6 @@
 </template>
 <script setup lang="ts">
 import BaseDropdownMenu from './BaseDropdownMenu.vue'
-import { ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 
 const items = [
     [
