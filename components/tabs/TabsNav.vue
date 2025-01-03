@@ -1,6 +1,9 @@
 <template>
     <div :class="clsx('relative z-10 mx-auto', classes)">
-        <div>Widths: {{ width }} - {{ tabsTotalWidth }}</div>
+        <!--div>
+            Widths: {{ collapsedTabs.length }} - {{ width }} -
+            {{ tabsTotalWidth }}
+        </div-->
 
         <div class="flex space-x-1.5">
             <SortableComponent
@@ -8,7 +11,7 @@
                 :classes="
                     ['flex space-x-0.5', classic && 'px-6'].filter(Boolean)
                 "
-                :model-value="tabs"
+                :model-value="effectiveTabs"
                 @update:modelValue="onUpdateOrder"
             >
                 <template v-slot:item="tab">
@@ -67,14 +70,13 @@
 </template>
 
 <script setup lang="ts">
+import BaseDropdownMenu from '../dropdown-menu/BaseDropdownMenu.vue'
+import SortableComponent from '../sortable/SortableComponent.vue'
 import { clsx } from 'clsx'
 import { computed, onMounted, ref, watch } from 'vue'
-import { twMerge } from 'tailwind-merge'
+import { m } from '../../utils'
 import { type Tab } from './Tab'
-import SortableComponent from '../sortable/SortableComponent.vue'
 import { useElementSize } from '@vueuse/core'
-import { m } from '../../utils/TextUtils'
-import BaseDropdownMenu from '../dropdown-menu/BaseDropdownMenu.vue'
 
 // define props using withDefaults from vue api
 const props = withDefaults(
@@ -95,12 +97,12 @@ const props = withDefaults(
 
 const emit = defineEmits(['clicked', 'update'])
 
-const effectiveTabs = ref(props.tabs)
-const sortableRef = ref()
-const { width } = useElementSize(sortableRef)
-const tabsTotalWidth = ref(0)
-const showTabsCount = ref(effectiveTabs.value.length)
 const dropdownRef = ref()
+const effectiveTabs = ref(props.tabs)
+const showTabsCount = ref(effectiveTabs.value.length)
+const sortableRef = ref()
+const tabsTotalWidth = ref(0)
+const { width } = useElementSize(sortableRef)
 
 watch(
     () => props.tabs,
@@ -122,15 +124,18 @@ function adapt() {
         document.querySelectorAll('.pj-tab'),
     ).reduce((acc, tab) => acc + tab.clientWidth, 0)
 
-    const allTabs = document.querySelectorAll('.pj-tab')
+    const allTabs = document.querySelectorAll(
+        '.pj-tab',
+    ) as NodeListOf<HTMLElement>
+
     let cutoffWidth = dropdownRef.value.offsetWidth
+    let usedWidth = 0
     collapsedTabs.value = []
 
-    allTabs.forEach((item, i) => {
-        if (width.value >= cutoffWidth + item.offsetWidth) {
-            cutoffWidth += item.offsetWidth
+    allTabs.forEach((item: HTMLElement, i: number) => {
+        if (width.value >= usedWidth + item.offsetWidth) {
+            usedWidth += item.offsetWidth
         } else {
-            // item.classList.add('--hidden')
             collapsedTabs.value.push(i)
         }
     })
