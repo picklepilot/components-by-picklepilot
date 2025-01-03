@@ -1,14 +1,12 @@
 <template>
-    <div :class="clsx('relative z-10 mx-auto', classes)">
-        <div>Widths: {{ width }} - {{ tabsTotalWidth }}</div>
-
+    <div :class="m('relative z-10 mx-auto', classes)">
         <div class="flex space-x-1.5">
             <SortableComponent
                 ref="sortableRef"
                 :classes="
                     ['flex space-x-0.5', classic && 'px-6'].filter(Boolean)
                 "
-                :model-value="tabs"
+                :model-value="effectiveTabs"
                 @update:modelValue="onUpdateOrder"
             >
                 <template v-slot:item="tab">
@@ -23,6 +21,7 @@
                                     : 'flex cursor-pointer items-center rounded border-0 px-3 py-2.5 text-sm font-medium leading-none transition-all hover:no-underline data-[active=false]:relative data-[active=true]:bg-white data-[active=false]:text-zinc-500 data-[active=true]:shadow-sm data-[active=false]:hover:bg-zinc-900/5 data-[active=false]:hover:text-zinc-800',
                                 tab.classes || '',
                                 tabClasses,
+                                classes.tab,
                             )
                         "
                         :data-active="tab.active.toString()"
@@ -33,53 +32,29 @@
                     </a>
                 </template>
             </SortableComponent>
-
-            <BaseDropdownMenu
-                ref="dropdownRef"
-                :classes="{
-                    menu: '',
-                    menuButton: 'rounded-lg px-3.5 py-2.5 hover:bg-zinc-200',
-                    menuItems: '!min-w-[300px] p-0',
-                    menuItem: '',
-                }"
-                :items="effectiveTabs.toSpliced(showTabsCount)"
-                :allowed-placements="['bottom-end']"
-            >
-                <template #trigger>
-                    <span
-                        class="inline-flex shrink-0 items-center justify-center space-x-1.5"
-                    >
-                        <span>Open me</span>
-                        <i
-                            class="fa-regular fa-angle-down h-5 w-5 text-zinc-400"
-                            aria-hidden="true"
-                        />
-                    </span>
-                </template>
-            </BaseDropdownMenu>
         </div>
 
         <hr
             v-if="classic && !disabled.includes('border')"
-            class="-mt-px border-gray-300"
+            :class="m('-mt-px border-zinc-300', classes.line)"
         />
     </div>
 </template>
 
 <script setup lang="ts">
-import { clsx } from 'clsx'
-import { computed, onMounted, ref, watch } from 'vue'
-import { twMerge } from 'tailwind-merge'
-import { type Tab } from './Tab'
 import SortableComponent from '../sortable/SortableComponent.vue'
-import { useElementSize } from '@vueuse/core'
-import { m } from '../../utils/TextUtils'
-import BaseDropdownMenu from '../dropdown-menu/BaseDropdownMenu.vue'
+import { m } from '../../utils'
+import { ref, watch } from 'vue'
+import { type Tab } from './Tab'
 
 // define props using withDefaults from vue api
 const props = withDefaults(
     defineProps<{
-        classes?: string[]
+        classes?: {
+            container?: string
+            line?: string
+            tab?: string
+        }
         classic?: boolean
         disabled?: string[]
         tabClasses?: string[]
@@ -87,7 +62,11 @@ const props = withDefaults(
     }>(),
     {
         classic: false,
-        classes: () => [],
+        classes: () => ({
+            container: '',
+            line: '',
+            tab: '',
+        }),
         disabled: () => [],
         tabClasses: () => [],
     },
@@ -95,12 +74,10 @@ const props = withDefaults(
 
 const emit = defineEmits(['clicked', 'update'])
 
-const effectiveTabs = ref(props.tabs)
-const sortableRef = ref()
-const { width } = useElementSize(sortableRef)
-const tabsTotalWidth = ref(0)
-const showTabsCount = ref(effectiveTabs.value.length)
 const dropdownRef = ref()
+const effectiveTabs = ref(props.tabs)
+const showTabsCount = ref(effectiveTabs.value.length)
+const sortableRef = ref()
 
 watch(
     () => props.tabs,
@@ -113,51 +90,4 @@ function onUpdateOrder(newTabs: Tab[]) {
     effectiveTabs.value = newTabs
     emit('update', newTabs)
 }
-
-const tabsSplit = computed(() => {})
-const collapsedTabs = ref<number[]>([])
-
-function adapt() {
-    tabsTotalWidth.value = Array.from(
-        document.querySelectorAll('.pj-tab'),
-    ).reduce((acc, tab) => acc + tab.clientWidth, 0)
-
-    const allTabs = document.querySelectorAll('.pj-tab')
-    let cutoffWidth = dropdownRef.value.offsetWidth
-    collapsedTabs.value = []
-
-    allTabs.forEach((item, i) => {
-        if (width.value >= cutoffWidth + item.offsetWidth) {
-            cutoffWidth += item.offsetWidth
-        } else {
-            // item.classList.add('--hidden')
-            collapsedTabs.value.push(i)
-        }
-    })
-
-    console.log('TabsNav:adapt()', collapsedTabs.value)
-
-    if (tabsTotalWidth.value > width.value - 100) {
-        console.log('SHOULD ADAPT')
-    }
-
-    showTabsCount.value = Math.floor((width.value - 100) / tabsTotalWidth.value)
-
-    /* console.log(
-        'TabsNav:adapt()',
-        (width.value - 100) / tabsTotalWidth.value,
-        tabsTotalWidth.value,
-    ) */
-}
-
-watch(
-    () => width.value,
-    () => {
-        adapt()
-    },
-)
-
-onMounted(() => {
-    adapt()
-})
 </script>

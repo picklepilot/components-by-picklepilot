@@ -3,9 +3,11 @@
         <div class="overflow-hidden rounded-lg bg-white shadow">
             <div class="pt-4">
                 <TabsNav
-                    :tab-classes="[
-                        'data-[active=false]:hover:bg-purple-500 data-[active=false]:hover:text-white',
-                    ]"
+                    :classes="{
+                        line: 'border-zinc-200',
+                        tab: 'data-[active=false]:hover:bg-lime-400 data-[active=false]:hover:text-lime-700',
+                    }"
+                    :classic="true"
                     :tabs="tabs"
                     @clicked="onClickedTab"
                     @updated="tabs = $event"
