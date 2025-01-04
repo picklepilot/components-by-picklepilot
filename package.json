@@ -6,7 +6,8 @@
     "files": [
         "components",
         "dist",
-        "utils"
+        "utils",
+        "./index.ts"
     ],
     "module": "./dist/components-by-picklepilot.es.js",
     "exports": {
