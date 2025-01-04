@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { m } from '../../../utils/TextUtils'
+import { m } from '../../../utils'
 import { defineProps } from 'vue'
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
     forId?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
     classes: () => [],
     forId: '',
 })

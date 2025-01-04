@@ -100,7 +100,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { m } from '../../utils/TextUtils'
+import { m } from '../../utils'
 import { autoPlacement, size, useFloating } from '@floating-ui/vue'
 
 import {

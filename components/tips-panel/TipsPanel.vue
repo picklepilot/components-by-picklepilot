@@ -32,10 +32,10 @@
 </template>
 
 <script setup lang="ts">
-import { m } from '../../utils/TextUtils'
+import { m } from '../../utils'
 import { BaseBadge } from '../index'
 
-const props = withDefaults(
+withDefaults(
     defineProps<{
         classes?: string[]
         tips?: any

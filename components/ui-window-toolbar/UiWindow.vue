@@ -95,7 +95,7 @@ const viewportSizes = ref({
     // windowSize.value = { width, height }
 }) */
 
-const resizerConfig = ref<any>([
+const resizerConfig = ref<{ direction: string; classes?: string }[]>([
     {
         direction: '*',
         classes: 'bottom-0 right-0 z-[11] h-4 w-4 cursor-se-resize',
@@ -203,7 +203,7 @@ function resizeSetup(
     window.addEventListener('mouseup', stopResize)
 }
 
-function resize(e) {
+function resize(e: any) {
     const width = ['w', 'sw', 'nw'].includes(dir.value)
         ? originalWidth.value - (e.pageX - originalMouseX.value)
         : originalWidth.value + (e.pageX - originalMouseX.value)
@@ -216,8 +216,10 @@ function resize(e) {
 
     const dh = e.pageY - originalMouseY.value
 
-    positions.value.movementX = positions.value.clientX - e.clientX
-    positions.value.movementY = positions.value.clientY - e.clientY
+    if (positions.value) {
+        positions.value.movementX = (positions.value.clientX || 0) - e.clientX
+        positions.value.movementY = (positions.value.clientY || 0) - e.clientY
+    }
 
     if (
         width > minimumSize.value &&
@@ -256,7 +258,7 @@ function stopResize() {
     window.removeEventListener('mousemove', resize)
 }
 
-function dragMouseDown(event) {
+function dragMouseDown(event: any) {
     if (!event.target.classList.contains('ui-window-toolbar')) {
         console.warn('dragMouseDown not a class')
         return false
@@ -278,12 +280,17 @@ function dragMouseDown(event) {
     document.onmouseup = closeDragElement
 }
 
-function elementDrag(event) {
+function elementDrag(event: any) {
     event.preventDefault()
     fullscreen.value = false
 
-    positions.value.movementX = positions.value.clientX - event.clientX
-    positions.value.movementY = positions.value.clientY - event.clientY
+    if (positions.value) {
+        positions.value.movementX =
+            (positions.value.clientX || 0) - event.clientX
+        positions.value.movementY =
+            (positions.value.clientY || 0) - event.clientY
+    }
+
     positions.value.clientX = event.clientX
     positions.value.clientY = event.clientY
 
@@ -309,12 +316,12 @@ function elementDrag(event) {
     }
 }
 
-function closeDragElement(e) {
+function closeDragElement() {
     document.onmouseup = null
     document.onmousemove = null
 }
 
-function tfs(e) {
+function tfs(e: any) {
     e.stopPropagation()
     fullscreen.value = !fullscreen.value
 }

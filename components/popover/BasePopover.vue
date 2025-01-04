@@ -1,8 +1,5 @@
 <template>
-    <Popover
-        v-slot="{ open }"
-        :class="m('relative inline-block text-left', classes.menu)"
-    >
+    <Popover :class="m('relative inline-block text-left', classes.menu)">
         <div>
             <PopoverButton ref="reference" :class="m('', classes.menuButton)">
                 <slot name="trigger"></slot>
@@ -35,7 +32,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { m } from '../../utils/TextUtils'
+import { m } from '../../utils'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import { autoPlacement, autoUpdate, size, useFloating } from '@floating-ui/vue'
 

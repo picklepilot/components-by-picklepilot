@@ -13,10 +13,10 @@
 <script setup lang="ts">
 import Sortable from 'sortablejs'
 import { ref, onMounted, watch, nextTick } from 'vue-demi'
-import { m } from '../../utils/TextUtils'
+import { m } from '../../utils'
 import { type Tab } from '../tabs/Tab'
 
-interface Item {
+type Item = {
     idx: number
     [key: string]: any
 }
@@ -186,7 +186,7 @@ function syncArrayElements<T>(
     })
 }
 
-function getItemBindings(item: Item, idx: number) {
+function getItemBindings(item: any, idx: number) {
     return { ...item, idx }
 }
 

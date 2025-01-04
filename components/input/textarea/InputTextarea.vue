@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { m } from '../../../utils/TextUtils'
+import { m } from '../../../utils'
 import { ref, watch } from 'vue'
 
 interface Props {

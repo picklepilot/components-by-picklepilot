@@ -74,9 +74,7 @@ const props = withDefaults(
 
 const emit = defineEmits(['clicked', 'update'])
 
-const dropdownRef = ref()
 const effectiveTabs = ref(props.tabs)
-const showTabsCount = ref(effectiveTabs.value.length)
 const sortableRef = ref()
 
 watch(

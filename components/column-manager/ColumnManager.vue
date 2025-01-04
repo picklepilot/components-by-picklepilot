@@ -81,6 +81,7 @@
                         :classes="dropDownClasses"
                         :default-items="defaultItems"
                         :display-property="() => ''"
+                        :multiple="false"
                         :nullable="true"
                         :searcher="searcher"
                         placeholder="Add a column to group"
@@ -159,9 +160,9 @@
                         selectedClass: 'selected',
                         emptyInsertThreshold: 100,
                     }"
-                    @add="onAdded(groupName, $event)"
-                    @remove="onRemoved(groupName, $event)"
-                    @update="onUpdatedList(groupName, $event)"
+                    @add="onAdded(groupName as string, $event)"
+                    @remove="onRemoved(groupName as string, $event)"
+                    @update="onUpdatedList(groupName as string, $event)"
                 >
                     <template #item="{ element, index }">
                         <div
@@ -179,7 +180,7 @@
                             >
                                 <button
                                     @click.prevent.stop="
-                                        removeColumn(groupName, index)
+                                        removeColumn(groupName as string, index)
                                     "
                                     class="flex h-6 w-6 items-center justify-center rounded text-xs text-zinc-400 ring-1 ring-transparent transition-all hover:bg-zinc-200 hover:text-zinc-700"
                                 >
@@ -228,10 +229,11 @@
 </template>
 
 <script setup lang="ts">
-import { m } from '../../utils/TextUtils'
+import { m } from '../../utils'
 import { ref, watch } from 'vue'
-import { nextTick } from 'vue-demi'
+// import { nextTick } from 'vue-demi'
 import { Sortable } from 'sortablejs-vue3'
+// @ts-ignore
 import { default as realSortable } from 'sortablejs'
 import BasePopover from '../popover/BasePopover.vue'
 import ColorPicker from '../color-picker/ColorPicker.vue'
@@ -244,6 +246,7 @@ import {
     InputText,
 } from '../'
 
+// @ts-ignore
 import { ComboboxOption } from '@headlessui/vue'
 
 import {
@@ -314,7 +317,9 @@ const props = withDefaults(
     },
 )
 
-const editableColumns = ref<any>(groupColumns(props.existingColumns))
+const editableColumns = ref<{ [key: string]: any }>(
+    groupColumns(props.existingColumns),
+)
 const focusedColumn = ref<any>()
 const newGroupName = ref<string>('')
 const addingColumnToGroup = ref<string>('')
@@ -414,7 +419,7 @@ function onUpdatedList(groupName: string, params: any) {
     emit('update:existingColumns', ungroupColumns(editableColumns.value))
 }
 
-function syncArrayElements<T>(
+/* function syncArrayElements<T>(
     listItems: any,
     domElements: HTMLElement[],
     from: number[],
@@ -464,7 +469,7 @@ function syncArrayElements<T>(
 
         emit('update:existingColumns', ungroupColumns(editableColumns.value))
     })
-}
+} */
 
 function onAdded(groupName: string, params: any) {
     const fromGroupName = params.from.dataset.groupName || 'Default'

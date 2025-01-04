@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { m } from '../../../utils/TextUtils'
+import { m } from '../../../utils'
 import { ref, watch } from 'vue'
 
 interface Props {
@@ -27,7 +27,7 @@ interface Props {
     placeholder?: string
 }
 
-const emit = defineEmits(['blur', 'focus', 'update:modelValue'])
+const emit = defineEmits(['blur', 'enter', 'focus', 'update:modelValue'])
 
 const props = withDefaults(defineProps<Props>(), {
     classes: () => [],

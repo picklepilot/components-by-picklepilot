@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { defineProps, withDefaults } from 'vue'
-import { m } from '../../utils/TextUtils'
+import { m } from '../../utils'
 
 interface Props {
     /**
@@ -40,7 +40,7 @@ interface Props {
     classes?: string[]
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
     bordered: false,
     classes: () => [],
 })

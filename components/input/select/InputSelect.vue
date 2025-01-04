@@ -17,7 +17,7 @@
                 :id="`generic-list-${uniqueId}-item-${computeIdx(groupIdx, i)}`"
                 :class="[
                     focusedIdx === computeIdx(groupIdx, i) && 'bg-gray-100',
-                    'generic-list-group-list-item border-b border-gray-200 hover:bg-sky-50 cursor-pointer',
+                    'generic-list-group-list-item cursor-pointer border-b border-gray-200 hover:bg-sky-50',
                 ]"
                 @mouseenter="focusedIdx = computeIdx(groupIdx, i)"
                 @click.stop="emit('click', computeIdx(groupIdx, i))"
@@ -58,7 +58,7 @@ const focusedGroupAndIdx = ref('0-0')
 
 const groups = computed(() => {
     if (!props.modelValue) return {}
-    return props.modelValue.reduce((acc, item) => {
+    return props.modelValue.reduce((acc: any, item: any) => {
         const key = item.header || 'Uncategorized'
         if (!acc[key]) {
             acc[key] = []
@@ -69,11 +69,11 @@ const groups = computed(() => {
 })
 
 function computeIdx(groupIdx: number, itemIdx: number) {
-    return (
-        Object.values(groups.value)
-            .slice(0, groupIdx)
-            .reduce((total, ch) => (total += ch.length), 0) + itemIdx
-    )
+    const t = Object.values(groups.value)
+        .slice(0, groupIdx)
+        .reduce((total: number, ch: any) => total + ch.length, 0)
+
+    return t + itemIdx
 }
 
 watch(

@@ -32,7 +32,7 @@
 import clsx from 'clsx'
 import { defineProps, withDefaults, ref, watch } from 'vue-demi'
 
-type TailwindColorModifier = 'bg-' | 'text-' | 'ring-' | 'border-'
+// type TailwindColorModifier = 'bg-' | 'text-' | 'ring-' | 'border-'
 
 interface Props {
     /**

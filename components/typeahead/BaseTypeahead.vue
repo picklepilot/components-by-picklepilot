@@ -120,7 +120,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { m } from '../../utils/TextUtils'
+import { m } from '../../utils'
 import {
     Combobox,
     ComboboxButton,
@@ -147,7 +147,7 @@ const props = withDefaults(
         immediate?: boolean
         items?: any[]
         modelValue?: any
-        multiple: boolean
+        multiple?: boolean
         nullable?: boolean
         placeholder?: string
         searcher?: (query: string) => Promise<any[]>
@@ -166,6 +166,7 @@ const props = withDefaults(
         immediate: false,
         items: () => [],
         modelValue: undefined,
+        multiple: false,
         nullable: false,
         placeholder: 'Search...',
         searcher: undefined,
