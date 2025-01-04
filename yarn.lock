@@ -437,10 +437,10 @@
     helper-js "^3.1.2"
     vue-demi latest
 
-"@headlessui/vue@^0.0.0-insiders.d71fb9c":
-  version "0.0.0-insiders.d71fb9c"
-  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-0.0.0-insiders.d71fb9c.tgz#43cb2aadadd9cf930947a0d458856714df29188d"
-  integrity sha512-pGOnYiCME7VRNvWKgDzJydMD8VkQI7CVBQRMSrietlpKsRc+DJD9lE/5lgiAD/re3v38whHXacEFjYk9CwMigA==
+"@headlessui/vue@^0.0.0-insiders.b6f355d":
+  version "0.0.0-insiders.b6f355d"
+  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-0.0.0-insiders.b6f355d.tgz#576fff517a6de3695cdbb239aade816f075461b0"
+  integrity sha512-Zml091cG/YtsP8kKRAAsGTtIdPQVH/cHhOk60Efi/HgV5gRjiEyYDS/9kqJ4zGC6fXI8u5GzCxFajd0mIrNnCA==
   dependencies:
     "@tanstack/vue-virtual" "3.0.0-beta.60"
 
